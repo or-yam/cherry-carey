@@ -24,4 +24,17 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+const userLogin = (email, password) => {
+  const query = `SELECT * from user 
+                WHERE email='${email}' 
+                AND password='${password}' `;
+  return sequelize.query(query);
+};
+
+router.get('/user/:email/:password', async (req, res) => {
+  const { email, password } = req.params;
+  const user = await userLogin(email, password);
+  res.send(user);
+});
+
 module.exports = router;

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "5b9f48a2406b2cd74c55c663",
+    "name": "Perkins Cunningham",
+    "email": "perkinscunningham@imant.com",
+    "password": "1234",
+    "img": "https://robohash.org/24"
+  },
+  {
+    "id": "5b9f48a2406b2cd74c55c333",
+    "name": "Rick",
+    "email": "rick@imant.com",
+    "password": "1234",
+    "img": "https://robohash.org/4"
+  },
+  {
+    "id": "5b9f48a2406b29994c55c663",
+    "name": "Morty",
+    "email": "morty@imant.com",
+    "password": "1234",
+    "img": "https://robohash.org/2"
+  },
+  {
+    "id": "5349f58a2406b2cd74c55c663",
+    "name": "C3po",
+    "email": "c3po@imant.com",
+    "password": "1234",
+    "img": "https://robohash.org/12"
+  }
+]
