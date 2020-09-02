@@ -123,35 +123,3 @@ const Register = inject('user')(
 );
 
 export default Register;
-
-/*
-  const [checkUser, setCheckUser] = useState(false);
-    
-
-    let NameText;
-    let emailText;
-    let passwordText;
-
-    const _handleTextFieldChange = (e) => {
-      // eslint-disable-next-line default-case
-      switch (e.target.id) {
-        case 'gName':
-          NameText = e.target.value;
-          break;
-        case 'email':
-          emailText = e.target.value;
-          break;
-        case 'password':
-          passwordText = e.target.value;
-      }
-    };
-
-    const sendLogInData = () => {
-      if (emailText === 'alonzager5@gmail.com') {
-        setCheckUser(true);
-      }
-      console.log(NameText);
-      console.log(emailText);
-      console.log(passwordText);
-    };
-*/
