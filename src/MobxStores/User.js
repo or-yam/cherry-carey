@@ -6,13 +6,6 @@ export class User {
   @observable email;
   @observable img;
 
-  constructor(id, name, email, img) {
-    this.id = id;
-    this.name = name;
-    this.email = email;
-    this.img = img;
-  }
-
   @observable emailInput = '';
   @observable passwordInput = '';
   @observable nameInput = '';
