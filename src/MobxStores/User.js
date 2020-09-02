@@ -45,7 +45,7 @@ export class User {
       })
       .then(
         (res) => {
-          const { id, name, email, img } = res.data[0];
+          const { id, name, email, img } = res.data[0][0];
           this.id = id;
           this.name = name;
           this.email = email;
