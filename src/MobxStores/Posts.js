@@ -26,12 +26,14 @@ export class Posts {
   }
 
   @action filterEatPosts() {
+    this.filteredPosts = this.foodPosts;
     this.filterCookPosts = this.foodPosts.filter(
       (post) => post.postType === 'eat'
     );
   }
 
   @action filterCookPosts() {
+    this.filteredPosts = this.foodPosts;
     this.filteredPosts = this.foodPosts.filter(
       (post) => post.postType === 'cook'
     );

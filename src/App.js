@@ -10,6 +10,7 @@ import './App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
+import FoodPost from './components/FoodPost';
 
 const user = new User();
 const posts = new Posts();
@@ -23,6 +24,7 @@ const App = observer(() => {
         <Route path="/" exact render={() => <Login />} />
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />
+        <Route path="/foodPost" exact render={() => <FoodPost />} />
       </Provider>
     </Router>
   );

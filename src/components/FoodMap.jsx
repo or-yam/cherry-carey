@@ -9,7 +9,6 @@ const mapStyles = {
 
 const FoodMap = inject('user')(
   observer((props) => {
-    console.log(props.user.name);
     return (
       <div>
         <div>
