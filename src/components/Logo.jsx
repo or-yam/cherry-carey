@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 export default function Logo() {
     return (
         <div style={{textAlign: 'center', marginTop: '10%'}}>
