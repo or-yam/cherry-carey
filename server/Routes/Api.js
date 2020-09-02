@@ -25,10 +25,16 @@ sequelize
   });
 
 const userLogin = (email, password) => {
-  const query = `SELECT * from user 
+  const query = `SELECT * FROM user 
                 WHERE email='${email}' 
                 AND password='${password}' `;
   return sequelize.query(query);
+};
+
+const IsEmailValid = (email) => {
+  const query = `SELECT * FROM user
+                WHERE email='${email}'`;
+  return sequelize.query(query).then((res) => res[0][0]);
 };
 
 const userRegister = (name, email, password) => {
@@ -94,15 +100,28 @@ const getAllPosts = () => {
 
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
-  const user = await userLogin(email, password);
-  res.send(user);
+
+  const isEmail = await IsEmailValid(email);
+
+  if (isEmail) {
+    let user = await userLogin(email, password);
+    user = user[0][0];
+    user ? res.send(user) : res.status(401).send('check your password');
+  } else {
+    res.status(404).send('email not found');
+  }
 });
 
 router.post('/user', async (req, res) => {
   const { name, email, password } = req.body;
-  const userId = await userRegister(name, email, password);
-  const user = await getUserById(userId);
-  res.send(user);
+  const isEmail = await IsEmailValid(email);
+  if (isEmail) {
+    res.status(409).send('email is taken');
+  } else {
+    const userId = await userRegister(name, email, password);
+    const user = await getUserById(userId);
+    res.send(user);
+  }
 });
 
 router.post('/foodPost', async (req, res) => {

@@ -6,6 +6,7 @@ export class User {
   @observable email = '';
   @observable img = '';
   @observable isSignin = false;
+  @observable errMsg = '';
 
   @observable emailInput = 'a';
   @observable passwordInput = 'b';
@@ -22,16 +23,15 @@ export class User {
       )
       .then(
         (res) => {
-          const { id, name, email, img } = res.data[0][0];
+          const { id, name, email, img } = res.data;
           this.id = id;
           this.name = name;
           this.email = email;
           this.img = img;
           this.isSignin = true;
-          console.log(this.name);
         },
         (error) => {
-          this.name = 'error';
+          this.errMsg = error.response.data;
         }
       );
   }
@@ -53,7 +53,7 @@ export class User {
           this.isSignin = true;
         },
         (error) => {
-          this.name = 'error';
+          this.errMsg = error.response.data;
         }
       );
   }
