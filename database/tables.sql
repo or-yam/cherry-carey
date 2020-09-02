@@ -11,35 +11,37 @@ USE cherryDb;
 
 -- DROP TABLE user;
 
-CREATE TABLE post(
-    id int NOT NULL AUTO_INCREMENT ,
-    generatedBy_id VARCHAR(30),
-    postType VARCHAR(10),
-    mealOrigin VARCHAR(30),
-    mealName VARCHAR(30),
-    mealDate DATE,
-    mealTime VARCHAR(30)
-    alergies VARCHAR(30),
-    kosher BOOLEAN,
-    distribution VARCHAR(30),
-    status BOOLEAN,
-    location ?? ,
-
-    PRIMARY KEY(id),
+-- CREATE TABLE post(
+--     id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+--     generatedBy_id int NOT NULL ,
+--     postType VARCHAR(10) ,
+--     mealOrigin VARCHAR(30) ,
+--     mealName VARCHAR(30) ,
+--     mealDate VARCHAR(50) ,
+--     mealTime VARCHAR(30),
+--     allergies VARCHAR(30),
+--     kosher BOOL,
+--     distribution VARCHAR(30),
+--     status BOOL,
+--     locationLat FLOAT(17, 15),
+--     locationLng FLOAT(17, 15),
     
-    FOREIGN KEY(generatedBy_id)
-    REFERENCES user(id)
-)
+--     FOREIGN KEY(generatedBy_id) 
+--     REFERENCES user(id)
+-- );
+
+-- DROP TABLE post;
 
 CREATE TABLE review(
     id int NOT NULL AUTO_INCREMENT ,
     text TEXT(3000),
-    cooker_id VARCHAR(30),
+    cooker_id int NOT NULL,
     rating INT,
 
     PRIMARY key(id),
 
-    FOREIGN KEY (cooker_id),
+    FOREIGN KEY (cooker_id)
     REFERENCES user(id)
-)
+);
 
+-- DROP TABLE review;
