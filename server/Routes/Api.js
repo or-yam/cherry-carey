@@ -45,6 +45,14 @@ const getUserById = (id) => {
   return sequelize.query(query);
 };
 
+const postFoodPost = (postData) => {};
+
+const getAllPosts = () => {};
+
+const postFoodReview = (review) => {};
+
+const getUserRating = (id) => {};
+
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
   const user = await userLogin(email, password);
@@ -57,4 +65,8 @@ router.post('/user', async (req, res) => {
   const user = await getUserById(userId);
   res.send(user);
 });
+
+router.post('/foodPost', (req, res) => {});
+router.get;
+
 module.exports = router;
