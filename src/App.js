@@ -1,21 +1,31 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider, observer } from 'mobx-react';
+
 import Login from './components/LogIn';
 import Register from './components/Register';
-import FoodMap from './components/FoodMap'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import FoodMap from './components/FoodMap';
 
-function App() {
+import './App.css';
+
+import { User } from './MobxStores/User';
+import { Posts } from './MobxStores/Posts';
+
+const user = new User();
+const posts = new Posts();
+
+const stores = { user, posts };
+
+const App = observer(() => {
   return (
     <Router>
-      <div>
-        <Route path='/' exact render={() => <Login />} />
-        <Route path='/register' exact render={() => <Register />} />
-        <Route path='/foodMap' exact render={() => <FoodMap />} />
-        
-      </div>
+      <Provider {...stores}>
+        <Route path="/" exact render={() => <Login />} />
+        <Route path="/register" exact render={() => <Register />} />
+        <Route path="/foodMap" exact render={() => <FoodMap />} />
+      </Provider>
     </Router>
   );
-}
+});
 
 export default App;

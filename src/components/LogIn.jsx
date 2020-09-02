@@ -2,19 +2,12 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Register from './Register';
 import Logo from './Logo';
-import FoodMap from './FoodMap'
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,13 +31,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const [checkUser, setCheckUser] = useState(false);
-  const [userNotExist, setUserNotExist] = useState("");
+  const [userNotExist, setUserNotExist] = useState('');
   const classes = useStyles();
-
 
   let emailText;
   let passwordText;
-  
 
   const _handleTextFieldChange = (e) => {
     if (e.target.id === 'email') {
@@ -55,59 +46,57 @@ export default function Login() {
   };
 
   const sendLogInData = () => {
-    if(emailText === 'alonzager5@gmail.com'){
-      setCheckUser(true) 
-    }else {
+    if (emailText === 'alonzager5@gmail.com') {
+      setCheckUser(true);
+    } else {
       //alert('User not exist, please register')
-      setUserNotExist('User not exist, please register')
+      setUserNotExist('User not exist, please register');
     }
     console.log(emailText);
     console.log(passwordText);
   };
 
-  
-  return (
-    checkUser ? 
+  return checkUser ? (
     <Redirect to="/foodMap" />
-    :
-    <Container component='main' maxWidth='xs'>
+  ) : (
+    <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Logo />
       <div className={classes.paper}>
-        <Typography component='h1' variant='h5'>
+        <Typography component="h1" variant="h5">
           Login
         </Typography>
-        <p style={{color: 'red'}}>{userNotExist}</p>
+        <p style={{ color: 'red' }}>{userNotExist}</p>
         <form className={classes.form} noValidate>
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            id='email'
-            label='Email Address'
-            name='email'
-            autoComplete='email'
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
             autoFocus
             onChange={_handleTextFieldChange}
           />
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            name='password'
-            label='Password'
-            type='password'
-            id='password'
-            autoComplete='current-password'
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
             onChange={_handleTextFieldChange}
           />
           <Button
             //type='submit'
             fullWidth
-            variant='contained'
-            color='primary'
+            variant="contained"
+            color="primary"
             className={classes.submit}
             onClick={sendLogInData}
           >
@@ -116,7 +105,7 @@ export default function Login() {
         </form>
       </div>
       <Box style={{ textAlign: 'center' }} mt={8}>
-        <Link to='register'  variant='body2'>
+        <Link to="register" variant="body2">
           {"Don't have an account? Register"}
         </Link>
       </Box>
@@ -125,7 +114,4 @@ export default function Login() {
       </Box>
     </Container>
   );
-  
-   
-
 }
