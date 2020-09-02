@@ -55,7 +55,7 @@ const Login = inject('user')(
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <p style={{ color: 'red' }}>{'Error handling'}</p>
+          <p style={{ color: 'red' }}>{user.errMsg}</p>
           <div className={classes.form} noValidate>
             <TextField
               variant="outlined"

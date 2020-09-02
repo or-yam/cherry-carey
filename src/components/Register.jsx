@@ -56,7 +56,8 @@ const Register = inject('user')(
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <form className={classes.form} noValidate>
+          <p style={{ color: 'red' }}>{user.errMsg}</p>
+          <div className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -107,7 +108,7 @@ const Register = inject('user')(
             >
               Register
             </Button>
-          </form>
+          </div>
         </div>
         <Box style={{ textAlign: 'center' }} mt={8}>
           <Link to="/" variant="body2">
