@@ -78,17 +78,16 @@ const FoodPost = inject('post')(
   observer((props) => {
     const classes = useStyles();
     const { post } = this.props;
-   
+
     return (
       <div style={{ textAlign: 'center' }}>
-
         <Logo />
 
         <FormControl className={classes.formControl}>
           <TextField
-            onChange={handleMealName}
-            value={state.mealName}
-            id="mealName"
+            onChange={() => post.onInputChange(event)}
+            // value={state.mealName}
+            name="mealName"
             label="MEAL NAME"
           />
         </FormControl>
@@ -97,8 +96,8 @@ const FoodPost = inject('post')(
           <InputLabel htmlFor="age-native-simple">MEAL ORIGIN</InputLabel>
           <Select
             native
-            value={state.mealOrigin}
-            onChange={handleSelectChange}
+            // value={state.mealOrigin}
+            onChange={() => post.onInputChange(event)}
             inputProps={{
               name: 'mealOrigin',
               id: 'mealOrigin',
@@ -119,8 +118,8 @@ const FoodPost = inject('post')(
           <InputLabel htmlFor="age-native-simple">ALLERGIES</InputLabel>
           <Select
             native
-            value={state.allergies}
-            onChange={handleSelectChange}
+            // value={state.allergies}
+            onChange={() => post.onInputChange(event)}
             inputProps={{
               name: 'allergies',
               id: 'allergies',
@@ -138,8 +137,8 @@ const FoodPost = inject('post')(
           <InputLabel htmlFor="age-native-simple">MEAL TIME</InputLabel>
           <Select
             native
-            value={state.mealTime}
-            onChange={handleSelectChange}
+            // value={state.mealTime}
+            onChange={() => post.onInputChange(event)}
             inputProps={{
               name: 'mealTime',
               id: 'mealTime',
@@ -157,11 +156,11 @@ const FoodPost = inject('post')(
           <FormControl className={classes.formControl}>
             <KeyboardDatePicker
               margin="normal"
-              id="date"
+              name="date"
               label="Date"
               format="MM/dd/yyyy"
-              value={state.date}
-              onChange={handleDateChange}
+              // value={state.date}
+              onChange={() => post.onInputChange(event)}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
@@ -175,16 +174,18 @@ const FoodPost = inject('post')(
             KOSHER
           </Typography>
           <FormControlLabel
+            name="kosher"
             value="yes"
             control={<Radio color="primary" />}
             label="yes"
-            onClick={handleKosher}
+            onClick={() => post.onInputChange(event)}
           />
           <FormControlLabel
+            name="kosher"
             value="no"
             control={<Radio color="primary" />}
             label="no"
-            onClick={handleKosher}
+            onClick={() => post.onInputChange(event)}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -208,6 +209,7 @@ const FoodPost = inject('post')(
             PRICE
           </Typography>
           <Slider
+            name="price"
             defaultValue={30}
             getAriaValueText={valueText}
             aria-labelledby="discrete-slider"
@@ -216,7 +218,7 @@ const FoodPost = inject('post')(
             marks={marks1}
             min={10}
             max={50}
-            onChange={handlePriceChange}
+            onChange={() => post.onInputChange(event)}
             id="price"
           />
         </FormControl>
@@ -233,7 +235,7 @@ const FoodPost = inject('post')(
             marks={marks2}
             min={0}
             max={60}
-            onChange={handleDistributionChange}
+            onChange={() => post.onInputChange}
             id="distribution"
             name="distribution"
           />
