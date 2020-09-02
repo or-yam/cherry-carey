@@ -3,8 +3,8 @@ import { inject, observer } from 'mobx-react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 
 const mapStyles = {
-  width: '100%',
-  height: '100%',
+  width: '80%',
+  height: '80%',
 };
 
 const FoodMap = inject('user')(
@@ -19,11 +19,11 @@ const FoodMap = inject('user')(
 
         <Map
           google={props.google}
-          zoom={14}
+          zoom={12}
           style={mapStyles}
           initialCenter={{
-            lat: -1.2884,
-            lng: 36.8233,
+            lat: 32.825942,
+            lng: 34.957236,
           }}
         />
       </div>
