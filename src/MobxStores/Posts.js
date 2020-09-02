@@ -25,11 +25,15 @@ export class Posts {
     return this.foodPosts.length;
   }
 
-  @computed get eatPosts() {
-    return this.foodPosts.filter((post) => post.postType === 'eat');
+  @action filterEatPosts() {
+    this.filterCookPosts = this.foodPosts.filter(
+      (post) => post.postType === 'eat'
+    );
   }
 
-  @computed get cookPosts() {
-    return this.foodPosts.filter((post) => post.postType === 'cook');
+  @action filterCookPosts() {
+    this.filteredPosts = this.foodPosts.filter(
+      (post) => post.postType === 'cook'
+    );
   }
 }

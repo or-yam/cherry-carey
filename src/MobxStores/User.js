@@ -35,14 +35,11 @@ export class User {
 
   @action userRegister() {
     axios
-      .post(
-        `http://localhost:4000/user/${this.emailInput}/${this.passwordInput}`,
-        {
-          name: this.nameInput,
-          email: this.emailInput,
-          password: this.passwordInput,
-        }
-      )
+      .post(`http://localhost:4000/user`, {
+        name: this.nameInput,
+        email: this.emailInput,
+        password: this.passwordInput,
+      })
       .then(
         (res) => {
           const { id, name, email, img } = res.data[0];
