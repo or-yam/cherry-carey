@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Logo from './Logo';
-import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
-import FoodMap from './FoodMap'
-
+import { Link, Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,7 +39,7 @@ export default function Register() {
   let passwordText;
 
   const _handleTextFieldChange = (e) => {
-    
+    // eslint-disable-next-line default-case
     switch (e.target.id) {
       case 'gName':
         NameText = e.target.value;
@@ -58,29 +53,28 @@ export default function Register() {
   };
 
   const sendLogInData = () => {
-    if(emailText === 'alonzager5@gmail.com'){
-      setCheckUser(true) 
+    if (emailText === 'alonzager5@gmail.com') {
+      setCheckUser(true);
     }
     console.log(NameText);
     console.log(emailText);
     console.log(passwordText);
   };
 
-  return (
-    checkUser ? 
+  return checkUser ? (
     <Redirect to="/foodMap" />
-    :
+  ) : (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Logo />
       <div className={classes.paper}>
         <Typography component="h1" variant="h5">
-        Register
+          Register
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-            <TextField
+              <TextField
                 autoComplete="fname"
                 name="Name"
                 variant="outlined"
@@ -131,8 +125,8 @@ export default function Register() {
         </form>
       </div>
       <Box style={{ textAlign: 'center' }} mt={8}>
-        <Link to='/'  variant='body2'>
-          {"Already have an account? Login"}
+        <Link to="/" variant="body2">
+          {'Already have an account? Login'}
         </Link>
       </Box>
       <Box style={{ textAlign: 'center' }} mt={8}>

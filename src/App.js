@@ -3,7 +3,7 @@ import './App.css';
 import Login from './components/LogIn';
 import Register from './components/Register';
 import FoodMap from './components/FoodMap'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 function App() {
   return (
