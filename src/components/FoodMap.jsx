@@ -6,7 +6,10 @@ const FoodMap = inject('user')(
     console.log(props.user.name);
     return (
       <div>
-        <h1> hello{props.user.name}</h1>
+        <h1> hello {props.user.name}</h1>
+        <h2>
+          <img src={props.user.img} alt="user" />
+        </h2>
         <img
           alt="map"
           src="https://art-sheep.com/wp-content/uploads/2019/07/Taste-Atlas-artsheep.png"
