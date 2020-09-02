@@ -1,17 +1,18 @@
 import { observable, action } from 'mobx';
 import axios from 'axios';
 export class User {
-  @observable id;
-  @observable name;
-  @observable email;
-  @observable img;
+  @observable id = '';
+  @observable name = '';
+  @observable email = '';
+  @observable img = '';
+  @observable isSignin = false;
 
-  @observable emailInput = '';
-  @observable passwordInput = '';
+  @observable emailInput = 'a';
+  @observable passwordInput = 'b';
   @observable nameInput = '';
 
   @action onInputChange(event) {
-    this[event.target.name] = event.target.value.toLowerCase();
+    this[event.target.name] = event.target.value;
   }
 
   @action userLogin() {
@@ -21,11 +22,13 @@ export class User {
       )
       .then(
         (res) => {
-          const { id, name, email, img } = res.data[0];
+          const { id, name, email, img } = res.data[0][0];
           this.id = id;
           this.name = name;
           this.email = email;
           this.img = img;
+          this.isSignin = true;
+          console.log(this.name);
         },
         (error) => {
           this.name = 'error';
@@ -47,6 +50,7 @@ export class User {
           this.name = name;
           this.email = email;
           this.img = img;
+          this.isSignin = true;
         },
         (error) => {
           this.name = 'error';
