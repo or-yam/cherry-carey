@@ -4,18 +4,20 @@ import { Provider, observer } from 'mobx-react';
 
 import Login from './components/LogIn';
 import Register from './components/Register';
+import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
 
 import './App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
-import FoodPost from './components/FoodPost';
+import { Post } from './MobxStores/Post';
 
 const user = new User();
+const post = new Post();
 const posts = new Posts();
 
-const stores = { user, posts };
+const stores = { user, posts, post };
 
 const App = observer(() => {
   return (

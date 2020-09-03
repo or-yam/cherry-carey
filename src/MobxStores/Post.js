@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 
-export class post {
+export class Post {
   @observable postType = '';
   @observable mealOrigin = '';
   @observable allergies = '';

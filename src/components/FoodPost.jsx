@@ -77,7 +77,12 @@ const marks2 = [
 const FoodPost = inject('post')(
   observer((props) => {
     const classes = useStyles();
-    const { post } = this.props;
+
+    const { post } = props;
+
+    const onchange = (event) => {
+      props.onInputChange(event);
+    };
 
     return (
       <div style={{ textAlign: 'center' }}>
@@ -85,7 +90,7 @@ const FoodPost = inject('post')(
 
         <FormControl className={classes.formControl}>
           <TextField
-            onChange={() => post.onInputChange(event)}
+            onChange={onchange}
             // value={state.mealName}
             name="mealName"
             label="MEAL NAME"
@@ -97,7 +102,7 @@ const FoodPost = inject('post')(
           <Select
             native
             // value={state.mealOrigin}
-            onChange={() => post.onInputChange(event)}
+            onChange={onchange}
             inputProps={{
               name: 'mealOrigin',
               id: 'mealOrigin',
@@ -119,7 +124,7 @@ const FoodPost = inject('post')(
           <Select
             native
             // value={state.allergies}
-            onChange={() => post.onInputChange(event)}
+            onChange={onchange}
             inputProps={{
               name: 'allergies',
               id: 'allergies',
@@ -138,7 +143,7 @@ const FoodPost = inject('post')(
           <Select
             native
             // value={state.mealTime}
-            onChange={() => post.onInputChange(event)}
+            onChange={onchange}
             inputProps={{
               name: 'mealTime',
               id: 'mealTime',
@@ -160,7 +165,7 @@ const FoodPost = inject('post')(
               label="Date"
               format="MM/dd/yyyy"
               // value={state.date}
-              onChange={() => post.onInputChange(event)}
+              onChange={onchange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
@@ -178,14 +183,14 @@ const FoodPost = inject('post')(
             value="yes"
             control={<Radio color="primary" />}
             label="yes"
-            onClick={() => post.onInputChange(event)}
+            onClick={onchange}
           />
           <FormControlLabel
             name="kosher"
             value="no"
             control={<Radio color="primary" />}
             label="no"
-            onClick={() => post.onInputChange(event)}
+            onClick={onchange}
           />
         </FormControl>
         <FormControl className={classes.formControl}>
@@ -218,7 +223,7 @@ const FoodPost = inject('post')(
             marks={marks1}
             min={10}
             max={50}
-            onChange={() => post.onInputChange(event)}
+            onChange={onchange}
             id="price"
           />
         </FormControl>
@@ -253,10 +258,10 @@ const FoodPost = inject('post')(
           variant="contained"
           aria-label="contained primary button group"
         >
-          <Button id="cook" onClick={postType} color="primary">
+          <Button id="cook" onClick={''} color="primary">
             COOK
           </Button>
-          <Button id="eat" onClick={postType} color="Secondary">
+          <Button id="eat" onClick={''} color="Secondary">
             EAT
           </Button>
         </ButtonGroup>
