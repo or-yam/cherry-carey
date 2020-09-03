@@ -45,7 +45,7 @@ router.post('/user', async (req, res) => {
 
 router.post('/foodPost', async (req, res) => {
   const postData = req.body;
-  console.log(postData);
+  console.log(postData.mealDate);
   const postId = await queries.postFoodPost(postData);
   const post = await queries.getPostById(postId);
   res.send(post[0][0]);

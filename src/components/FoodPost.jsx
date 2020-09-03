@@ -1,7 +1,8 @@
 import 'date-fns';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
+import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
 
 import Logo from './Logo';
 
@@ -24,8 +25,6 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Switch from '@material-ui/core/Switch';
-
-import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -70,7 +69,9 @@ const FoodPost = inject(
       post.submitPost(event, user.id);
     };
 
-    return (
+    return post.postType ? (
+      <Redirect to="/foodMap" />
+    ) : (
       <div style={{ textAlign: 'center' }}>
         <Logo />
 
@@ -269,115 +270,3 @@ const FoodPost = inject(
 );
 
 export default FoodPost;
-
-/*
-  const [state, setState] = React.useState({
-    postType: '',
-    mealOrigin: '',
-    allergies: '',
-    mealTime: '',
-    mealName: '',
-    date: new Date().toJSON().slice(0, 10).replace(/-/g, '/'),
-    location: getLocation(),
-    locationLat: '',
-    locationLan: '',
-    kosher: '',
-    distribution: 'Be social - Eat together',
-    price: '',
-  });
-
-  const handleSelectChange = (event) => {
-    let newSelect = event.target.name;
-    setState({
-      ...state,
-      [newSelect]: event.target.value,
-    });
-  };
-
-  const handlePriceChange = (e, newValue) => {
-    setState({
-      ...state,
-      price: newValue,
-    });
-
-    console.log(newValue);
-  };
-
-  const handleDistributionChange = (e, newValue) => {
-    setState({
-      ...state,
-      distribution:
-        newValue === 60
-          ? 'Take away'
-          : newValue === 0
-          ? 'Delivery'
-          : 'Be social - Eat together',
-    });
-
-    console.log(newValue);
-  };
-
-  const handleMealName = (e) => {
-    setState({
-      ...state,
-      mealName: e.target.value,
-    });
-  };
-
-  const handleKosher = (e) => {
-    setState({
-      ...state,
-      kosher: e.target.value,
-    });
-  };
-
-  const handleDateChange = (date) => {
-    console.log(date);
-    setState({
-      ...state,
-      date: date,
-    });
-  };
-
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-      console.log('Geolocation is not supported by this browser.');
-    }
-  };
-
-  const showPosition = (position) => {
-    setState({
-      locationLat: position.coords.latitude,
-      locationLan: position.coords.longitude,
-    });
-  };
-
-  ///////////////////////////////////////////////////////////
-
-  const sendFoodPost = () => {
-    let foodPost = {};
-    foodPost.postType = state.postType;
-    foodPost.mealOrigin = state.mealOrigin;
-    foodPost.allergies = state.allergies;
-    foodPost.mealTime = state.mealTime;
-    foodPost.mealName = state.mealName;
-    foodPost.date = state.date;
-    foodPost.locationLat = state.locationLat;
-    foodPost.locationLan = state.locationLan;
-    foodPost.kosher = state.kosher;
-    foodPost.distribution = state.distribution;
-    foodPost.price = state.price;
-    console.log(foodPost);
-  };
-
-  const postType = (e) => {
-    setState({
-      ...state,
-      postType: e.target.id,
-    });
-    sendFoodPost();
-  };
-
-*/

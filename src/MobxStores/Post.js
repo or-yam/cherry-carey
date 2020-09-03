@@ -68,7 +68,7 @@ export class Post {
       postType: this.postType,
       mealOrigin: this.mealOrigin,
       mealName: this.mealName,
-      date: this.date,
+      mealDate: this.date,
       mealTime: this.mealTime,
       allergies: this.allergies,
       kosher: this.kosher,
