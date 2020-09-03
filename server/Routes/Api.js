@@ -3,18 +3,6 @@ const router = express.Router();
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('mysql://root:@localhost/cherryDb');
 
-//DELETE BEFORE PUBLISHING>>>>>>
-router.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Content-Type, Authorization, Content-Length, X-Requested-With'
-  );
-  next();
-});
-//DELETE BEFORE PUBLISHING<<<<<<
-
 sequelize
   .authenticate()
   .then(() => {
@@ -24,6 +12,7 @@ sequelize
     console.error('Unable to connect to the database:', err);
   });
 
+//sql queries
 const userLogin = (email, password) => {
   const query = `SELECT * FROM user 
                 WHERE email='${email}' 
@@ -98,6 +87,20 @@ const getAllPosts = () => {
 
 // const getUserRating = (id) => {};
 
+//Routes
+
+//DELETE BEFORE PUBLISHING>>>>>>
+router.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, Content-Length, X-Requested-With'
+  );
+  next();
+});
+//DELETE BEFORE PUBLISHING<<<<<<
+
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
 
@@ -106,7 +109,9 @@ router.get('/user/:email/:password', async (req, res) => {
   if (isEmail) {
     let user = await userLogin(email, password);
     user = user[0][0];
-    user ? res.send(user) : res.status(401).send('check your password');
+    user
+      ? res.status(202).send(user)
+      : res.status(401).send('check your password');
   } else {
     res.status(404).send('email not found');
   }
@@ -120,7 +125,7 @@ router.post('/user', async (req, res) => {
   } else {
     const userId = await userRegister(name, email, password);
     const user = await getUserById(userId);
-    res.send(user);
+    res.status(201).send(user);
   }
 });
 
@@ -129,11 +134,6 @@ router.post('/foodPost', async (req, res) => {
   const postId = await postFoodPost(postData);
   const post = await getPostById(postId);
   res.send(post);
-});
-
-router.get('/foodPost', async (req, res) => {
-  const posts = await getAllPosts();
-  res.send(posts);
 });
 
 router.get('/foodPost', async (req, res) => {

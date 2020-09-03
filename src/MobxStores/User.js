@@ -53,7 +53,9 @@ export class User {
           this.isSignin = true;
         },
         (error) => {
-          this.errMsg = error.response.data;
+          error.response.data
+            ? (this.errMsg = error.response.data)
+            : (this.errMsg = 'something went wrong');
         }
       );
   }
