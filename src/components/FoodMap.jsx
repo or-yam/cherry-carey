@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const mapStyles = {
   width: '80%',
@@ -19,7 +19,9 @@ const FoodMap = inject(
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return (
+    return !user.isSignin ? (
+      <Redirect to="/login" />
+    ) : (
       <div>
         <div>
           <h1> hello {user.name}</h1>
