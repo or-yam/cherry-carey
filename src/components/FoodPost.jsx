@@ -25,6 +25,8 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Switch from '@material-ui/core/Switch';
 
+import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
+
 const useStyles = makeStyles((theme) => ({
   formControl: {
     marginTop: theme.spacing(2),
@@ -39,44 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 const valueText = (value) => `${value} ₪`;
 
-const marks1 = [
-  {
-    value: 10,
-    label: '10 ₪',
-  },
-  {
-    value: 20,
-    label: '20 ₪',
-  },
-  {
-    value: 30,
-    label: '30 ₪',
-  },
-  {
-    value: 40,
-    label: '40 ₪',
-  },
-  {
-    value: 50,
-    label: '50 ₪',
-  },
-];
-
-const marks2 = [
-  {
-    value: 0,
-    label: 'Delivery',
-  },
-  {
-    value: 30,
-    label: 'Be social - Eat together',
-  },
-  {
-    value: 60,
-    label: 'Take away',
-  },
-];
-
 const FoodPost = inject('post')(
   observer((props) => {
     const classes = useStyles();
@@ -87,16 +51,20 @@ const FoodPost = inject('post')(
       post.onInputChange(event);
     };
 
-    const [kosherChecked, setKosherChecked] = React.useState(false);
-    const switchKosher = (e) => {
-      setKosherChecked((prev) => !prev);
-      console.log(kosherChecked);
+    const onDateChange = (event) => {
+      post.onDateInputChange(event);
     };
 
-    const [locationChecked, setLocationChecked] = React.useState(false);
-    const switchLocation = (e) => {
-      setLocationChecked((prev) => !prev);
-      console.log(locationChecked);
+    const toggleValue = (event) => {
+      post.toggleValue(event);
+    };
+
+    const sliderChange = (event, val) => {
+      post.sliderChange(event, val);
+    };
+
+    const onSubmit = (event) => {
+      post.submitPost(event);
     };
 
     return (
@@ -171,8 +139,8 @@ const FoodPost = inject('post')(
               name="date"
               label="Date"
               format="MM/dd/yyyy"
-              // value={state.date}
-              onChange={onchange}
+              value={post.date}
+              onChange={onDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
@@ -193,11 +161,12 @@ const FoodPost = inject('post')(
               <Grid item>YES</Grid>
               <Grid item>
                 <FormControlLabel
-                  value="KOSHER"
+                  name="kosher"
+                  value={post.kosher}
                   control={<Switch color="primary" />}
                   label="KOSHER"
                   labelPlacement="top"
-                  onChange={switchKosher}
+                  onChange={toggleValue}
                 />
               </Grid>
               <Grid item>NO</Grid>
@@ -217,11 +186,12 @@ const FoodPost = inject('post')(
               <Grid item>MY</Grid>
               <Grid item>
                 <FormControlLabel
-                  value="LOCATION"
+                  name="location"
+                  value={post.location}
                   control={<Switch color="primary" />}
                   label="LOCATION"
                   labelPlacement="top"
-                  onChange={switchLocation}
+                  onChange={toggleValue}
                 />
               </Grid>
               <Grid item>ADD</Grid>
@@ -234,17 +204,18 @@ const FoodPost = inject('post')(
             PRICE
           </Typography>
           <Slider
+            className="slider"
+            id="price"
             name="price"
-            defaultValue={30}
             getAriaValueText={valueText}
             aria-labelledby="discrete-slider"
             valueLabelDisplay="auto"
+            defaultValue={30}
             step={10}
-            marks={marks1}
+            marks={priceMarks}
             min={10}
             max={50}
-            onChange={onchange}
-            id="price"
+            onChange={sliderChange}
           />
         </FormControl>
 
@@ -257,10 +228,10 @@ const FoodPost = inject('post')(
             getAriaValueText={valueText}
             aria-labelledby="discrete-slider"
             step={30}
-            marks={marks2}
+            marks={distributionMarks}
             min={0}
             max={60}
-            onChange={() => post.onInputChange}
+            onChange={sliderChange}
             id="distribution"
             name="distribution"
           />
@@ -278,10 +249,10 @@ const FoodPost = inject('post')(
           variant="contained"
           aria-label="contained primary button group"
         >
-          <Button id="cook" onClick={''} color="primary">
+          <Button id="cook" onClick={onSubmit} color="primary">
             COOK
           </Button>
-          <Button id="eat" onClick={''} color="Secondary">
+          <Button id="eat" onClick={onSubmit} color="secondary">
             EAT
           </Button>
         </ButtonGroup>
