@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { Link } from 'react-router-dom';
@@ -8,14 +8,26 @@ const mapStyles = {
   height: '80%',
 };
 
-const FoodMap = inject('user')(
+const FoodMap = inject(
+  'user',
+  'posts'
+)(
   observer((props) => {
+    const { user, posts } = props;
+    useEffect(() => {
+      posts.getFoodPosts();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
       <div>
         <div>
-          <h1> hello {props.user.name}</h1>
-          <img src={props.user.img} alt="user" />
+          <h1> hello {user.name}</h1>
+          <img src={user.img} alt="user" />
           <Link to="/foodPost">Post</Link>
+          {posts.foodPosts.map((post) => (
+            <div>{post.mealName}</div>
+          ))}
         </div>
 
         <Map
