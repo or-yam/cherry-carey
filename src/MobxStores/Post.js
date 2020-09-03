@@ -28,6 +28,8 @@ export class Post {
   }
 
   @action onInputChange(event) {
-    this[event.target.name] = event.target.value;
+    console.log(event.target.name);
+    // this[event.target.name] = event.target.value;
+    // console.log(this[event.target.name]);
   }
 }

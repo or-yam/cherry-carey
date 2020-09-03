@@ -1,12 +1,16 @@
 import 'date-fns';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+
 import Logo from './Logo';
+
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
-import Radio from '@material-ui/core/Radio';
+import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
@@ -19,8 +23,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { Link } from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
+import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -81,7 +84,19 @@ const FoodPost = inject('post')(
     const { post } = props;
 
     const onchange = (event) => {
-      props.onInputChange(event);
+      post.onInputChange(event);
+    };
+
+    const [kosherChecked, setKosherChecked] = React.useState(false);
+    const switchKosher = (e) => {
+      setKosherChecked((prev) => !prev);
+      console.log(kosherChecked);
+    };
+
+    const [locationChecked, setLocationChecked] = React.useState(false);
+    const switchLocation = (e) => {
+      setLocationChecked((prev) => !prev);
+      console.log(locationChecked);
     };
 
     return (
@@ -89,19 +104,13 @@ const FoodPost = inject('post')(
         <Logo />
 
         <FormControl className={classes.formControl}>
-          <TextField
-            onChange={onchange}
-            // value={state.mealName}
-            name="mealName"
-            label="MEAL NAME"
-          />
+          <TextField onChange={onchange} name="mealName" label="MEAL NAME" />
         </FormControl>
 
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-native-simple">MEAL ORIGIN</InputLabel>
           <Select
             native
-            // value={state.mealOrigin}
             onChange={onchange}
             inputProps={{
               name: 'mealOrigin',
@@ -123,7 +132,6 @@ const FoodPost = inject('post')(
           <InputLabel htmlFor="age-native-simple">ALLERGIES</InputLabel>
           <Select
             native
-            // value={state.allergies}
             onChange={onchange}
             inputProps={{
               name: 'allergies',
@@ -142,7 +150,6 @@ const FoodPost = inject('post')(
           <InputLabel htmlFor="age-native-simple">MEAL TIME</InputLabel>
           <Select
             native
-            // value={state.mealTime}
             onChange={onchange}
             inputProps={{
               name: 'mealTime',
@@ -175,38 +182,51 @@ const FoodPost = inject('post')(
 
         <br></br>
         <FormControl className={classes.formControl}>
-          <Typography id="discrete-slider" gutterBottom>
-            KOSHER
+          <Typography component="div">
+            <Grid
+              style={{ justifyContent: 'center' }}
+              component="label"
+              container
+              alignItems="center"
+              spacing={1}
+            >
+              <Grid item>YES</Grid>
+              <Grid item>
+                <FormControlLabel
+                  value="KOSHER"
+                  control={<Switch color="primary" />}
+                  label="KOSHER"
+                  labelPlacement="top"
+                  onChange={switchKosher}
+                />
+              </Grid>
+              <Grid item>NO</Grid>
+            </Grid>
           </Typography>
-          <FormControlLabel
-            name="kosher"
-            value="yes"
-            control={<Radio color="primary" />}
-            label="yes"
-            onClick={onchange}
-          />
-          <FormControlLabel
-            name="kosher"
-            value="no"
-            control={<Radio color="primary" />}
-            label="no"
-            onClick={onchange}
-          />
         </FormControl>
+
         <FormControl className={classes.formControl}>
-          <Typography id="discrete-slider" gutterBottom>
-            LOCATION
+          <Typography component="div">
+            <Grid
+              style={{ justifyContent: 'center' }}
+              component="label"
+              container
+              alignItems="center"
+              spacing={1}
+            >
+              <Grid item>MY</Grid>
+              <Grid item>
+                <FormControlLabel
+                  value="LOCATION"
+                  control={<Switch color="primary" />}
+                  label="LOCATION"
+                  labelPlacement="top"
+                  onChange={switchLocation}
+                />
+              </Grid>
+              <Grid item>ADD</Grid>
+            </Grid>
           </Typography>
-          <FormControlLabel
-            value="start"
-            control={<Radio color="primary" />}
-            label="My location"
-          />
-          <FormControlLabel
-            value="My location"
-            control={<Radio color="primary" />}
-            label="Add location"
-          />
         </FormControl>
         <br></br>
         <FormControl className={classes.formControl}>
