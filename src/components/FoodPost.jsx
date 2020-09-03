@@ -1,31 +1,31 @@
 import 'date-fns';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+
 import Logo from './Logo';
+
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import NativeSelect from '@material-ui/core/NativeSelect';
 import TextField from '@material-ui/core/TextField';
-import Radio from '@material-ui/core/Radio';
+import Grid from '@material-ui/core/Grid';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
-import EditIcon from '@material-ui/icons/Edit';
-import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import { sizing } from '@material-ui/system';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Switch from '@material-ui/core/Switch';
+
+import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -39,51 +39,238 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function valuetext(value) {
-  return `${value} ₪`;
-}
+const valueText = (value) => `${value} ₪`;
 
-const marks1 = [
-  {
-    value: 10,
-    label: '10 ₪',
-  },
-  {
-    value: 20,
-    label: '20 ₪',
-  },
-  {
-    value: 30,
-    label: '30 ₪',
-  },
-  {
-    value: 40,
-    label: '40 ₪',
-  },
-  {
-    value: 50,
-    label: '50 ₪',
-  },
-];
+const FoodPost = inject(
+  'post',
+  'user'
+)(
+  observer((props) => {
+    const classes = useStyles();
 
-const marks2 = [
-  {
-    value: 0,
-    label: 'Delivery',
-  },
-  {
-    value: 30,
-    label: 'Be social - Eat together',
-  },
-  {
-    value: 60,
-    label: 'Take away',
-  },
-];
+    const { post, user } = props;
 
-export default function FoodPost() {
-  const classes = useStyles();
+    const onchange = (event) => {
+      post.onInputChange(event);
+    };
 
+    const onDateChange = (event) => {
+      post.onDateInputChange(event);
+    };
+
+    const toggleValue = (event) => {
+      post.toggleValue(event);
+    };
+
+    const sliderChange = (event, val) => {
+      post.sliderChange(event, val);
+    };
+
+    const onSubmit = (event) => {
+      post.submitPost(event, user.id);
+    };
+
+    return (
+      <div style={{ textAlign: 'center' }}>
+        <Logo />
+
+        <FormControl className={classes.formControl}>
+          <TextField onChange={onchange} name="mealName" label="MEAL NAME" />
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple">MEAL ORIGIN</InputLabel>
+          <Select
+            native
+            onChange={onchange}
+            inputProps={{
+              name: 'mealOrigin',
+              id: 'mealOrigin',
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={'Israeli'}>Israeli</option>
+            <option value={'Italian'}>Italian</option>
+            <option value={'Thai'}>Thai</option>
+            <option value={'Indian'}>Indian</option>
+            <option value={'Moroccan'}>Moroccan</option>
+          </Select>
+        </FormControl>
+
+        <br></br>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple">ALLERGIES</InputLabel>
+          <Select
+            native
+            onChange={onchange}
+            inputProps={{
+              name: 'allergies',
+              id: 'allergies',
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={'Gluten'}>Gluten</option>
+            <option value={'Lactose'}>Lactose</option>
+            <option value={'Nuts'}>Nuts</option>
+            <option value={'Else'}>Else</option>
+          </Select>
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-native-simple">MEAL TIME</InputLabel>
+          <Select
+            native
+            onChange={onchange}
+            inputProps={{
+              name: 'mealTime',
+              id: 'mealTime',
+            }}
+          >
+            <option aria-label="None" value="" />
+            <option value={'Breakfast'}>Breakfast</option>
+            <option value={'Lunch'}>Lunch</option>
+            <option value={'Dinner'}>Dinner</option>
+            <option value={'Night munchie'}>Night munchie</option>
+          </Select>
+        </FormControl>
+        <br></br>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <FormControl className={classes.formControl}>
+            <KeyboardDatePicker
+              margin="normal"
+              name="date"
+              label="Date"
+              format="MM/dd/yyyy"
+              value={post.date}
+              onChange={onDateChange}
+              KeyboardButtonProps={{
+                'aria-label': 'change date',
+              }}
+            />
+          </FormControl>
+        </MuiPickersUtilsProvider>
+
+        <br></br>
+        <FormControl className={classes.formControl}>
+          <Typography component="div">
+            <Grid
+              style={{ justifyContent: 'center' }}
+              component="label"
+              container
+              alignItems="center"
+              spacing={1}
+            >
+              <Grid item>YES</Grid>
+              <Grid item>
+                <FormControlLabel
+                  name="kosher"
+                  value={post.kosher}
+                  control={<Switch color="primary" />}
+                  label="KOSHER"
+                  labelPlacement="top"
+                  onChange={toggleValue}
+                />
+              </Grid>
+              <Grid item>NO</Grid>
+            </Grid>
+          </Typography>
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <Typography component="div">
+            <Grid
+              style={{ justifyContent: 'center' }}
+              component="label"
+              container
+              alignItems="center"
+              spacing={1}
+            >
+              <Grid item>MY</Grid>
+              <Grid item>
+                <FormControlLabel
+                  name="location"
+                  value={post.location}
+                  control={<Switch color="primary" />}
+                  label="LOCATION"
+                  labelPlacement="top"
+                  onChange={toggleValue}
+                />
+              </Grid>
+              <Grid item>ADD</Grid>
+            </Grid>
+          </Typography>
+        </FormControl>
+        <br></br>
+        <FormControl className={classes.formControl}>
+          <Typography id="discrete-slider" gutterBottom>
+            PRICE
+          </Typography>
+          <Slider
+            className="slider"
+            id="price"
+            name="price"
+            getAriaValueText={valueText}
+            aria-labelledby="discrete-slider"
+            valueLabelDisplay="auto"
+            defaultValue={30}
+            step={10}
+            marks={priceMarks}
+            min={10}
+            max={50}
+            onChange={sliderChange}
+          />
+        </FormControl>
+
+        <FormControl className={classes.formControl}>
+          <Typography id="discrete-slider" gutterBottom>
+            DISTRIBUTION
+          </Typography>
+          <Slider
+            defaultValue={30}
+            getAriaValueText={valueText}
+            aria-labelledby="discrete-slider"
+            step={30}
+            marks={distributionMarks}
+            min={0}
+            max={60}
+            onChange={sliderChange}
+            id="distribution"
+            name="distribution"
+          />
+        </FormControl>
+        <br></br>
+        <Fab color="primary" variant="extended">
+          <AddIcon />
+          Add food image
+        </Fab>
+        <br></br>
+        <br></br>
+
+        <ButtonGroup
+          size="large"
+          variant="contained"
+          aria-label="contained primary button group"
+        >
+          <Button id="cook" onClick={onSubmit} color="primary">
+            COOK
+          </Button>
+          <Button id="eat" onClick={onSubmit} color="secondary">
+            EAT
+          </Button>
+        </ButtonGroup>
+        <br></br>
+        <Link to="foodMap" variant="body2">
+          {'Back to map'}
+        </Link>
+      </div>
+    );
+  })
+);
+
+export default FoodPost;
+
+/*
   const [state, setState] = React.useState({
     postType: '',
     mealOrigin: '',
@@ -98,8 +285,6 @@ export default function FoodPost() {
     distribution: 'Be social - Eat together',
     price: '',
   });
-
-  //////////////////////////////////////////////////////
 
   const handleSelectChange = (event) => {
     let newSelect = event.target.name;
@@ -154,20 +339,20 @@ export default function FoodPost() {
     });
   };
 
-  function getLocation() {
+  const getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
       console.log('Geolocation is not supported by this browser.');
     }
-  }
+  };
 
-  function showPosition(position) {
+  const showPosition = (position) => {
     setState({
       locationLat: position.coords.latitude,
       locationLan: position.coords.longitude,
     });
-  }
+  };
 
   ///////////////////////////////////////////////////////////
 
@@ -195,188 +380,4 @@ export default function FoodPost() {
     sendFoodPost();
   };
 
-  return (
-    <div style={{ textAlign: 'center' }}>
-      <Logo />
-
-      <FormControl className={classes.formControl}>
-        <TextField
-          onChange={handleMealName}
-          value={state.mealName}
-          id='mealName'
-          label='MEAL NAME'
-        />
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='age-native-simple'>MEAL ORIGIN</InputLabel>
-        <Select
-          native
-          value={state.mealOrigin}
-          onChange={handleSelectChange}
-          inputProps={{
-            name: 'mealOrigin',
-            id: 'mealOrigin',
-          }}
-        >
-          <option aria-label='None' value='' />
-          <option value={'Israeli'}>Israeli</option>
-          <option value={'Italian'}>Italian</option>
-          <option value={'Thai'}>Thai</option>
-          <option value={'Indian'}>Indian</option>
-          <option value={'Moroccan'}>Moroccan</option>
-        </Select>
-      </FormControl>
-
-      <br></br>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='age-native-simple'>ALLERGIES</InputLabel>
-        <Select
-          native
-          value={state.allergies}
-          onChange={handleSelectChange}
-          inputProps={{
-            name: 'allergies',
-            id: 'allergies',
-          }}
-        >
-          <option aria-label='None' value='' />
-          <option value={'Gluten'}>Gluten</option>
-          <option value={'Lactose'}>Lactose</option>
-          <option value={'Nuts'}>Nuts</option>
-          <option value={'Else'}>Else</option>
-        </Select>
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='age-native-simple'>MEAL TIME</InputLabel>
-        <Select
-          native
-          value={state.mealTime}
-          onChange={handleSelectChange}
-          inputProps={{
-            name: 'mealTime',
-            id: 'mealTime',
-          }}
-        >
-          <option aria-label='None' value='' />
-          <option value={'Breakfast'}>Breakfast</option>
-          <option value={'Lunch'}>Lunch</option>
-          <option value={'Dinner'}>Dinner</option>
-          <option value={'Night munchie'}>Night munchie</option>
-        </Select>
-      </FormControl>
-      <br></br>
-      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <FormControl className={classes.formControl}>
-          <KeyboardDatePicker
-            margin='normal'
-            id='date'
-            label='Date'
-            format='MM/dd/yyyy'
-            value={state.date}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
-          />
-        </FormControl>
-      </MuiPickersUtilsProvider>
-
-      <br></br>
-      <FormControl className={classes.formControl}>
-        <Typography id='discrete-slider' gutterBottom>
-          KOSHER
-        </Typography>
-        <FormControlLabel
-          value='yes'
-          control={<Radio color='primary' />}
-          label='yes'
-          onClick={handleKosher}
-        />
-        <FormControlLabel
-          value='no'
-          control={<Radio color='primary' />}
-          label='no'
-          onClick={handleKosher}
-        />
-      </FormControl>
-      <FormControl className={classes.formControl}>
-        <Typography id='discrete-slider' gutterBottom>
-          LOCATION
-        </Typography>
-        <FormControlLabel
-          value='start'
-          control={<Radio color='primary' />}
-          label='My location'
-        />
-        <FormControlLabel
-          value='My location'
-          control={<Radio color='primary' />}
-          label='Add location'
-        />
-      </FormControl>
-      <br></br>
-      <FormControl className={classes.formControl}>
-        <Typography id='discrete-slider' gutterBottom>
-          PRICE
-        </Typography>
-        <Slider
-          defaultValue={30}
-          getAriaValueText={valuetext}
-          aria-labelledby='discrete-slider'
-          valueLabelDisplay='auto'
-          step={10}
-          marks={marks1}
-          min={10}
-          max={50}
-          onChange={handlePriceChange}
-          id='price'
-        />
-      </FormControl>
-
-      <FormControl className={classes.formControl}>
-        <Typography id='discrete-slider' gutterBottom>
-          DISTRIBUTION
-        </Typography>
-        <Slider
-          defaultValue={30}
-          getAriaValueText={valuetext}
-          aria-labelledby='discrete-slider'
-          step={30}
-          marks={marks2}
-          min={0}
-          max={60}
-          onChange={handleDistributionChange}
-          id='distribution'
-          name='distribution'
-        />
-      </FormControl>
-      <br></br>
-      <Fab color='primary' variant='extended'>
-        <AddIcon />
-        Add food image
-      </Fab>
-      <br></br>
-      <br></br>
-
-      <ButtonGroup
-        size='large'
-        variant='contained'
-        aria-label='contained primary button group'
-      >
-        <Button id='cook' onClick={postType} color='primary'>
-          COOK
-        </Button>
-        <Button id='eat' onClick={postType} color='Secondary'>
-          EAT
-        </Button>
-      </ButtonGroup>
-      <br></br>
-      <Link to='foodMap' variant='body2'>
-        {'Back to map'}
-      </Link>
-    </div>
-  );
-}
+*/
