@@ -60,9 +60,7 @@ export class Post {
   }
 
   @action submitPost(event, userId) {
-    this.postType = event.target.id
-      ? event.target.id
-      : event.target.closest('button').id;
+    this.postType = event.currentTarget.id;
     const postData = {
       userId: userId,
       postType: this.postType,
