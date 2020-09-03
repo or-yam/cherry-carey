@@ -1,6 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { Map, GoogleApiWrapper } from 'google-maps-react';
+import { Link } from 'react-router-dom';
 
 const mapStyles = {
   width: '80%',
@@ -14,6 +15,7 @@ const FoodMap = inject('user')(
         <div>
           <h1> hello {props.user.name}</h1>
           <img src={props.user.img} alt="user" />
+          <Link to="/foodPost">Post</Link>
         </div>
 
         <Map

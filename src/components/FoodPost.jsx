@@ -41,11 +41,14 @@ const useStyles = makeStyles((theme) => ({
 
 const valueText = (value) => `${value} ₪`;
 
-const FoodPost = inject('post')(
+const FoodPost = inject(
+  'post',
+  'user'
+)(
   observer((props) => {
     const classes = useStyles();
 
-    const { post } = props;
+    const { post, user } = props;
 
     const onchange = (event) => {
       post.onInputChange(event);
@@ -64,7 +67,7 @@ const FoodPost = inject('post')(
     };
 
     const onSubmit = (event) => {
-      post.submitPost(event);
+      post.submitPost(event, user.id);
     };
 
     return (

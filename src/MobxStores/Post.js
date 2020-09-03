@@ -1,4 +1,5 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
+
 import axios from 'axios';
 export class Post {
   @observable postType = '';
@@ -9,7 +10,7 @@ export class Post {
   @observable date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
   @observable location = true;
   @observable locationLat = '';
-  @observable locationLan = '';
+  @observable locationLng = '';
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = '';
@@ -25,12 +26,12 @@ export class Post {
   showPosition = async (position) => {
     const postPosition = await position.coords;
     this.locationLat = postPosition.latitude;
-    this.locationLan = postPosition.longitude;
+    this.locationLng = postPosition.longitude;
   };
 
   setDefaultPosition = () => {
     this.locationLat = 32.834247;
-    this.locationLan = 35.640642;
+    this.locationLng = 35.640642;
   };
 
   @action onInputChange(event) {
@@ -58,33 +59,31 @@ export class Post {
             : 'Take away');
   }
 
-  @action submitPost(event) {
+  @action submitPost(event, userId) {
     this.postType = event.target.id
       ? event.target.id
       : event.target.closest('button').id;
     const postData = {
+      userId: userId,
       postType: this.postType,
       mealOrigin: this.mealOrigin,
-      allergies: this.allergies,
-      mealTime: this.mealTime,
       mealName: this.mealName,
       date: this.date,
-      locationLat: this.locationLat,
-      locationLan: this.locationLan,
+      mealTime: this.mealTime,
+      allergies: this.allergies,
       kosher: this.kosher,
       distribution: this.distribution,
-      price: this.price,
+      locationLat: this.locationLat,
+      locationLng: this.locationLng,
+      //   price: this.price,
     };
-    // axios.post('http://localhost:4000/foodPost', postData).then(
-    //   (res) => {
-    //     this.foodPosts = res.data[0];
-    //     this.filteredPosts = this.foodPosts;
-    //     this.loadingState = 'done';
-    //   },
-    //   (error) => {
-    //     this.loadingState = 'error';
-    //   }
-    // );
-    console.log(postData);
+    axios.post('http://localhost:4000/foodPost', postData).then(
+      (res) => {
+        console.log(res.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }
