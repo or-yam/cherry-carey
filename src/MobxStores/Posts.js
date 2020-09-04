@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-
+import {Post} from './Post';
 export class Posts {
   @observable foodPosts = [];
   @observable filteredPosts = [];
@@ -11,7 +11,7 @@ export class Posts {
     this.loadingState = 'pending';
     axios.get('http://localhost:4000/foodPost').then(
       (res) => {
-        this.foodPosts = res.data[0];
+        this.foodPosts = res.data[0].map((post) => new Post(post));
         this.filteredPosts = this.foodPosts;
         this.loadingState = 'done';
       },

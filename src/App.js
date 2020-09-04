@@ -24,7 +24,7 @@ const App = observer(() => {
   return (
     <Router>
       <Provider {...stores}>
-        <Route path="/" exact render={() => <Login />} />
+        <Route path="/login" exact render={() => <Login />} />
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />
         <Route path="/foodPost" exact render={() => <FoodPost />} />

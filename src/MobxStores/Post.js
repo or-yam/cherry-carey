@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 
 import axios from 'axios';
 export class Post {
+  @observable id = null;
   @observable postType = '';
   @observable mealOrigin = '';
   @observable allergies = '';
@@ -14,6 +15,7 @@ export class Post {
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = '';
+  @observable mapWindow = false;
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -83,5 +85,9 @@ export class Post {
         console.log(error);
       }
     );
+  }
+
+  @action mapWindowToggle() {
+    this.mapWindow = !this.mapWindow;
   }
 }

@@ -1,15 +1,16 @@
 import React from 'react';
 
-const MapMarker = ({ post, windowHandler }) => {
+const MapMarker = ({ post, windowHandler, lat, lng }) => {
+  // post.window = false;
   return (
     <div>
       <div
         onClick={() => {
-          windowHandler(post.id, post.lat, post.lng);
+          windowHandler(post.window, lat, lng);
         }}
         style={{ fontSize: '250%' }}
       >
-        {post.text}
+        {post.postType}
       </div>
       {!post.window ? (
         <div></div>
@@ -25,7 +26,7 @@ const MapMarker = ({ post, windowHandler }) => {
             borderStyle: 'solid',
           }}
         >
-          <h1>{post.name}</h1>
+          <h1>{post.mealName}</h1>
         </div>
       )}
     </div>
