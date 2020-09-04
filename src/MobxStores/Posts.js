@@ -1,6 +1,6 @@
 import { observable, action, computed } from 'mobx';
 import axios from 'axios';
-import {Post} from './Post';
+import { Post } from './Post';
 export class Posts {
   @observable foodPosts = [];
   @observable filteredPosts = [];
