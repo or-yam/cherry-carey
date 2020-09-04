@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
+import MapMarker from './MapMarker';
 
 export default function NewMap(props) {
   const mapRef = useRef();
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     zoom: 14,
     lat: 32.077937,
     lng: 34.774263,
@@ -58,53 +59,20 @@ export default function NewMap(props) {
       },
     ],
   });
-  const expansionZoom = 18;
-  const AnyReactComponent = ({ id, lat, lng, text, name, window }) => (
-    <div>
-      <div
-        onClick={() => {
-          openWindow(id, lat, lng);
-        }}
-        style={{ fontSize: '250%' }}
-      >
-        {text}
-      </div>
-      {!window ? (
-        <div></div>
-      ) : (
-        <div
-          style={{
-            height: '200px',
-            width: '250px',
-            backgroundColor: 'white',
-            borderTopRightRadius: '50%',
-            borderBottomLeftRadius: '50%',
-            borderBottomRightRadius: '50%',
-            borderStyle: 'solid',
-          }}
-        >
-          <h1>{name}</h1>
-        </div>
-      )}
-    </div>
-  );
 
-  const openWindow = (id, lat, lng) => {
-    state.postArr.map((p) => {
-      let newPostArr = [...state.postArr];
-      p.window = false;
-      setState({ postArr: newPostArr });
-    });
-    for (let i = 0; i < state.postArr.length; i++) {
-      if (id === state.postArr[i].id) {
-        let newPostArr = [...state.postArr];
-        newPostArr[i].window = true;
-        setState({
-          postArr: newPostArr,
-        });
+  const expansionZoom = 18;
+
+  const windowHandler = (id, lat, lng) => {
+    let newPostArr = [...state.postArr];
+    for (const post of newPostArr) {
+      if (id === post.id) {
+        post.window = !post.window;
         mapRef.current.panTo({ lat: lat - 0.001, lng: lng + 0.0006 });
         mapRef.current.setZoom(expansionZoom);
       }
+      setState({
+        postArr: newPostArr,
+      });
     }
   };
 
@@ -120,13 +88,11 @@ export default function NewMap(props) {
         }}
       >
         {state.postArr.map((p) => (
-          <AnyReactComponent
-            id={p.id}
-            window={p.window}
-            name={p.name}
+          <MapMarker
+            post={p}
             lat={p.lat}
             lng={p.lng}
-            text={p.text}
+            windowHandler={windowHandler}
           />
         ))}
       </GoogleMapReact>
