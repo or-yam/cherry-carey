@@ -15,7 +15,7 @@ import { Posts } from './MobxStores/Posts';
 import { Post } from './MobxStores/Post';
 
 const user = new User();
-const post = new Post();
+const post = new Post({});
 const posts = new Posts();
 
 const stores = { user, posts, post };
@@ -24,7 +24,7 @@ const App = observer(() => {
   return (
     <Router>
       <Provider {...stores}>
-        <Route path="/" exact render={() => <Login />} />
+        <Route path="/login" exact render={() => <Login />} />
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />
         <Route path="/foodPost" exact render={() => <FoodPost />} />

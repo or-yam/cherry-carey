@@ -2,6 +2,7 @@ import { observable, action } from 'mobx';
 
 import axios from 'axios';
 export class Post {
+  @observable id = null;
   @observable postType = '';
   @observable mealOrigin = '';
   @observable allergies = '';
@@ -14,6 +15,22 @@ export class Post {
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = '';
+  @observable mapWindow = false;
+
+  constructor(data) {
+    data.id ? (this.id = data.id) : (this.id = null);
+    this.postType = data.postType;
+    this.mealOrigin = data.mealOrigin;
+    this.allergies = data.allergies;
+    this.mealTime = data.mealTime;
+    this.mealName = data.mealName;
+    this.date = data.date;
+    this.locationLat = data.locationLat;
+    this.locationLng = data.locationLng;
+    this.kosher = data.kosher;
+    this.distribution = data.distribution;
+    this.price = data.price;
+  }
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -83,5 +100,9 @@ export class Post {
         console.log(error);
       }
     );
+  }
+
+  @action mapWindowToggle() {
+    this.mapWindow = !this.mapWindow;
   }
 }

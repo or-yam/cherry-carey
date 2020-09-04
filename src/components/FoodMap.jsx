@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
 import { Link, Redirect } from 'react-router-dom';
-
-const mapStyles = {
-  width: '80%',
-  height: '80%',
-};
+import Map from './Map';
 
 const FoodMap = inject(
   'user',
@@ -32,20 +27,9 @@ const FoodMap = inject(
           ))}
         </div>
 
-        <Map
-          google={props.google}
-          zoom={12}
-          style={mapStyles}
-          initialCenter={{
-            lat: 32.825942,
-            lng: 34.957236,
-          }}
-        />
+        <Map />
       </div>
     );
   })
 );
-
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyAsAf8ZKSFF8-3xgRO1GOdhAsEEVxdc9a0',
-})(FoodMap);
+export default FoodMap;
