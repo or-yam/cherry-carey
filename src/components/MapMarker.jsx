@@ -1,18 +1,18 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 
-const MapMarker = ({ post, windowHandler, lat, lng }) => {
-  // post.window = false;
+const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
   return (
     <div>
       <div
         onClick={() => {
-          windowHandler(post.window, lat, lng);
+          windowHandler(post, lat, lng);
         }}
         style={{ fontSize: '250%' }}
       >
         {post.postType}
       </div>
-      {!post.window ? (
+      {!post.mapWindow ? (
         <div></div>
       ) : (
         <div
@@ -31,5 +31,5 @@ const MapMarker = ({ post, windowHandler, lat, lng }) => {
       )}
     </div>
   );
-};
+});
 export default MapMarker;

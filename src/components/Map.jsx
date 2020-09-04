@@ -21,19 +21,10 @@ const NewMap = inject('posts')(
 
     const expansionZoom = 18;
 
-    const windowHandler = (window, lat, lng) => {
-      //   let newPostArr = [...state.postArr];
-      //   for (const post of newPostArr) {
-      // if (id === post.id) {
-      window = !window;
+    const windowHandler = (post, lat, lng) => {
+      post.mapWindowToggle();
       mapRef.current.panTo({ lat: lat - 0.001, lng: lng + 0.0006 });
       mapRef.current.setZoom(expansionZoom);
-      console.log(window)
-      // }
-      // setState({
-      //   postArr: newPostArr,
-      // });
-      //   }
     };
 
     return (

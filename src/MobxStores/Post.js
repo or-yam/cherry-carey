@@ -17,6 +17,21 @@ export class Post {
   @observable price = '';
   @observable mapWindow = false;
 
+  constructor(data) {
+    data.id ? (this.id = data.id) : (this.id = null);
+    this.postType = data.postType;
+    this.mealOrigin = data.mealOrigin;
+    this.allergies = data.allergies;
+    this.mealTime = data.mealTime;
+    this.mealName = data.mealName;
+    this.date = data.date;
+    this.locationLat = data.locationLat;
+    this.locationLng = data.locationLng;
+    this.kosher = data.kosher;
+    this.distribution = data.distribution;
+    this.price = data.price;
+  }
+
   getLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.showPosition);

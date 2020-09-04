@@ -15,7 +15,7 @@ import { Posts } from './MobxStores/Posts';
 import { Post } from './MobxStores/Post';
 
 const user = new User();
-const post = new Post();
+const post = new Post({});
 const posts = new Posts();
 
 const stores = { user, posts, post };
