@@ -23,6 +23,10 @@ const FoodMap = inject(
 
     formInputs.clearInputs();
 
+    const onFilter = (event) => {
+      posts.filterByType(event);
+    };
+
     return !user.isSignin ? (
       <Redirect to="/login" />
     ) : (
@@ -49,10 +53,10 @@ const FoodMap = inject(
           variant="contained"
           aria-label="contained primary button group"
         >
-          <Button id="viewCook" color="primary" onClick={posts.filterCookPosts}>
+          <Button id="cook" color="primary" onClick={onFilter}>
             COOK
           </Button>
-          <Button id="viewEat" color="secondary" onClick={posts.filterEatPosts}>
+          <Button id="eat" color="secondary" onClick={onFilter}>
             EAT
           </Button>
         </ButtonGroup>

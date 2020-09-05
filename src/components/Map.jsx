@@ -38,7 +38,7 @@ const NewMap = inject('posts')(
             mapRef.current = map;
           }}
         >
-          {posts.foodPosts.map((p) => (
+          {posts.filteredPosts.map((p) => (
             <MapMarker
               key={p.id}
               post={p}
