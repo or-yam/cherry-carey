@@ -7,6 +7,7 @@ import Register from './components/Register';
 import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
 import Map from './components/Map';
+import Landing from './components/Landing';
 
 import './App.css';
 
@@ -24,6 +25,7 @@ const App = observer(() => {
   return (
     <Router>
       <Provider {...stores}>
+        <Route path="/" exact render={() => <Landing />} />
         <Route path="/login" exact render={() => <Login />} />
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />
