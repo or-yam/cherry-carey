@@ -38,4 +38,15 @@ export class Posts {
       (post) => post.postType === 'cook'
     );
   }
+
+  @action addPost(postData) {
+    axios.post('http://localhost:4000/foodPost', postData).then(
+      (res) => {
+        this.foodPosts.push(new Post(res.data));
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
