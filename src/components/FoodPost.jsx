@@ -1,4 +1,3 @@
-import 'date-fns';
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';

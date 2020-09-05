@@ -20,18 +20,17 @@ const FoodMap = inject(
     return !user.isSignin ? (
       <Redirect to="/login" />
     ) : (
-      <div>
-        <div>
+      <>
+        <>
           <h1> hello {user.name}</h1>
           <img src={user.img} alt="user" />
           <Link to="/foodPost">Post</Link>
-          {posts.foodPosts.map((post) => (
-            <div>{post.mealName}</div>
+          {posts.foodPosts.map((post, index) => (
+            <div key={index}>{post.mealName}</div>
           ))}
-        </div>
-
+        </>
         <Map />
-      </div>
+      </>
     );
   })
 );

@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export default function Logo() {
+const Logo = () => {
   return (
     <div style={{ textAlign: 'center', marginTop: '10%' }}>
       <img
@@ -13,4 +12,6 @@ export default function Logo() {
       <span style={{ color: 'aqua', fontSize: '8vh' }}> carey</span>
     </div>
   );
-}
+};
+
+export default Logo;

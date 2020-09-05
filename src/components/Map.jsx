@@ -40,6 +40,7 @@ const NewMap = inject('posts')(
         >
           {posts.foodPosts.map((p) => (
             <MapMarker
+              key={p.id}
               post={p}
               lat={p.locationLat}
               lng={p.locationLng}
@@ -53,61 +54,3 @@ const NewMap = inject('posts')(
 );
 
 export default NewMap;
-
-/*
- const [state, setState] = useState({
-      zoom: 14,
-      lat: 32.077937,
-      lng: 34.774263,
-      postArr: [
-        {
-          id: 1,
-          window: false,
-          lat: 32.0727,
-          lng: 34.7747,
-          text: '🍴',
-          name: 'dadi',
-        },
-        {
-          id: 2,
-          window: false,
-          lat: 32.0757,
-          lng: 34.7757,
-          text: '🍴',
-          name: 'gadi',
-        },
-        {
-          id: 3,
-          window: false,
-          lat: 32.0747,
-          lng: 34.7767,
-          text: '🍴',
-          name: 'babi',
-        },
-        {
-          id: 4,
-          window: false,
-          lat: 32.0775,
-          lng: 34.7777,
-          text: '‍👨‍🍳',
-          name: 'nir',
-        },
-        {
-          id: 5,
-          window: false,
-          lat: 32.0774,
-          lng: 34.7717,
-          text: '‍👨‍🍳',
-          name: 'shir',
-        },
-        {
-          id: 6,
-          window: false,
-          lat: 32.0791,
-          lng: 34.7735,
-          text: '‍👨‍🍳',
-          name: 'lior',
-        },
-      ],
-    });
-*/
