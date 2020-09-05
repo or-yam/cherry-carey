@@ -12,8 +12,7 @@ export class FormInputs {
   @observable locationLng = 35.540642;
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
-  @observable price = '';
-  @observable mapWindow = false;
+  @observable price = 30;
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -45,12 +44,11 @@ export class FormInputs {
     this.locationLng = 35.540642;
     this.kosher = true;
     this.distribution = 'Be social - Eat together';
-    this.price = '';
-    this.mapWindow = false;
+    this.price = 30;
   };
 
   @action onInputChange(event) {
-    this[event.target.name] = event.target.value;
+    this[event.currentTarget.name] = event.currentTarget.value;
   }
 
   @action onDateInputChange(event) {
@@ -58,15 +56,15 @@ export class FormInputs {
   }
 
   @action toggleValue(event) {
-    this[event.target.name] = !this[event.target.name];
+    this[event.currentTarget.name] = !this[event.currentTarget.name];
     this.getLocation();
     this.location ? this.getLocation() : this.setDefaultPosition();
   }
 
   @action sliderChange(event, val) {
-    event.target.id !== 'distribution'
-      ? (this[event.target.id] = val)
-      : (this[event.target.id] =
+    event.currentTarget.id !== 'distribution'
+      ? (this[event.currentTarget.id] = val)
+      : (this[event.currentTarget.id] =
           val === 0
             ? 'Delivery'
             : val === 30
@@ -88,7 +86,7 @@ export class FormInputs {
       distribution: this.distribution,
       locationLat: this.locationLat,
       locationLng: this.locationLng,
-      //   price: this.price,
+      price: this.price,
     };
     return postData;
   }

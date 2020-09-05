@@ -25,9 +25,14 @@ const FoodMap = inject(
           <h1> hello {user.name}</h1>
           <img src={user.img} alt="user" />
           <Link to="/foodPost">Post</Link>
-          {posts.foodPosts.map((post, index) => (
-            <div key={index}>{post.mealName}</div>
-          ))}
+          {posts.foodPosts.map((post, index) => {
+            console.log(post.price);
+            return (
+              <div key={index}>
+                {post.mealName}, {post.price}$
+              </div>
+            );
+          })}
         </>
         <Map />
       </>

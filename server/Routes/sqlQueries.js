@@ -51,6 +51,7 @@ class sqlQueries {
       distribution,
       locationLat,
       locationLng,
+      price,
     } = postData;
     const query = `INSERT INTO post 
                        VALUES(
@@ -66,7 +67,8 @@ class sqlQueries {
                            '${distribution}',
                            0,
                            ${locationLat},
-                           ${locationLng})`;
+                           ${locationLng},
+                           ${parseInt(price)})`;
     return sequelize.query(query);
   }
 
