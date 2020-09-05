@@ -25,6 +25,7 @@ USE cherryDb;
 --     status BOOL,
 --     locationLat FLOAT(17, 15),
 --     locationLng FLOAT(17, 15),
+--     price  INT,
     
 --     FOREIGN KEY(generatedBy_id) 
 --     REFERENCES user(id)
@@ -32,16 +33,15 @@ USE cherryDb;
 
 -- DROP TABLE post;
 
-CREATE TABLE review(
-    id int NOT NULL AUTO_INCREMENT ,
-    text TEXT(3000),
-    cooker_id int NOT NULL,
-    rating INT,
+-- CREATE TABLE review(
+--     id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+--     text TEXT(3000),
+--     cooker_id int NOT NULL,
+--     rating INT,
 
-    PRIMARY key(id),
 
-    FOREIGN KEY (cooker_id)
-    REFERENCES user(id)
-);
+--     FOREIGN KEY (cooker_id)
+--     REFERENCES user(id)
+-- );
 
 -- DROP TABLE review;
