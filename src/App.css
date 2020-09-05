@@ -20,6 +20,10 @@ a {
   color: unset;
 }
 
+.landing{
+  text-align: center;
+}
+
 .main-page {
   overflow: hidden;
   height: 100%;
