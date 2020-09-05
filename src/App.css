@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -10,20 +15,34 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: unset;
+}
+
 .main-page {
   overflow: hidden;
   height: 100%;
   width: 100%;
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: 11% 80% 9%;
 }
 
 .top-nav {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
 }
 
-.bottom-nav {
-  display: flex;
-  justify-content: space-between;
+.user-icon {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  text-align: center;
+}
+
+.user-icon img {
+  width: 40%;
+  height: auto;
+  justify-self: center;
 }

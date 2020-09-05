@@ -1,6 +1,12 @@
 import React, { useEffect } from 'react';
 import { inject, observer } from 'mobx-react';
 import { Link, Redirect } from 'react-router-dom';
+
+import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
+import FilterListIcon from '@material-ui/icons/FilterList';
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+
 import Map from './Map';
 
 const FoodMap = inject(
@@ -17,24 +23,39 @@ const FoodMap = inject(
 
     formInputs.clearInputs();
 
-    // return !user.isSignin ? (
-    //   <Redirect to="/login" />
-    // ) :
-    return (
+    return !user.isSignin ? (
+      <Redirect to="/login" />
+    ) : (
       <div className="main-page">
         <div className="top-nav">
-          <Link to="/foodPost">Add Post</Link>
+          <Link to="/foodPost">
+            <Button>
+              <AddCircleOutlineIcon />
+            </Button>
+          </Link>
           <div className="user-icon">
-            <h1>{user.name}</h1>
             <img src={user.img} alt="user" />
+            <span>{user.name}</span>
           </div>
-          <button>Filter</button>
+          <Button id="filter" color="">
+            <FilterListIcon />
+          </Button>
         </div>
         <Map className="main-map" />
-        <div className="bottom-nav">
-          <button>Cookers</button>
-          <button>Eaters</button>
-        </div>
+
+        <ButtonGroup
+          fullWidth
+          size="large"
+          variant="contained"
+          aria-label="contained primary button group"
+        >
+          <Button id="viewCook" color="primary" onClick={posts.filterCookPosts}>
+            COOK
+          </Button>
+          <Button id="viewEat" color="secondary" onClick={posts.filterEatPosts}>
+            EAT
+          </Button>
+        </ButtonGroup>
       </div>
     );
   })
