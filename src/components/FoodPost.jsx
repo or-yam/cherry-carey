@@ -41,35 +41,37 @@ const useStyles = makeStyles((theme) => ({
 const valueText = (value) => `${value} ₪`;
 
 const FoodPost = inject(
-  'post',
-  'user'
+  'formInputs',
+  'user',
+  'posts'
 )(
   observer((props) => {
     const classes = useStyles();
 
-    const { post, user } = props;
+    const { user, formInputs, posts } = props;
 
     const onchange = (event) => {
-      post.onInputChange(event);
+      formInputs.onInputChange(event);
     };
 
     const onDateChange = (event) => {
-      post.onDateInputChange(event);
+      formInputs.onDateInputChange(event);
     };
 
     const toggleValue = (event) => {
-      post.toggleValue(event);
+      formInputs.toggleValue(event);
     };
 
     const sliderChange = (event, val) => {
-      post.sliderChange(event, val);
+      formInputs.sliderChange(event, val);
     };
 
     const onSubmit = (event) => {
-      post.submitPost(event, user.id);
+      const newPost = formInputs.submitPost(event, user.id);
+      posts.addPost(newPost);
     };
 
-    return post.postType ? (
+    return formInputs.postType ? (
       <Redirect to="/foodMap" />
     ) : (
       <div style={{ textAlign: 'center' }}>
@@ -143,7 +145,7 @@ const FoodPost = inject(
               name="date"
               label="Date"
               format="MM/dd/yyyy"
-              value={post.date}
+              value={formInputs.date}
               onChange={onDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
@@ -166,7 +168,7 @@ const FoodPost = inject(
               <Grid item>
                 <FormControlLabel
                   name="kosher"
-                  value={post.kosher}
+                  value={formInputs.kosher}
                   control={<Switch color="primary" />}
                   label="KOSHER"
                   labelPlacement="top"
@@ -191,7 +193,7 @@ const FoodPost = inject(
               <Grid item>
                 <FormControlLabel
                   name="location"
-                  value={post.location}
+                  value={formInputs.location}
                   control={<Switch color="primary" />}
                   label="LOCATION"
                   labelPlacement="top"

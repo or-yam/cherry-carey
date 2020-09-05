@@ -12,13 +12,15 @@ import './App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
-import { Post } from './MobxStores/Post';
+import { FormInputs } from './MobxStores/FormInputs';
+// import { Post } from './MobxStores/Post';
 
 const user = new User();
-const post = new Post({});
 const posts = new Posts();
+const formInputs = new FormInputs();
+// const post = new Post({});
 
-const stores = { user, posts, post };
+const stores = { user, posts, formInputs };
 
 const App = observer(() => {
   return (

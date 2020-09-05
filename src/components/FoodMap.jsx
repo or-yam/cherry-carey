@@ -5,14 +5,17 @@ import Map from './Map';
 
 const FoodMap = inject(
   'user',
-  'posts'
+  'posts',
+  'formInputs'
 )(
   observer((props) => {
-    const { user, posts } = props;
+    const { user, posts, formInputs } = props;
     useEffect(() => {
       posts.getFoodPosts();
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    formInputs.clearInputs();
 
     return !user.isSignin ? (
       <Redirect to="/login" />
