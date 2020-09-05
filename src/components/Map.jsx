@@ -30,7 +30,7 @@ const NewMap = inject('posts')(
     return (
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAsAf8ZKSFF8-3xgRO1GOdhAsEEVxdc9a0' }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={{ lat: defaultMapProps.lat, lng: defaultMapProps.lng }}
           defaultZoom={defaultMapProps.zoom}
           yesIWantToUseGoogleMapApiInternals
