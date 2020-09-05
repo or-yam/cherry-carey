@@ -28,7 +28,7 @@ const NewMap = inject('posts')(
     };
 
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={{ lat: defaultMapProps.lat, lng: defaultMapProps.lng }}
@@ -38,7 +38,7 @@ const NewMap = inject('posts')(
             mapRef.current = map;
           }}
         >
-          {posts.foodPosts.map((p) => (
+          {posts.filteredPosts.map((p) => (
             <MapMarker
               key={p.id}
               post={p}

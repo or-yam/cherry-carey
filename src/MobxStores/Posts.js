@@ -25,17 +25,9 @@ export class Posts {
     return this.foodPosts.length;
   }
 
-  @action filterEatPosts() {
-    this.filteredPosts = this.foodPosts;
-    this.filterCookPosts = this.foodPosts.filter(
-      (post) => post.postType === 'eat'
-    );
-  }
-
-  @action filterCookPosts() {
-    this.filteredPosts = this.foodPosts;
+  @action filterByType(event) {
     this.filteredPosts = this.foodPosts.filter(
-      (post) => post.postType === 'cook'
+      (post) => post.postType === event.currentTarget.id
     );
   }
 
