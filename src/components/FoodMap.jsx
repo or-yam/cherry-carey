@@ -17,26 +17,36 @@ const FoodMap = inject(
 
     formInputs.clearInputs();
 
-    return !user.isSignin ? (
-      <Redirect to="/login" />
-    ) : (
-      <>
-        <>
-          <h1> hello {user.name}</h1>
-          <img src={user.img} alt="user" />
-          <Link to="/foodPost">Post</Link>
-          {posts.foodPosts.map((post, index) => {
-            console.log(post.price);
+    // return !user.isSignin ? (
+    //   <Redirect to="/login" />
+    // ) :
+    return (
+      <div className="main-page">
+        <div className="top-nav">
+          <Link to="/foodPost">Add Post</Link>
+          <div className="user-icon">
+            <h1>{user.name}</h1>
+            <img src={user.img} alt="user" />
+          </div>
+          <button>Filter</button>
+        </div>
+        <Map className="main-map" />
+        <div className="bottom-nav">
+          <button>Cookers</button>
+          <button>Eaters</button>
+        </div>
+      </div>
+    );
+  })
+);
+export default FoodMap;
+
+/*
+  {posts.foodPosts.map((post, index) => {
             return (
               <div key={index}>
                 {post.mealName}, {post.price}$
               </div>
             );
           })}
-        </>
-        <Map />
-      </>
-    );
-  })
-);
-export default FoodMap;
+ */

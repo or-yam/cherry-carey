@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.main-page {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-between;
+}
