@@ -8,23 +8,26 @@ import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
 import Map from './components/Map';
 import MoreInfo from './components/MoreInfo'
+import Landing from './components/Landing';
+
 
 import './App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
-import { Post } from './MobxStores/Post';
+import { FormInputs } from './MobxStores/FormInputs';
 
 const user = new User();
-const post = new Post({});
 const posts = new Posts();
+const formInputs = new FormInputs();
 
-const stores = { user, posts, post };
+const stores = { user, posts, formInputs };
 
 const App = observer(() => {
   return (
     <Router>
       <Provider {...stores}>
+        <Route path="/" exact render={() => <Landing />} />
         <Route path="/login" exact render={() => <Login />} />
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />

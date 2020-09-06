@@ -25,17 +25,20 @@ export class Posts {
     return this.foodPosts.length;
   }
 
-  @action filterEatPosts() {
-    this.filteredPosts = this.foodPosts;
-    this.filterCookPosts = this.foodPosts.filter(
-      (post) => post.postType === 'eat'
+  @action filterByType(event) {
+    this.filteredPosts = this.foodPosts.filter(
+      (post) => post.postType === event.currentTarget.id
     );
   }
 
-  @action filterCookPosts() {
-    this.filteredPosts = this.foodPosts;
-    this.filteredPosts = this.foodPosts.filter(
-      (post) => post.postType === 'cook'
+  @action addPost(postData) {
+    axios.post('http://localhost:4000/foodPost', postData).then(
+      (res) => {
+        this.foodPosts.push(new Post(res.data));
+      },
+      (error) => {
+        console.log(error);
+      }
     );
   }
 }
