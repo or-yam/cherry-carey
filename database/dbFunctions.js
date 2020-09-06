@@ -1,4 +1,4 @@
-const data = require('../../database/dummyData.json');
+const data = require('../../database/dummyUsers.json');
 
 const addDummyUsers = () => {
   data.map(async (user) => {
