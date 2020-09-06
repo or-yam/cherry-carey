@@ -8,19 +8,19 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Box from '@material-ui/core/Box'
+import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import MealInfo from './MealInfo';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import Logo from './Logo'
+import Logo from './Logo';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       <Box style={{ textAlign: 'center' }} mt={8}>
-          <span>© Cherry carey 2020</span>
-        </Box>
+        <span>© Cherry carey 2020</span>
+      </Box>
     </Typography>
   );
 }
@@ -112,13 +112,22 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you ;)
+                  {' Thank you ;)'}
                 </Typography>
                 <Typography variant="subtitle1">
-                We have emailed your meal confirmation.
+                  We have emailed your meal confirmation.
                 </Typography>
-                <Typography style={{color: 'red', fontStyle: 'italic', textAlign: 'center', marginTop: '5%'}} variant="h5" gutterBottom>
-                Bon appétit
+                <Typography
+                  style={{
+                    color: 'red',
+                    fontStyle: 'italic',
+                    textAlign: 'center',
+                    marginTop: '5%',
+                  }}
+                  variant="h5"
+                  gutterBottom
+                >
+                  Bon appétit
                 </Typography>
               </React.Fragment>
             ) : (
