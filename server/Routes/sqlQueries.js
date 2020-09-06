@@ -31,10 +31,10 @@ class sqlQueries {
       )`;
     return sequelize.query(query);
   }
-
+  
   getUserById(id) {
-    const query = `SELECT * from user 
-                      WHERE id='${id}'`;
+    const query = `SELECT id,name,email,img from user 
+                      WHERE id=${id}`;
     return sequelize.query(query);
   }
 

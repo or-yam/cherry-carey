@@ -43,6 +43,12 @@ router.post('/user', async (req, res) => {
   }
 });
 
+router.get('/user/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await queries.getUserById(id);
+  res.send(user[0][0]);
+});
+
 router.post('/foodPost', async (req, res) => {
   const postData = req.body;
   const postId = await queries.postFoodPost(postData);
