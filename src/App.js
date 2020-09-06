@@ -9,6 +9,7 @@ import FoodMap from './components/FoodMap';
 import Map from './components/Map';
 import MoreInfo from './components/MoreInfo'
 import Landing from './components/Landing';
+import FilterMap from './components/FilterMap'
 
 
 import './App.css';
@@ -34,6 +35,7 @@ const App = observer(() => {
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/map" exact render={() => <Map />} />
         <Route path="/moreInfo" exact render={() => <MoreInfo />} />
+        <Route path="/filterMap" exact render={() => <FilterMap />} />
       </Provider>
     </Router>
   );
