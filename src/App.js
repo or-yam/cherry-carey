@@ -34,7 +34,7 @@ const App = observer(() => {
         <Route path="/foodMap" exact render={() => <FoodMap />} />
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/map" exact render={() => <Map />} />
-        <Route path="/moreInfo" exact render={() => <MoreInfo />} />
+        <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
         <Route path="/filterMap" exact render={() => <FilterMap />} />
       </Provider>
     </Router>

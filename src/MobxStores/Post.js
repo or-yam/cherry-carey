@@ -24,7 +24,7 @@ export class Post {
     this.allergies = data.allergies;
     this.mealTime = data.mealTime;
     this.mealName = data.mealName;
-    this.date = data.date;
+    this.date = data.mealDate;
     this.locationLat = data.locationLat;
     this.locationLng = data.locationLng;
     this.kosher = data.kosher;

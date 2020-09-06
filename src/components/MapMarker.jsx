@@ -37,14 +37,14 @@ const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
           }}
         >
           <h1>
-            {post.generatedBy.name.split(' ')[0]} Wants to {post.postType}:{' '}
+            {post.generatedBy.name.split(' ')[0]} Wants to {post.postType}:
             {post.mealName}
           </h1>
           <p>({post.mealOrigin} food)</p>
           <p>
             He will be ready at {post.date} For {post.mealTime}
           </p>
-          <Link to="#">More Info</Link>
+          <Link to={`/moreInfo/${post.id}`}>More Info</Link>
         </div>
       )}
     </div>
