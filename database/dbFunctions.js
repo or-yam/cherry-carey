@@ -1,7 +1,8 @@
-const data = require('../../database/dummyUsers.json');
+const dummyUsers = require('./dummyUsers.json');
+const dummyPosts = require('./dummyPosts.json');
 
 const addDummyUsers = () => {
-  data.map(async (user) => {
+  dummyUsers.map(async (user) => {
     const query = `INSERT INTO user VALUES(
             '${user.id}',
             '${user.name}',
@@ -13,4 +14,16 @@ const addDummyUsers = () => {
     return result;
   });
 };
-addDummyUsers();
+
+const addDummyPosts = () => {
+  dummyPosts.map((post) =>
+    axios.post('http://localhost:4000/foodPost', post).then(
+      (res) => {
+        this.foodPosts.push(new Post(res.data));
+      },
+      (error) => {
+        console.log(error);
+      }
+    )
+  );
+};
