@@ -56,6 +56,20 @@ a {
   border-radius: 50%;
 }
 
+/* login and register */
+
+.infoBox {
+  text-align: center;
+}
+
+.link {
+  color: blue;
+}
+
+.error-msg{
+  color: red;
+}
+
 .main-page {
   overflow: hidden;
   height: 100%;
