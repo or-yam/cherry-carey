@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Post } from './Post';
 export class Posts {
   @observable foodPosts = [];
-  @observable filteredPosts = [];
+  @observable filteredPosts = this.foodPosts;
   @observable loadingState = 'pending';
 
   @action getFoodPosts() {
@@ -28,6 +28,16 @@ export class Posts {
   @action filterByType(event) {
     this.filteredPosts = this.foodPosts.filter(
       (post) => post.postType === event.currentTarget.id
+    );
+    console.log(this.filteredPosts);
+  }
+
+  @action filterByValues(filters) {
+    this.filteredPosts = this.foodPosts.filter(
+      (post) =>
+        post.mealOrigin === filters.mealOrigin &&
+        post.mealTime === filters.mealTime &&
+        post.mealDate === filters.mealDate
     );
   }
 

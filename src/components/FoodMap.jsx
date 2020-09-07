@@ -4,9 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
+import FilterDrawer from './FilterDrawer';
 import Map from './Map';
 
 const FoodMap = inject(
@@ -27,6 +26,8 @@ const FoodMap = inject(
       posts.filterByType(event);
     };
 
+    console.log(posts.filteredPosts.length);
+
     return !user.isSignin ? (
       <Redirect to="/login" />
     ) : (
@@ -42,9 +43,10 @@ const FoodMap = inject(
             <span>{user.name}</span>
           </div>
           <Button id="filter" color="">
-            <FilterListIcon />
+            <FilterDrawer />
           </Button>
         </div>
+
         <Map className="main-map" />
 
         <ButtonGroup

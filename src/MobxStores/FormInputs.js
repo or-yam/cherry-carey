@@ -90,4 +90,12 @@ export class FormInputs {
     };
     return postData;
   }
+
+  @action submitFilters() {
+    return {
+      mealOrigin: this.mealOrigin,
+      mealTime: this.mealTime,
+      mealDate: this.date,
+    };
+  }
 }

@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { locationRangeMarks } from '../Utilities/SlideBarMarks';
 
-import Logo from './Logo';
 
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -21,19 +19,20 @@ import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(6),
-
-    minWidth: 300,
+    // marginTop: theme.spacing(2),
+    // marginLeft: theme.spacing(6),
+    maxWidth: 1,
+    minWidth: 150,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
 }));
 
-function valuetext(value) {
+const valueText = (value) => {
   return `${value}km`;
-}
+};
+
 const FilterMap = inject(
   'formInputs',
   'user',
@@ -42,7 +41,7 @@ const FilterMap = inject(
   observer((props) => {
     const classes = useStyles();
 
-    const { user, formInputs, posts } = props;
+    const { formInputs, posts } = props;
 
     const onchange = (event) => {
       formInputs.onInputChange(event);
@@ -51,29 +50,27 @@ const FilterMap = inject(
     const onDateChange = (event) => {
       formInputs.onDateInputChange(event);
     };
-    //////////////////////////////////////////////////////////////////
 
-    const [value, setValue] = React.useState([33, 66]);
-
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
+    const onFilterSubmit = () => {
+      const filters = formInputs.submitFilters();
+      posts.filterByValues(filters);
     };
 
-    const filterMap = () => {
-      console.log(value);
+    const clearInputs = () => {
+      formInputs.clearInputs();
+      // window.location.reload();
     };
 
-    const clearFilter = () => {
-      console.log('clear filters');
-    };
-    ////////////////////////////////////////////////////////////////////
-    return formInputs.postType ? (
-      <Redirect to='/foodMap' />
-    ) : (
+    // const [value, setValue] = React.useState([33, 66]);
+
+    // const handleChange = (event, newValue) => {
+    //   setValue(newValue);
+    // };
+
+    return (
       <div style={{ textAlign: 'center' }}>
-        <Logo />
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor='age-native-simple'>MEAL ORIGIN</InputLabel>
+          <InputLabel htmlFor="age-native-simple">MEAL ORIGIN</InputLabel>
           <Select
             native
             onChange={onchange}
@@ -82,7 +79,7 @@ const FilterMap = inject(
               id: 'mealOrigin',
             }}
           >
-            <option aria-label='None' value='' />
+            <option aria-label="None" value="" />
             <option value={'Israeli'}>Israeli</option>
             <option value={'Italian'}>Italian</option>
             <option value={'Thai'}>Thai</option>
@@ -92,7 +89,7 @@ const FilterMap = inject(
         </FormControl>
 
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor='age-native-simple'>MEAL TIME</InputLabel>
+          <InputLabel htmlFor="age-native-simple">MEAL TIME</InputLabel>
           <Select
             native
             onChange={onchange}
@@ -101,21 +98,22 @@ const FilterMap = inject(
               id: 'mealTime',
             }}
           >
-            <option aria-label='None' value='' />
+            <option aria-label="None" value="" />
             <option value={'Breakfast'}>Breakfast</option>
             <option value={'Lunch'}>Lunch</option>
             <option value={'Dinner'}>Dinner</option>
             <option value={'Night munchie'}>Night munchie</option>
           </Select>
         </FormControl>
+
         <br></br>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <FormControl className={classes.formControl}>
             <KeyboardDatePicker
-              margin='normal'
-              name='date'
-              label='Date'
-              format='MM/dd/yyyy'
+              margin="normal"
+              name="date"
+              label="Date"
+              format="MM/dd/yyyy"
               value={formInputs.date}
               onChange={onDateChange}
               KeyboardButtonProps={{
@@ -132,43 +130,24 @@ const FilterMap = inject(
           className={classes.formControl}
         >
           <div className={classes.root}>
-            <Typography id='range-slider' gutterBottom>
+            <Typography id="range-slider" gutterBottom>
               Location range
               <img
                 style={{ width: '5vh' }}
-                src='https://cdn4.iconfinder.com/data/icons/map-navigation-3/512/15-512.png'
-              ></img>
+                src="https://cdn4.iconfinder.com/data/icons/map-navigation-3/512/15-512.png"
+                alt="location"
+              />
             </Typography>
             <Slider
-              value={value}
-              onChange={handleChange}
-              valueLabelDisplay='auto'
-              aria-labelledby='range-slider'
-              getAriaValueText={valuetext}
+              value={'value'}
+              onChange={'handleChange'}
+              valueLabelDisplay="auto"
+              aria-labelledby="range-slider"
+              getAriaValueText={valueText}
               marks={locationRangeMarks}
             />
           </div>
           <br></br>
-
-          <div style={{textAlign: 'center'}}>
-          <Fab style={{width: '16vh', height: '16vh', marginBottom: '5%', border: 'solid 2px'}} onClick={filterMap} color='primary' aria-label='add'>
-            <img
-              style={{ width: '10vh' }}
-              src='https://image.flaticon.com/icons/svg/3115/3115993.svg'
-            ></img>
-          </Fab>
-          <br></br>
-          <Fab style={{border: 'solid 2px'}} onClick={clearFilter} color='primary' aria-label='add'>
-            <img
-              style={{ width: '5vh' }}
-              src='https://image.flaticon.com/icons/svg/3126/3126610.svg'
-            ></img>
-          </Fab>
-          </div>
-          <br></br>
-          <Link style={{ marginTop: '5%' }} to='foodMap' variant='body2'>
-            {'Back to map'}
-          </Link>
         </FormControl>
       </div>
     );

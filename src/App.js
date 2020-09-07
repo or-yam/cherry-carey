@@ -7,10 +7,10 @@ import Register from './components/Register';
 import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
 import Map from './components/Map';
-import MoreInfo from './components/MoreInfo'
+import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
-import FilterMap from './components/FilterMap'
-
+import FilterMap from './components/FilterMap';
+import FilterDrawer from './components/FilterDrawer';
 
 import './App.css';
 
@@ -35,7 +35,7 @@ const App = observer(() => {
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/map" exact render={() => <Map />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
-        <Route path="/filterMap" exact render={() => <FilterMap />} />
+        <Route path="/filterMap" exact render={() => <FilterDrawer />} />
       </Provider>
     </Router>
   );

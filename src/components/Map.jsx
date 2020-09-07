@@ -7,11 +7,6 @@ const NewMap = inject('posts')(
   observer((props) => {
     const { posts } = props;
 
-    useEffect(() => {
-      posts.getFoodPosts();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
     const mapRef = useRef();
     const defaultMapProps = {
       zoom: 14,
