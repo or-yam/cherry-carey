@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
+import MapMarkerUser from './MapMarkerUser';
 import { inject, observer } from 'mobx-react';
 
-const NewMap = inject('posts')(
+const NewMap = inject(
+  'posts',
+  'user'
+)(
   observer((props) => {
-    const { posts } = props;
+    const { posts, user } = props;
 
     const mapRef = useRef();
     const defaultMapProps = {
@@ -42,6 +46,13 @@ const NewMap = inject('posts')(
               windowHandler={windowHandler}
             />
           ))}
+          <MapMarkerUser
+            key={user.id}
+            user={user}
+            lat={user.lat}
+            lng={user.lng}
+            windowHandler={windowHandler}
+          />
         </GoogleMapReact>
       </div>
     );

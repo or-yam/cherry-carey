@@ -7,14 +7,39 @@ export class User {
   @observable img = '';
   @observable isSignin = false;
   @observable errMsg = '';
+  @observable lat = 32.734247;
+  @observable lng = 35.540642;
+  @observable mapWindow = false;
 
-  @observable emailInput = 'a';
-  @observable passwordInput = 'b';
+  @observable emailInput = '';
+  @observable passwordInput = '';
   @observable nameInput = '';
 
   @action onInputChange(event) {
     this[event.target.name] = event.target.value;
   }
+
+  @action mapWindowToggle() {
+    this.mapWindow = !this.mapWindow;
+  }
+
+  getLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  };
+  setDefaultPosition = () => {
+    this.lat = 32.834247;
+    this.lng = 35.640642;
+  };
+
+  showPosition = async (position) => {
+    const postPosition = await position.coords;
+    this.lat = postPosition.latitude;
+    this.lng = postPosition.longitude;
+  };
 
   @action userLogin() {
     axios
@@ -34,6 +59,7 @@ export class User {
           this.errMsg = error.response.data;
         }
       );
+    this.getLocation();
   }
 
   @action userRegister() {
@@ -58,5 +84,6 @@ export class User {
             : (this.errMsg = 'something went wrong');
         }
       );
+    this.getLocation();
   }
 }
