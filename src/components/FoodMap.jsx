@@ -26,10 +26,9 @@ const FoodMap = inject(
       posts.filterByType(event);
     };
 
-    // return !user.isSignin ? (
-    //   <Redirect to="/login" />
-    // ) : 
-    return (
+    return !user.isSignin ? (
+      <Redirect to="/login" />
+    ) : (
       <div className="main-page">
         <div className="top-nav">
           <Link to="/foodPost">
