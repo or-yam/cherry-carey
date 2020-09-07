@@ -39,8 +39,11 @@ const FilterDrawer = inject(
 
     return (
       <div>
-        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        <Button style={{ width: '12vh' }} variant="outlined"  color="primary" onClick={handleClickOpen}>
+          <div>
           <FilterListIcon />
+          <p style={{ fontSize: '8px', margin: '0' }}>Filter</p>
+          </div>
         </Button>
         <Dialog
           open={open}

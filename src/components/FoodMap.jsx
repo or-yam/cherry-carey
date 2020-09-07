@@ -5,7 +5,7 @@ import { Link, Redirect } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
+import FilterDrawer from './FilterDrawer';
 import Map from './Map';
 
 const FoodMap = inject(
@@ -26,38 +26,31 @@ const FoodMap = inject(
       posts.filterByType(event);
     };
 
-    // return !user.isSignin ? (
-    //   <Redirect to="/login" />
-    // ) : (
-    return (
+    return !user.isSignin ? (
+      <Redirect to="/login" />
+    ) : (
       <div className='main-page'>
         <div className='top-nav'>
-          <div style={{textAlign: 'center'}}>
-          <Link to='/foodPost'>
-            <Button style={{ width: '12vh' }} variant='outlined' color='primary'>
-              <div>
-                <AddCircleOutlineIcon />
-                <p style={{ fontSize: '8px', margin: '0' }}>Add post</p>
-              </div>
-            </Button>
-          </Link>
+          <div style={{ textAlign: 'center' }}>
+            <Link to='/foodPost'>
+              <Button
+                style={{ width: '12vh' }}
+                variant='outlined'
+                color='primary'
+              >
+                <div>
+                  <AddCircleOutlineIcon />
+                  <p style={{ fontSize: '8px', margin: '0' }}>Add post</p>
+                </div>
+              </Button>
+            </Link>
           </div>
           <div className='user-icon'>
             <img src={user.img} alt='user' />
             <span>{user.name}</span>
           </div>
-          <div style={{textAlign: 'center'}}>
-          <Button
-            style={{ width: '12vh' }}
-            variant='outlined'
-            id='filter'
-            color='primary'
-          >
-            <div>
-              <FilterListTwoToneIcon />
-              <p style={{ fontSize: '8px', margin: '0' }}>Filter</p>
-            </div>
-          </Button>
+          <div style={{ textAlign: 'center' }}>
+            <FilterDrawer />
           </div>
         </div>
 
@@ -69,14 +62,14 @@ const FoodMap = inject(
           variant='contained'
           aria-label='contained primary button group'
         >
-          <Button id='cook' color='primary' onClick={onFilter}>
+          <Button style={{backgroundColor: '#118AB2'}} id='cook'  onClick={onFilter}>
             <img
               style={{ width: '50px' }}
               src='https://image.flaticon.com/icons/svg/1830/1830839.svg'
               alt='cookers'
             />
           </Button>
-          <Button id='eat' color='secondary' onClick={onFilter}>
+          <Button style={{backgroundColor: '#EF476F'}} id='eat' onClick={onFilter}>
             <img
               style={{ width: '50px' }}
               src='https://image.flaticon.com/icons/svg/2737/2737034.svg'
