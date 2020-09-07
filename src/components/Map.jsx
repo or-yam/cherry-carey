@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import GoogleMapReact from 'google-map-react';
 import MapMarker from './MapMarker';
 import { inject, observer } from 'mobx-react';

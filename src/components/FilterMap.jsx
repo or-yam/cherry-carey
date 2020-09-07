@@ -2,7 +2,6 @@ import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { locationRangeMarks } from '../Utilities/SlideBarMarks';
 
-
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -14,8 +13,6 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import Button from '@material-ui/core/Button';
-import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -33,15 +30,11 @@ const valueText = (value) => {
   return `${value}km`;
 };
 
-const FilterMap = inject(
-  'formInputs',
-  'user',
-  'posts'
-)(
+const FilterMap = inject('formInputs')(
   observer((props) => {
     const classes = useStyles();
 
-    const { formInputs, posts } = props;
+    const { formInputs } = props;
 
     const onchange = (event) => {
       formInputs.onInputChange(event);
@@ -50,22 +43,6 @@ const FilterMap = inject(
     const onDateChange = (event) => {
       formInputs.onDateInputChange(event);
     };
-
-    const onFilterSubmit = () => {
-      const filters = formInputs.submitFilters();
-      posts.filterByValues(filters);
-    };
-
-    const clearInputs = () => {
-      formInputs.clearInputs();
-      // window.location.reload();
-    };
-
-    // const [value, setValue] = React.useState([33, 66]);
-
-    // const handleChange = (event, newValue) => {
-    //   setValue(newValue);
-    // };
 
     return (
       <div style={{ textAlign: 'center' }}>
@@ -125,7 +102,7 @@ const FilterMap = inject(
 
         <br></br>
 
-        <FormControl
+        {/* <FormControl
           style={{ textAlign: 'center' }}
           className={classes.formControl}
         >
@@ -148,7 +125,7 @@ const FilterMap = inject(
             />
           </div>
           <br></br>
-        </FormControl>
+        </FormControl> */}
       </div>
     );
   })

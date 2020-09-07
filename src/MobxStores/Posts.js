@@ -29,15 +29,14 @@ export class Posts {
     this.filteredPosts = this.foodPosts.filter(
       (post) => post.postType === event.currentTarget.id
     );
-    console.log(this.filteredPosts);
   }
 
   @action filterByValues(filters) {
     this.filteredPosts = this.foodPosts.filter(
       (post) =>
-        post.mealOrigin === filters.mealOrigin &&
-        post.mealTime === filters.mealTime &&
-        post.mealDate === filters.mealDate
+        (post.mealOrigin === filters.mealOrigin || filters.mealOrigin === '') &&
+        (post.mealTime === filters.mealTime || filters.mealTime === '') &&
+        post.date === filters.mealDate
     );
   }
 

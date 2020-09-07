@@ -26,15 +26,13 @@ const FoodMap = inject(
       posts.filterByType(event);
     };
 
-    console.log(posts.filteredPosts.length);
-
     return !user.isSignin ? (
       <Redirect to="/login" />
     ) : (
       <div className="main-page">
         <div className="top-nav">
           <Link to="/foodPost">
-            <Button>
+            <Button variant="outlined" color="primary">
               <AddCircleOutlineIcon />
             </Button>
           </Link>
@@ -42,7 +40,7 @@ const FoodMap = inject(
             <img src={user.img} alt="user" />
             <span>{user.name}</span>
           </div>
-          <Button id="filter" color="">
+          <Button id="filter">
             <FilterDrawer />
           </Button>
         </div>

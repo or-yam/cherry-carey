@@ -9,7 +9,6 @@ import FoodMap from './components/FoodMap';
 import Map from './components/Map';
 import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
-import FilterMap from './components/FilterMap';
 import FilterDrawer from './components/FilterDrawer';
 
 import './App.css';
