@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%',
+    width: '50vh',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -110,8 +110,8 @@ const Register = inject('user')(
           </div>
         </div>
         <Box style={{ textAlign: 'center' }} mt={4}>
-          <Link to="/" variant="body2">
-            {'Already have an account? Login'}
+          <Link to="/login" variant="body2">
+            <span>Already have an account?</span> <span  style={{color: 'blue'}}>Login</span>
           </Link>
         </Box>
         <Box style={{ textAlign: 'center' }} mt={4}>

@@ -7,24 +7,20 @@ import Logo from './Logo';
 
 const Landing = () => {
   return (
-    <div className="landing">
+    <div style={{textAlign: 'center' }} className='landing'>
       <Logo />
-      <h2>
-        <span role="img" aria-label="cook">
-          👨‍🍳
-        </span>
-        Social Cooking
-        <span role="img" aria-label="dine">
-          🍝
-        </span>
-      </h2>
-      <Button color="primary">
-        <Link to="/login">
-          <NavigateNextIcon />
-          Start Sharing
-          <NavigateNextIcon />
-        </Link>
-      </Button>
+      <h1 style={{marginBottom: '0'}}>The food social network</h1>  
+      <div>
+      <img style={{ width: '40vh', height: '40vh', borderRadius: '50%'}} src='https://image.freepik.com/free-photo/friends-eating_23-2147680636.jpg' />
+      </div>
+          
+      <div > 
+                  
+        <Button style={{width: '40vh', textAlign: 'center'}} variant='contained' color='primary'>
+        
+          <Link to='/login'>Let's start</Link>
+        </Button>          
+      </div>
     </div>
   );
 };
