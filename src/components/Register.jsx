@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '50vh',
     marginTop: theme.spacing(3),
   },
   submit: {
