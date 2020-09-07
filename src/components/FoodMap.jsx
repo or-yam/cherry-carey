@@ -4,9 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
-
+import FilterDrawer from './FilterDrawer';
 import Map from './Map';
 
 const FoodMap = inject(
@@ -33,7 +32,7 @@ const FoodMap = inject(
       <div className="main-page">
         <div className="top-nav">
           <Link to="/foodPost">
-            <Button>
+            <Button variant="outlined" color="primary">
               <AddCircleOutlineIcon />
             </Button>
           </Link>
@@ -41,10 +40,11 @@ const FoodMap = inject(
             <img src={user.img} alt="user" />
             <span>{user.name}</span>
           </div>
-          <Button id="filter" color="">
-            <FilterListIcon />
+          <Button id="filter">
+            <FilterDrawer />
           </Button>
         </div>
+
         <Map className="main-map" />
 
         <ButtonGroup

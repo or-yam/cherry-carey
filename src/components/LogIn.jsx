@@ -34,7 +34,9 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = inject('user')(
   observer((props) => {
+    
     const classes = useStyles();
+    
     const { user } = props;
 
     const onChange = (event) => {
@@ -48,7 +50,7 @@ const Login = inject('user')(
     return user.isSignin ? (
       <Redirect to="/foodMap" />
     ) : (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" >
         <CssBaseline />
         <Logo />
         <div className={classes.paper}>
@@ -92,12 +94,12 @@ const Login = inject('user')(
             </Button>
           </div>
         </div>
-        <Box style={{ textAlign: 'center' }} mt={8}>
+        <Box style={{ textAlign: 'center' }} mt={4}>
           <Link to="register" variant="body2">
             {"Don't have an account? Register"}
           </Link>
         </Box>
-        <Box style={{ textAlign: 'center' }} mt={8}>
+        <Box style={{ textAlign: 'center' }} mt={4}>
           <span>© Cherry carey 2020</span>
         </Box>
       </Container>
