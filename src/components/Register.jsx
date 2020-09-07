@@ -15,7 +15,7 @@ import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    marginTop: theme.spacing(8),
+    marginTop: theme.spacing(4),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -56,7 +56,7 @@ const Register = inject('user')(
             Register
           </Typography>
           <p style={{ color: 'red' }}>{user.errMsg}</p>
-          <div className={classes.form} noValidate>
+          <div style={{marginTop: '0'}} className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
