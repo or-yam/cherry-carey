@@ -109,12 +109,12 @@ const Register = inject('user')(
             </Button>
           </div>
         </div>
-        <Box style={{ textAlign: 'center' }} mt={8}>
+        <Box style={{ textAlign: 'center' }} mt={4}>
           <Link to="/" variant="body2">
             {'Already have an account? Login'}
           </Link>
         </Box>
-        <Box style={{ textAlign: 'center' }} mt={8}>
+        <Box style={{ textAlign: 'center' }} mt={4}>
           <span>© Cherry carey 2020</span>
         </Box>
       </Container>
