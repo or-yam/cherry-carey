@@ -46,4 +46,15 @@ export class Post {
   @action mapWindowToggle() {
     this.mapWindow = !this.mapWindow;
   }
+
+  @action async confirmOrder() {
+    await axios.put(`http://localhost:4000/foodPost/${this.id}`).then(
+      (res) => {
+        console.log(res.data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }
