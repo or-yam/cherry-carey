@@ -46,10 +46,12 @@ const FoodMap = inject(
               </Button>
             </Link>
           </div>
-          <div className="user-icon">
-            <img src={user.img} alt="user" />
-            <span>{user.name}</span>
-          </div>
+          <Link to="/userPage">
+            <div className="user-icon">
+              <img src={user.img} alt="user" />
+              <span>{user.name}</span>
+            </div>
+          </Link>
           <div style={{ textAlign: 'center' }}>
             <FilterDrawer />
           </div>

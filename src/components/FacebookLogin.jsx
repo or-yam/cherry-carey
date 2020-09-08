@@ -16,9 +16,9 @@ const FacebookLogin = () => {
   };
 
   return (
-    <FacebookProvider appId='2397377263900056'>
+    <FacebookProvider appId="2397377263900056">
       <LoginButton
-        scope='email'
+        scope="email"
         onCompleted={handleResponse}
         onError={handleError}
       >
@@ -29,20 +29,23 @@ const FacebookLogin = () => {
             outline: '0',
           }}
           fullWidth
-          variant='contained'
+          variant="contained"
         >
           <img
-            alt='facebookLogo'
+            alt="facebookLogo"
             style={{ width: '8%' }}
-            src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png'
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png"
           />
-          <span style={{ marginRight: '10%', marginLeft: '10%', color: 'white' }}>
+          <span
+            style={{ marginRight: '10%', marginLeft: '10%', color: 'white' }}
+          >
             Login with Facebook
           </span>
           <img
-          
-          style={{ width: '8%', borderRadius: '50%' }}
-          src={img} />
+            alt="userImg"
+            style={{ width: '8%', borderRadius: '50%' }}
+            src={img}
+          />
         </Button>
       </LoginButton>
     </FacebookProvider>
