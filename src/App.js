@@ -10,6 +10,7 @@ import Map from './components/Map';
 import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
 import FilterDrawer from './components/FilterDrawer';
+import UserPage from './components/UserPage'
 
 import './App.css';
 
@@ -35,6 +36,7 @@ const App = observer(() => {
         <Route path="/map" exact render={() => <Map />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
         <Route path="/filterMap" exact render={() => <FilterDrawer />} />
+        <Route path="/userPage" exact render={() => <UserPage />} />
       </Provider>
     </Router>
   );
