@@ -16,15 +16,15 @@ router.use(function (req, res, next) {
 });
 //DELETE BEFORE PUBLISHING<<<<<<
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.MAIL_ADDRESS,
-    pass: process.env.MAIL_PASSWORD,
-  },
-  debug: false,
-  logger: true,
-});
+// const transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: process.env.MAIL_ADDRESS,
+//     pass: process.env.MAIL_PASSWORD,
+//   },
+//   debug: false,
+//   logger: true,
+// });
 
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
@@ -72,41 +72,41 @@ router.get('/foodPost', async (req, res) => {
   res.send(posts);
 });
 
-router.put('/foodPost', async (req, res) => {
-  const { postData } = req.body;
+// router.put('/foodPost', async (req, res) => {
+//   const { postData } = req.body;
 
-  await queries.upDatePostStatus(postData.id);
-  res.send('updated');
+//   await queries.upDatePostStatus(postData.id);
+//   res.send('updated');
 
-  let mailToGeneratedBy = {
-    from: process.env.MAIL_ADDRESS,
-    to: postData.generatedBy.email,
-    subject: 'order confirmation',
-    text: `${postData.activeUser.name} has confirmed you request fo ${postData.type} a ${postData.mealName} at ${postData.date} ${postData.mealTime} please make contact at ${postData.activeUser.email} `,
-  };
+//   let mailToGeneratedBy = {
+//     from: process.env.MAIL_ADDRESS,
+//     to: postData.generatedBy.email,
+//     subject: 'order confirmation',
+//     text: `${postData.activeUser.name} has confirmed you request fo ${postData.type} a ${postData.mealName} at ${postData.date} ${postData.mealTime} please make contact at ${postData.activeUser.email} `,
+//   };
 
-  let mailToActiveUser = {
-    from: process.env.MAIL_ADDRESS,
-    to: postData.activeUser.email,
-    subject: 'order confirmation',
-    text: `Thank you ${postData.activeUser.name} for ordering from us. Please contact ${postData.generatedBy.name} at ${postData.generatedBy.email} `,
-  };
+//   let mailToActiveUser = {
+//     from: process.env.MAIL_ADDRESS,
+//     to: postData.activeUser.email,
+//     subject: 'order confirmation',
+//     text: `Thank you ${postData.activeUser.name} for ordering from us. Please contact ${postData.generatedBy.name} at ${postData.generatedBy.email} `,
+//   };
 
-  transporter.sendMail(mailToGeneratedBy, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
-  });
+//   transporter.sendMail(mailToGeneratedBy, function (err, data) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(data);
+//     }
+//   });
 
-  transporter.sendMail(mailToActiveUser, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
-  });
-});
+//   transporter.sendMail(mailToActiveUser, function (err, data) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(data);
+//     }
+//   });
+// });
 
 module.exports = router;
