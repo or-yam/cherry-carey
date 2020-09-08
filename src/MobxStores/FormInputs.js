@@ -55,8 +55,8 @@ export class FormInputs {
     this.allergies = '';
     this.mealTime = '';
     this.mealName = '';
-    this.date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-    this.location = true;
+    this.date = '';
+    this.location = false;
     this.locationLat = 32.734247;
     this.locationLng = 35.540642;
     this.adressInput = '';

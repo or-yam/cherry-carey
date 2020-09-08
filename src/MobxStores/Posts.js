@@ -36,7 +36,7 @@ export class Posts {
       (post) =>
         (post.mealOrigin === filters.mealOrigin || filters.mealOrigin === '') &&
         (post.mealTime === filters.mealTime || filters.mealTime === '') &&
-        post.date === filters.mealDate
+        (post.date === filters.mealDate || filters.mealDate === '')
     );
   }
 
