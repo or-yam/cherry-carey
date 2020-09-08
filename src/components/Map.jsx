@@ -1,10 +1,12 @@
 import React, { useRef } from 'react';
-import GoogleMapReact from 'google-map-react';
-import MapMarker from './MapMarker';
-import MapMarkerUser from './MapMarkerUser';
 import { inject, observer } from 'mobx-react';
 
-const NewMap = inject(
+import MapMarker from './MapMarker';
+import MapMarkerUser from './MapMarkerUser';
+
+import GoogleMapReact from 'google-map-react';
+
+const Map = inject(
   'posts',
   'user'
 )(
@@ -18,7 +20,7 @@ const NewMap = inject(
       lng: 34.774263,
     };
 
-    const expansionZoom = 18;
+    const expansionZoom = 16;
 
     const windowHandler = (post, lat, lng) => {
       post.mapWindowToggle();
@@ -59,4 +61,4 @@ const NewMap = inject(
   })
 );
 
-export default NewMap;
+export default Map;

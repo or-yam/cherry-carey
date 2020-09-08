@@ -55,8 +55,8 @@ const Register = inject('user')(
           <Typography component="h1" variant="h5">
             Register
           </Typography>
-          <p style={{ color: 'red' }}>{user.errMsg}</p>
-          <div style={{marginTop: '0'}} className={classes.form} noValidate>
+          <p className="error-msg">{user.errMsg}</p>
+          <div className={classes.form} noValidate>
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
@@ -108,12 +108,13 @@ const Register = inject('user')(
             </Button>
           </div>
         </div>
-        <Box style={{ textAlign: 'center' }} mt={4}>
+        <Box className="infoBox" mt={4}>
+          <span>Already have an account? </span>{' '}
           <Link to="/login" variant="body2">
-            <span>Already have an account?</span> <span  style={{color: 'blue'}}>Login</span>
+            <span className="link">Login</span>
           </Link>
         </Box>
-        <Box style={{ textAlign: 'center' }} mt={4}>
+        <Box className="infoBox" mt={4}>
           <span>© Cherry carey 2020</span>
         </Box>
       </Container>

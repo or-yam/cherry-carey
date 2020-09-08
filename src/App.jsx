@@ -6,12 +6,10 @@ import Login from './components/LogIn';
 import Register from './components/Register';
 import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
-import Map from './components/Map';
 import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
-import FilterDrawer from './components/FilterDrawer';
 
-import './App.css';
+import './Styles/App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
@@ -32,9 +30,7 @@ const App = observer(() => {
         <Route path="/register" exact render={() => <Register />} />
         <Route path="/foodMap" exact render={() => <FoodMap />} />
         <Route path="/foodPost" exact render={() => <FoodPost />} />
-        <Route path="/map" exact render={() => <Map />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
-        <Route path="/filterMap" exact render={() => <FilterDrawer />} />
       </Provider>
     </Router>
   );
