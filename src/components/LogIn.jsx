@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
 import Logo from './Logo';
+import FacebookLogin from './FacebookLogin'
 
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -44,6 +45,10 @@ const Login = inject('user')(
     const onSubmit = () => {
       user.userLogin();
     };
+
+    const facebookLogin = ()=> {
+      console.log('kkk')
+    }
 
     return user.isSignin ? (
       <Redirect to="/foodMap" />
@@ -90,6 +95,7 @@ const Login = inject('user')(
             >
               Login
             </Button>
+            <FacebookLogin />
           </div>
         </div>
         <Box className="infoBox" mt={4}>
