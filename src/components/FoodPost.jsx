@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
-import GetLatLng from './GetLatLng'
+import GetLatLng from './GetLatLng';
 
 import Logo from './Logo';
 
@@ -20,12 +20,9 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Switch from '@material-ui/core/Switch';
-
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -55,12 +52,11 @@ const FoodPost = inject(
       formInputs.onDateInputChange(event);
     };
 
-    const [addLocation, setAddLocation] = React.useState('false');
+    // const [addLocation, setAddLocation] = React.useState(false);
+
     const toggleValue = (event) => {
       formInputs.toggleValue(event);
-
-      
-      setAddLocation( event.target.value )
+      // setAddLocation(event.target.value);
     };
 
     const sliderChange = (event, val) => {
@@ -199,7 +195,7 @@ const FoodPost = inject(
               alignItems="center"
               spacing={1}
             >
-              <Grid item>MY</Grid>
+              <Grid item>USE MINE</Grid>
               <Grid item>
                 <FormControlLabel
                   name="location"
@@ -210,10 +206,10 @@ const FoodPost = inject(
                   onChange={toggleValue}
                 />
               </Grid>
-              <Grid item>ADD</Grid>
+              <Grid item>ADD NEW</Grid>
             </Grid>
           </Typography>
-          {addLocation === 'false' ? '' : <GetLatLng />}
+          {formInputs.location ? <GetLatLng /> : ''}
         </FormControl>
         <br></br>
         <FormControl className={classes.formControl}>
@@ -262,19 +258,12 @@ const FoodPost = inject(
           />
         </FormControl>
         <br></br>
-        {/* <Fab color="primary" variant="extended">
-          <AddIcon />
-          Add food image
-        </Fab>
-        <br></br>
-        <br></br> */}
 
         <ButtonGroup
           style={{
             justifyContent: 'center',
           }}
           size="large"
-          // variant="contained"
           aria-label="contained primary button group"
         >
           <Button id="cook" onClick={onSubmit} color="primary">

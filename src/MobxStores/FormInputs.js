@@ -1,4 +1,7 @@
 import { observable, action } from 'mobx';
+import Geocode from 'react-geocode';
+Geocode.setApiKey(process.env.REACT_APP_API_KEY);
+Geocode.setLanguage('en');
 
 export class FormInputs {
   @observable postType = '';
@@ -7,9 +10,10 @@ export class FormInputs {
   @observable mealTime = '';
   @observable mealName = '';
   @observable date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-  @observable location = true;
+  @observable location = false;
   @observable locationLat = 32.734247;
   @observable locationLng = 35.540642;
+  @observable adressInput = '';
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = 30;
@@ -32,6 +36,19 @@ export class FormInputs {
     this.locationLng = postPosition.longitude;
   };
 
+  @action setPositionByAdress() {
+    Geocode.fromAddress(this.adressInput).then(
+      (response) => {
+        const { lat, lng } = response.results[0].geometry.location;
+        this.locationLat = lat;
+        this.locationLng = lng;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   @action clearInputs = () => {
     this.postType = '';
     this.mealOrigin = '';
@@ -42,6 +59,7 @@ export class FormInputs {
     this.location = true;
     this.locationLat = 32.734247;
     this.locationLng = 35.540642;
+    this.adressInput = '';
     this.kosher = true;
     this.distribution = 'Be social - Eat together';
     this.price = 30;
