@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-   
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -34,9 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = inject('user')(
   observer((props) => {
-    
     const classes = useStyles();
-    
+
     const { user } = props;
 
     const onChange = (event) => {
@@ -57,7 +55,7 @@ const Login = inject('user')(
           <Typography component="h1" variant="h5">
             Login
           </Typography>
-          <p style={{ color: 'red' }}>{user.errMsg}</p>
+          <p className="error-msg">{user.errMsg}</p>
           <div className={classes.form} noValidate>
             <TextField
               variant="outlined"
@@ -94,12 +92,13 @@ const Login = inject('user')(
             </Button>
           </div>
         </div>
-        <Box style={{ textAlign: 'center' }} mt={4}>
+        <Box className="infoBox" mt={4}>
+          <span>Don't have an account? </span>
           <Link to="register" variant="body2">
-            <span>Don't have an account?</span> <span  style={{color: 'blue'}}>Register</span>
+            <span className="link">Register</span>
           </Link>
         </Box>
-        <Box style={{ textAlign: 'center' }} mt={4}>
+        <Box className="infoBox" mt={4}>
           <span>© Cherry carey 2020</span>
         </Box>
       </Container>

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -26,32 +27,31 @@ export default function Review(props) {
   const classes = useStyles();
   const { postData } = props;
   return (
-    <React.Fragment>
+    <div style={{ textAlign: 'center' }}>
       <Typography variant="h6" gutterBottom>
         MEAL confirmation
       </Typography>
-
       <Grid container spacing={3}>
-        <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <h2 style={{ marginBottom: '3%' }}> {postData.mealName}</h2>
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <h2 style={{ marginBottom: '3%' }}>
             {postData.mealOrigin}
-            <span style={{ fontStyle: 'italic' }}> kitchen</span>
+            <span> kitchen</span>
           </h2>
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12}>
+        <Grid item xs={12}>
           <img
-            style={{ width: '35vh', borderRadius: '20%' }}
+            style={{ width: '35vh', borderRadius: '7px' }}
             src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/9/3/KC1807_Sunnys-Grilled-Sweet-and-Spicy-Chicken-Thighs-and-Rice_s4x3.jpg.rend.hgtvcom.826.620.suffix/1536092264187.jpeg"
             alt="meal"
           />
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <h3 style={{ marginBottom: '3%' }}>TIME: {postData.mealTime}</h3>
         </Grid>
-        <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
+        <Grid item xs={12} sm={6}>
           <h3 style={{ marginBottom: '3%' }}>DATE: {postData.date}</h3>
         </Grid>
       </Grid>
@@ -59,7 +59,7 @@ export default function Review(props) {
         <Typography variant="h6" gutterBottom className={classes.title}>
           Payment details
         </Typography>
-        <Grid container>
+        <Grid container style={{ textAlign: 'left' }}>
           {payments.map((payment) => (
             <React.Fragment key={payment.name}>
               <Grid item xs={6}>
@@ -72,6 +72,6 @@ export default function Review(props) {
           ))}
         </Grid>
       </Grid>
-    </React.Fragment>
+    </div>
   );
 }

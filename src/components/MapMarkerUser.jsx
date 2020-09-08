@@ -3,7 +3,7 @@ import { observer } from 'mobx-react';
 
 const MapMarkerUser = observer(({ user, lat, lng, windowHandler }) => {
   return (
-    <div>
+    <>
       <div
         onClick={() => {
           windowHandler(user, lat, lng);
@@ -34,10 +34,17 @@ const MapMarkerUser = observer(({ user, lat, lng, windowHandler }) => {
           }}
         >
           <h1>Hey {user.name.split(' ')[0]}</h1>
+          <button
+            onClick={() => {
+              windowHandler(user, lat, lng);
+            }}
+          >
+            X
+          </button>
           <p>You are here</p>
         </div>
       )}
-    </div>
+    </>
   );
 });
 export default MapMarkerUser;

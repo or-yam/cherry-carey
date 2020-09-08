@@ -1,15 +1,15 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react';
+
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
 import Fab from '@material-ui/core/Fab';
 
 import FilterMap from './FilterMap';
-import { inject, observer } from 'mobx-react';
 
 const FilterDrawer = inject(
   'formInputs',
@@ -34,15 +34,19 @@ const FilterDrawer = inject(
 
     const clearInputs = () => {
       formInputs.clearInputs();
-      // window.location.reload();
     };
 
     return (
       <div>
-        <Button style={{ width: '12vh' }} variant="outlined"  color="primary" onClick={handleClickOpen}>
+        <Button
+          style={{ width: '12vh' }}
+          variant="outlined"
+          color="primary"
+          onClick={handleClickOpen}
+        >
           <div>
-          <FilterListIcon />
-          <p style={{ fontSize: '8px', margin: '0' }}>Filter</p>
+            <FilterListIcon />
+            <p style={{ fontSize: '8px', margin: '0' }}>Filter</p>
           </div>
         </Button>
         <Dialog

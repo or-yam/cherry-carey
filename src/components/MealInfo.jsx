@@ -4,15 +4,8 @@ import Grid from '@material-ui/core/Grid';
 export default function MealInfo(props) {
   const { postData } = props;
   return (
-    <React.Fragment>
-      <div
-        style={{
-          border: '2px solid double',
-          borderRadius: '20px',
-          borderStyle: 'double',
-          borderColor: 'aqua',
-        }}
-      >
+    <>
+      <div>
         <Grid container spacing={3}>
           <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
             <h2 style={{ marginBottom: '3%' }}> {postData.mealName}</h2>
@@ -20,12 +13,12 @@ export default function MealInfo(props) {
           <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
             <h2 style={{ marginBottom: '3%' }}>
               {postData.mealOrigin}
-              <span style={{ fontStyle: 'italic' }}> Kitchen</span>
+              <span> Kitchen</span>
             </h2>
           </Grid>
           <Grid style={{ textAlign: 'center' }} item xs={12}>
             <img
-              style={{ width: '35vh', borderRadius: '20%' }}
+              style={{ width: '35vh', borderRadius: '7px' }}
               src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/9/3/KC1807_Sunnys-Grilled-Sweet-and-Spicy-Chicken-Thighs-and-Rice_s4x3.jpg.rend.hgtvcom.826.620.suffix/1536092264187.jpeg"
               alt="foodImag"
             />
@@ -95,6 +88,6 @@ export default function MealInfo(props) {
           />
         )}
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

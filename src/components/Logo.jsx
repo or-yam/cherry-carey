@@ -3,18 +3,10 @@ import cherryLogo from '../cherry.svg';
 
 const Logo = () => {
   return (
-    <div
-      style={{
-        textAlign: 'center',
-        marginTop: '5%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <img style={{ width: '7vh' }} src={cherryLogo} alt="logo" />
-      <span style={{ color: '#EF476F', fontSize: '7.5vh' }}>herry </span>
-      <span style={{ color: '#118AB2', fontSize: '7.5vh' }}> carey</span>
+    <div className="logo-container">
+      <img src={cherryLogo} alt="logo" />
+      <span className="logo-text red-text">herry </span>
+      <span className="logo-text blue-text"> carey</span>
     </div>
   );
 };

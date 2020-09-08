@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
   return (
-    <div>
+    <>
       <div
         onClick={() => {
           windowHandler(post, lat, lng);
@@ -51,6 +51,13 @@ const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
               alt="profile"
               style={{ height: '60px' }}
             />
+            <button
+              onClick={() => {
+                windowHandler(post, lat, lng);
+              }}
+            >
+              X
+            </button>
           </div>
           <div>
             <h1>
@@ -67,7 +74,7 @@ const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 });
 export default MapMarker;

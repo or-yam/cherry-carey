@@ -27,13 +27,9 @@ import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(6),
-
-    minWidth: 300,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
+    // marginLeft: theme.spacing(6),
+    // minWidth: 300,
   },
 }));
 
@@ -73,7 +69,16 @@ const FoodPost = inject(
     return formInputs.postType ? (
       <Redirect to="/foodMap" />
     ) : (
-      <div style={{ textAlign: 'center' }}>
+      <div
+        style={{
+          textAlign: 'center',
+          display: 'grid',
+          height: '100%',
+          overflow: 'scroll',
+          marginLeft: '32px',
+          marginRight: '32px',
+        }}
+      >
         <Logo />
 
         <FormControl className={classes.formControl}>
@@ -209,6 +214,10 @@ const FoodPost = inject(
             PRICE
           </Typography>
           <Slider
+            style={{
+              alignSelf: 'center',
+              width: '80%',
+            }}
             className="slider"
             id="price"
             name="price"
@@ -229,6 +238,10 @@ const FoodPost = inject(
             DISTRIBUTION
           </Typography>
           <Slider
+            style={{
+              alignSelf: 'center',
+              width: '80%',
+            }}
             defaultValue={30}
             getAriaValueText={valueText}
             aria-labelledby="discrete-slider"
@@ -242,16 +255,19 @@ const FoodPost = inject(
           />
         </FormControl>
         <br></br>
-        <Fab color="primary" variant="extended">
+        {/* <Fab color="primary" variant="extended">
           <AddIcon />
           Add food image
         </Fab>
         <br></br>
-        <br></br>
+        <br></br> */}
 
         <ButtonGroup
+          style={{
+            justifyContent: 'center',
+          }}
           size="large"
-          variant="contained"
+          // variant="contained"
           aria-label="contained primary button group"
         >
           <Button id="cook" onClick={onSubmit} color="primary">
