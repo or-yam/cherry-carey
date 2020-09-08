@@ -6,8 +6,10 @@ import Login from './components/LogIn';
 import Register from './components/Register';
 import FoodPost from './components/FoodPost';
 import FoodMap from './components/FoodMap';
+
 import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
+import UserPage from './components/UserPage'
 
 import './Styles/App.css';
 
@@ -31,6 +33,7 @@ const App = observer(() => {
         <Route path="/foodMap" exact render={() => <FoodMap />} />
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
+        <Route path="/userPage" exact render={() => <UserPage />} />
       </Provider>
     </Router>
   );
