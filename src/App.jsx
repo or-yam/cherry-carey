@@ -34,6 +34,7 @@ const App = observer(() => {
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
         <Route path="/userPage" exact render={() => <UserPage />} />
+        
       </Provider>
     </Router>
   );

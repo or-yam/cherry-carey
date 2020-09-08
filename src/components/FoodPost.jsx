@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
+import GetLatLng from './GetLatLng'
 
 import Logo from './Logo';
 
@@ -24,6 +25,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import Switch from '@material-ui/core/Switch';
+
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -53,8 +55,12 @@ const FoodPost = inject(
       formInputs.onDateInputChange(event);
     };
 
+    const [addLocation, setAddLocation] = React.useState('false');
     const toggleValue = (event) => {
       formInputs.toggleValue(event);
+
+      
+      setAddLocation( event.target.value )
     };
 
     const sliderChange = (event, val) => {
@@ -207,6 +213,7 @@ const FoodPost = inject(
               <Grid item>ADD</Grid>
             </Grid>
           </Typography>
+          {addLocation === 'false' ? '' : <GetLatLng />}
         </FormControl>
         <br></br>
         <FormControl className={classes.formControl}>
