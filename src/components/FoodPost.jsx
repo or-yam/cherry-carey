@@ -27,13 +27,10 @@ import Switch from '@material-ui/core/Switch';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(6),
-
-    minWidth: 300,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+    // marginTop: theme.spacing(2),
+    // marginLeft: theme.spacing(6),
+    // minWidth: 300,
+    
   },
 }));
 
@@ -73,7 +70,7 @@ const FoodPost = inject(
     return formInputs.postType ? (
       <Redirect to="/foodMap" />
     ) : (
-      <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', display:'grid' }}>
         <Logo />
 
         <FormControl className={classes.formControl}>

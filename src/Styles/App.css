@@ -66,9 +66,39 @@ a {
   color: blue;
 }
 
-.error-msg{
+.error-msg {
   color: red;
 }
+
+/* logo */
+.logo-container {
+  text-align: center;
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-container img {
+  width: 7vh;
+}
+
+.logo-text {
+  font-size: 7.5vh;
+}
+
+.red-text {
+  color: #ef476f;
+}
+
+.blue-text {
+  color: #118ab2;
+}
+
+
+
+
+/* more.... */
 
 .main-page {
   overflow: hidden;

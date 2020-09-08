@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -26,11 +27,10 @@ export default function Review(props) {
   const classes = useStyles();
   const { postData } = props;
   return (
-    <React.Fragment>
+    <>
       <Typography variant="h6" gutterBottom>
         MEAL confirmation
       </Typography>
-
       <Grid container spacing={3}>
         <Grid style={{ textAlign: 'center' }} item xs={12} sm={6}>
           <h2 style={{ marginBottom: '3%' }}> {postData.mealName}</h2>
@@ -72,6 +72,6 @@ export default function Review(props) {
           ))}
         </Grid>
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

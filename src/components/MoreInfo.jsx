@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import { useLocation } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,8 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import MealInfo from './MealInfo';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+
 import Logo from './Logo';
-import { useLocation } from 'react-router-dom';
 
 function Copyright() {
   return (
@@ -85,7 +86,6 @@ const Checkout = inject('posts')(
     const location = useLocation();
     const postId = parseInt(location.pathname.split('/')[2]);
     const postData = props.posts.foodPosts.find((post) => post.id === postId);
-
 
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);

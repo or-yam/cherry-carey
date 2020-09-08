@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -7,13 +8,19 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 export default function PaymentForm() {
   return (
-    <React.Fragment>
+    <>
       <Typography variant="h6" gutterBottom>
         Payment method
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>
-          <TextField required id="cardName" label="Name on card" fullWidth autoComplete="cc-name" />
+          <TextField
+            required
+            id="cardName"
+            label="Name on card"
+            fullWidth
+            autoComplete="cc-name"
+          />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -25,7 +32,13 @@ export default function PaymentForm() {
           />
         </Grid>
         <Grid item xs={12} md={6}>
-          <TextField required id="expDate" label="Expiry date" fullWidth autoComplete="cc-exp" />
+          <TextField
+            required
+            id="expDate"
+            label="Expiry date"
+            fullWidth
+            autoComplete="cc-exp"
+          />
         </Grid>
         <Grid item xs={12} md={6}>
           <TextField
@@ -44,6 +57,6 @@ export default function PaymentForm() {
           />
         </Grid>
       </Grid>
-    </React.Fragment>
+    </>
   );
 }

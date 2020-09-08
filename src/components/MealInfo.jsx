@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 export default function MealInfo(props) {
   const { postData } = props;
   return (
-    <React.Fragment>
+    <>
       <div
         style={{
           border: '2px solid double',
@@ -95,6 +95,6 @@ export default function MealInfo(props) {
           />
         )}
       </Grid>
-    </React.Fragment>
+    </>
   );
 }
