@@ -47,8 +47,24 @@ export class Post {
     this.mapWindow = !this.mapWindow;
   }
 
-  @action async confirmOrder() {
-    await axios.put(`http://localhost:4000/foodPost/${this.id}`).then(
+  @action async confirmOrder(user) {
+    const data = {
+      id: this.id,
+      generatedBy: this.generatedBy,
+      postType: this.postType,
+      mealOrigin: this.mealOrigin,
+      allergies: this.allergies,
+      mealTime: this.mealTime,
+      mealName: this.mealName,
+      date: this.date,
+      locationLat: this.locationLat,
+      locationLng: this.locationLng,
+      kosher: this.kosher,
+      distribution: this.distribution,
+      price: this.price,
+      activeUser: user,
+    };
+    await axios.put(`http://localhost:4000/foodPost/,${data}`).then(
       (res) => {
         console.log(res.data);
       },
