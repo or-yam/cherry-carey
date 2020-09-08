@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 export default function GetLatLng() {
   const [inputAddress, setInputAddress] = React.useState('');
-  Geocode.setApiKey('AIzaSyAsAf8ZKSFF8-3xgRO1GOdhAsEEVxdc9a0');
+  Geocode.setApiKey(process.env.REACT_APP_API_KEY);
   Geocode.setLanguage('en');
   Geocode.enableDebug();
 
@@ -28,22 +28,21 @@ export default function GetLatLng() {
   return (
     <div style={{ textAlign: 'center' }}>
       <TextField
-      style={{width: '100vh'}}
+        style={{ width: '100vh' }}
         onChange={onchange}
-        name='inputAddress'
-        label='INSERT ADDRESS'
+        name="inputAddress"
+        label="INSERT ADDRESS"
       />
       <br></br>
-      
+
       <Button
         style={{ marginTop: '1%' }}
-        variant='contained'
-        color='primary'
+        variant="contained"
+        color="primary"
         onClick={getLatLng}
       >
         Send
       </Button>
-      
     </div>
   );
 }
