@@ -31,7 +31,7 @@ class sqlQueries {
       )`;
     return sequelize.query(query);
   }
-  
+
   getUserById(id) {
     const query = `SELECT id,name,email,img from user 
                       WHERE id=${id}`;
@@ -79,7 +79,15 @@ class sqlQueries {
   }
 
   getAllPosts() {
-    const query = `SELECT * from post`;
+    const query = `SELECT * from post
+                    WHERE post.status=0`;
+    return sequelize.query(query);
+  }
+
+  upDatePostStatus(id) {
+    const query = `UPDATE post
+                    SET post.status=1
+                    WHERE post.id=${id}`;
     return sequelize.query(query);
   }
 

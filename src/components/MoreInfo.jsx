@@ -1,6 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -93,6 +94,11 @@ const Checkout = inject('posts')(
       setActiveStep(activeStep + 1);
     };
 
+    const handleConfirm = () => {
+      postData.confirmOrder();
+      setActiveStep(activeStep + 1);
+    };
+
     const handleBack = () => {
       setActiveStep(activeStep - 1);
     };
@@ -115,7 +121,11 @@ const Checkout = inject('posts')(
                     {' Thank you ;)'}
                   </Typography>
                   <Typography variant="subtitle1">
-                    We have emailed your meal confirmation.
+                    You ordered from {postData.generatedBy.name}, please contact
+                    him at {postData.generatedBy.email}
+                  </Typography>
+                  <Typography variant="subtitle1">
+                    We also emailed your meal confirmation.
                   </Typography>
                   <Typography
                     style={{
@@ -129,6 +139,9 @@ const Checkout = inject('posts')(
                   >
                     Bon appétit
                   </Typography>
+                  <Link to="/foodMap">
+                    <Button>Back to map</Button>
+                  </Link>
                 </React.Fragment>
               ) : (
                 <React.Fragment>
@@ -139,14 +152,25 @@ const Checkout = inject('posts')(
                         Back
                       </Button>
                     )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                    </Button>
+                    {activeStep === steps.length - 1 ? (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleConfirm}
+                        className={classes.button}
+                      >
+                        Place order
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleNext}
+                        className={classes.button}
+                      >
+                        Next
+                      </Button>
+                    )}
                   </div>
                 </React.Fragment>
               )}

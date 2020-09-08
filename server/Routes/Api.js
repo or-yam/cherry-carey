@@ -61,4 +61,10 @@ router.get('/foodPost', async (req, res) => {
   res.send(posts);
 });
 
+router.put('/foodPost/:id', async (req, res) => {
+  const { id } = req.params;
+  await queries.upDatePostStatus(id);
+  res.send('updated');
+});
+
 module.exports = router;
