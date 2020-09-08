@@ -45,13 +45,18 @@ const MapMarker = observer(({ post, lat, lng, windowHandler }) => {
             borderRadius: '7px',
           }}
         >
-          <div>
+          <div style={{ display: 'flex' }}>
             <img
               src={post.generatedBy.img}
               alt="profile"
-              style={{ height: '60px' }}
+              style={{ height: '60px', marginRight: 'auto' }}
             />
             <button
+              style={{
+                height: '20px',
+                backgroundColor: 'transparent',
+                border: 'none',
+              }}
               onClick={() => {
                 windowHandler(post, lat, lng);
               }}

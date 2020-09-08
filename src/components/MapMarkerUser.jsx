@@ -33,15 +33,26 @@ const MapMarkerUser = observer(({ user, lat, lng, windowHandler }) => {
             padding: '12px',
           }}
         >
-          <h1>Hey {user.name.split(' ')[0]}</h1>
-          <button
-            onClick={() => {
-              windowHandler(user, lat, lng);
-            }}
-          >
-            X
-          </button>
-          <p>You are here</p>
+          <div style={{ display: 'flex' }}>
+            <img
+              src={user.img}
+              alt="profile"
+              style={{ height: '60px', marginRight: 'auto' }}
+            />
+            <button
+              style={{
+                height: '20px',
+                backgroundColor: 'transparent',
+                border: 'none',
+              }}
+              onClick={() => {
+                windowHandler(user, lat, lng);
+              }}
+            >
+              X
+            </button>
+          </div>
+          <p>You are here {user.name}</p>
         </div>
       )}
     </>

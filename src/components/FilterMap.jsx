@@ -24,7 +24,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const valueText = (value) => {// location filter
+const valueText = (value) => {
+  // location filter
   return `${value}km`;
 };
 

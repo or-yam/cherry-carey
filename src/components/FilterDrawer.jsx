@@ -34,6 +34,7 @@ const FilterDrawer = inject(
 
     const clearInputs = () => {
       formInputs.clearInputs();
+      onFilterSubmit();
     };
 
     return (
