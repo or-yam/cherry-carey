@@ -13,17 +13,14 @@ const Map = inject(
   observer((props) => {
     const { posts, user } = props;
 
-
     const mapRef = useRef();
-    
-    
+
     const defaultMapProps = {
       zoom: 12,
       lat: navigator.geolocation ? user.lat : 32.077937,
       lng: navigator.geolocation ? user.lng : 34.774263,
     };
 
-    
     const expansionZoom = 16;
 
     const windowHandler = (post, lat, lng) => {
@@ -35,7 +32,7 @@ const Map = inject(
     return (
       <div style={{ height: '100%', width: '100%' }}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAsAf8ZKSFF8-3xgRO1GOdhAsEEVxdc9a0' }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_API_KEY }}
           defaultCenter={{ lat: defaultMapProps.lat, lng: defaultMapProps.lng }}
           defaultZoom={defaultMapProps.zoom}
           yesIWantToUseGoogleMapApiInternals
