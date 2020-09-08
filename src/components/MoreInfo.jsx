@@ -81,8 +81,12 @@ function getStepContent(step, postData) {
   }
 }
 
-const Checkout = inject('posts')(
+const Checkout = inject(
+  'posts',
+  'user'
+)(
   observer((props) => {
+    const { user } = props;
     const location = useLocation();
     const postId = parseInt(location.pathname.split('/')[2]);
     const postData = props.posts.foodPosts.find((post) => post.id === postId);
@@ -95,7 +99,7 @@ const Checkout = inject('posts')(
     };
 
     const handleConfirm = () => {
-      postData.confirmOrder();
+      postData.confirmOrder(user);
       setActiveStep(activeStep + 1);
     };
 
