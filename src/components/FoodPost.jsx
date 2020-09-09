@@ -65,6 +65,10 @@ const FoodPost = inject(
       posts.addPost(newPost);
     };
 
+    const uploadImage = (event) => {
+      formInputs.onImageChange(event);
+    };
+
     return formInputs.postType ? (
       <Redirect to="/foodMap" />
     ) : (
@@ -256,6 +260,15 @@ const FoodPost = inject(
           />
         </FormControl>
         <br></br>
+        <div>
+          <h1>Upload image</h1>
+          <input type="file" name="image" onChange={uploadImage} />
+          {/* {loading ? (
+            <h1>loading</h1>
+          ) : ( */}
+            <img alt="" src={formInputs.mealImage}  style={{width:'120px'}}/>
+          {/* )} */}
+        </div>
 
         <ButtonGroup
           style={{

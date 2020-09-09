@@ -16,7 +16,7 @@ const FacebookLogin = () => {
   };
 
   return (
-    <FacebookProvider appId="2397377263900056">
+    <FacebookProvider appId={process.env.REACT_APP_FB_API_KEY}>
       <LoginButton
         scope="email"
         onCompleted={handleResponse}
@@ -32,7 +32,7 @@ const FacebookLogin = () => {
           variant="contained"
         >
           <img
-            alt="facebookLogo"
+            alt=""
             style={{ width: '8%' }}
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/1024px-Facebook_Logo_%282019%29.png"
           />

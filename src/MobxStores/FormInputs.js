@@ -1,4 +1,5 @@
 import { observable, action } from 'mobx';
+import axios from 'axios';
 import Geocode from 'react-geocode';
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 Geocode.setLanguage('en');
@@ -17,6 +18,7 @@ export class FormInputs {
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = 30;
+  @observable mealImage = '';
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -63,6 +65,7 @@ export class FormInputs {
     this.kosher = true;
     this.distribution = 'Be social - Eat together';
     this.price = 30;
+    this.mealImage = '';
   };
 
   @action onInputChange(event) {
@@ -92,6 +95,20 @@ export class FormInputs {
             : 'Take away');
   }
 
+  @action async onImageChange(event) {
+    const file = event.target.files[0];
+    const data = new FormData();
+    data.append('file', file);
+    data.append('upload_preset', 'i4co6ysf');
+    // setLoading(true);
+    axios
+      .post('https://api.cloudinary.com/v1_1/dnrxmm7a0/image/upload', data)
+      .then((res) => {
+        this.mealImage = res.data.url;
+      });
+    // setLoading(false);
+  }
+
   @action submitPost(event, userId) {
     this.postType = event.currentTarget.id;
     const postData = {
@@ -107,6 +124,7 @@ export class FormInputs {
       locationLat: this.locationLat,
       locationLng: this.locationLng,
       price: this.price,
+      mealImage: this.mealImage,
     };
     return postData;
   }
