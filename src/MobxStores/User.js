@@ -58,7 +58,7 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
-          localStorage.stayLoggedIn = 'LoggedIn'
+          localStorage.stayLoggedIn = 'LoggedIn';
           localStorage.id = id;
           localStorage.name = name;
           localStorage.email = email;
@@ -87,7 +87,7 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
-          localStorage.stayLoggedIn = 'LoggedIn'
+          localStorage.stayLoggedIn = 'LoggedIn';
           localStorage.id = id;
           localStorage.name = name;
           localStorage.email = email;
@@ -102,7 +102,6 @@ export class User {
     this.getLocation();
   }
 
-
   @action stayLoggedIn() {
     this.id = localStorage.id;
     this.name = localStorage.name;
@@ -110,6 +109,7 @@ export class User {
     this.img = localStorage.img;
     this.isSignin = true;
     this.getLocation();
+  }
 
   @action facebookRegister(email, name, img) {
     axios.post(`http://localhost:4000/fbUser`, { email, name, img }).then(
