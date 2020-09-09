@@ -73,8 +73,8 @@ router.get('/foodPost', async (req, res) => {
 });
 
 router.put('/foodPost', async (req, res) => {
-  const { postData } = req.body;
-
+  const postData = req.body;
+  console.log(postData);
   await queries.upDatePostStatus(postData.id);
   res.send('updated');
 
@@ -82,7 +82,7 @@ router.put('/foodPost', async (req, res) => {
     from: process.env.MAIL_ADDRESS,
     to: postData.generatedBy.email,
     subject: 'order confirmation',
-    text: `${postData.activeUser.name} has confirmed you request fo ${postData.type} a ${postData.mealName} at ${postData.date} ${postData.mealTime} please make contact at ${postData.activeUser.email} `,
+    text: `${postData.activeUser.name} has confirmed you request for ${postData.postType} a ${postData.mealName} at ${postData.date} ${postData.mealTime} please make contact at ${postData.activeUser.email} `,
   };
 
   let mailToActiveUser = {

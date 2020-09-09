@@ -48,7 +48,7 @@ export class Post {
   }
 
   @action async confirmOrder(user) {
-    const data = {
+    const postData = {
       id: this.id,
       generatedBy: this.generatedBy,
       postType: this.postType,
@@ -64,7 +64,7 @@ export class Post {
       price: this.price,
       activeUser: user,
     };
-    await axios.put(`http://localhost:4000/foodPost/,${data}`).then(
+    await axios.put('http://localhost:4000/foodPost', postData).then(
       (res) => {
         console.log(res.data);
       },
