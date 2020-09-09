@@ -46,9 +46,12 @@ const Login = inject('user')(
       user.userLogin();
     };
 
-    return user.isSignin ? (
+    return localStorage.stayLoggedIn === 'LoggedIn' ? (
+      <div>
+       {user.stayLoggedIn()}
       <Redirect to="/foodMap" />
-    ) : (
+    </div> 
+    ) : ( 
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Logo />

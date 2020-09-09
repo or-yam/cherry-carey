@@ -1,12 +1,22 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
+
 
 import Button from '@material-ui/core/Button';
 
 import Logo from './Logo';
 
-const Landing = () => {
-  return (
+
+const Landing = inject('user')(
+  observer((props) => {
+    const { user } = props;
+  return localStorage.stayLoggedIn === 'LoggedIn' ? (
+    <div>
+       {user.stayLoggedIn()}
+      <Redirect to="/foodMap" />
+    </div> 
+  ) : (
     <div className="landing">
       <Logo />
       <h2>The Social Network For Food</h2>  
@@ -23,6 +33,7 @@ const Landing = () => {
       </div>
     </div>
   );
-};
+})
+);
 
 export default Landing;
