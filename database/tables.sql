@@ -5,7 +5,7 @@ USE cherryDb;
 --     name VARCHAR(30),
 --     email VARCHAR(30),
 --     password VARCHAR(30),
---     img VARCHAR(30),
+--     img VARCHAR(400),
 --     PRIMARY KEY(id)
 -- );
 
@@ -13,7 +13,7 @@ USE cherryDb;
 
 -- CREATE TABLE post(
 --     id int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
---     generatedBy_id int NOT NULL ,
+--     generatedBy_id INT NOT NULL ,
 --     postType VARCHAR(10) ,
 --     mealOrigin VARCHAR(30) ,
 --     mealName VARCHAR(30) ,
@@ -26,6 +26,7 @@ USE cherryDb;
 --     locationLat FLOAT(17, 15),
 --     locationLng FLOAT(17, 15),
 --     price  INT,
+--     mealImage VARCHAR(100),
     
 --     FOREIGN KEY(generatedBy_id) 
 --     REFERENCES user(id)
@@ -45,3 +46,6 @@ USE cherryDb;
 -- );
 
 -- DROP TABLE review;
+
+-- TRUNCATE post;
+-- TRUNCATE user;

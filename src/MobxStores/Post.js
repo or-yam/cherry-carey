@@ -14,6 +14,7 @@ export class Post {
   @observable kosher = true;
   @observable distribution = '';
   @observable price = '';
+  @observable mealImage = '';
   @observable mapWindow = false;
 
   constructor(data) {
@@ -30,6 +31,7 @@ export class Post {
     this.kosher = data.kosher;
     this.distribution = data.distribution;
     this.price = data.price;
+    this.mealImage = data.mealImage;
   }
 
   @action async getGeneratedBy(generatedBy_id) {
@@ -48,7 +50,7 @@ export class Post {
   }
 
   @action async confirmOrder(user) {
-    const data = {
+    const postData = {
       id: this.id,
       generatedBy: this.generatedBy,
       postType: this.postType,
@@ -62,9 +64,10 @@ export class Post {
       kosher: this.kosher,
       distribution: this.distribution,
       price: this.price,
+      mealImage: this.mealImage,
       activeUser: user,
     };
-    await axios.put(`http://localhost:4000/foodPost/,${data}`).then(
+    await axios.put('http://localhost:4000/foodPost', postData).then(
       (res) => {
         console.log(res.data);
       },

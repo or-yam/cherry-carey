@@ -32,6 +32,13 @@ class sqlQueries {
     return sequelize.query(query);
   }
 
+  registerFb(user) {
+    const query = `INSERT INTO user (name,email,password,img)
+      VALUES('${user.name}','${user.email}','','${user.img}'
+      )`;
+    return sequelize.query(query);
+  }
+
   getUserById(id) {
     const query = `SELECT id,name,email,img from user 
                       WHERE id=${id}`;
@@ -52,6 +59,7 @@ class sqlQueries {
       locationLat,
       locationLng,
       price,
+      mealImage,
     } = postData;
     const query = `INSERT INTO post 
                        VALUES(
@@ -68,7 +76,8 @@ class sqlQueries {
                            0,
                            ${locationLat},
                            ${locationLng},
-                           ${parseInt(price)})`;
+                           ${parseInt(price)},
+                           '${mealImage}')`;
     return sequelize.query(query);
   }
 
