@@ -54,12 +54,18 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
+          localStorage.stayLoggedIn = 'LoggedIn'
+          localStorage.id = id;
+          localStorage.name = name;
+          localStorage.email = email;
+          localStorage.img = img;
         },
         (error) => {
           this.errMsg = error.response.data;
         }
       );
     this.getLocation();
+    window.location.reload();
   }
 
   @action userRegister() {
@@ -77,6 +83,11 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
+          localStorage.stayLoggedIn = 'LoggedIn'
+          localStorage.id = id;
+          localStorage.name = name;
+          localStorage.email = email;
+          localStorage.img = img;
         },
         (error) => {
           error.response.data
@@ -84,6 +95,15 @@ export class User {
             : (this.errMsg = 'something went wrong');
         }
       );
+    this.getLocation();
+  }
+
+  @action stayLoggedIn() {
+    this.id = localStorage.id;
+    this.name = localStorage.name;
+    this.email = localStorage.email;
+    this.img = localStorage.img;
+    this.isSignin = true;
     this.getLocation();
   }
 }
