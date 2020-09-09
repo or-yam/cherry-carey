@@ -55,7 +55,8 @@ router.post('/user', async (req, res) => {
     res.status(409).send('email is taken');
   } else {
     const userId = await queries.userRegister(name, email, password);
-    const user = await queries.getUserById(userId);
+    console.log(`user id is = ${userId}`);
+    const user = await queries.getUserById(userId.splice(',')[0]);
     res.status(201).send(user);
   }
 });
