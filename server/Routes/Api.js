@@ -26,6 +26,12 @@ const transporter = nodemailer.createTransport({
   logger: true,
 });
 
+router.get('/user/:email', async (req, res) => {
+  const { email } = req.params;
+  const isEmail = await queries.IsEmailValid(email);
+  res.send(isEmail);
+});
+
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
 
@@ -49,7 +55,8 @@ router.post('/user', async (req, res) => {
     res.status(409).send('email is taken');
   } else {
     const userId = await queries.userRegister(name, email, password);
-    const user = await queries.getUserById(userId);
+    console.log(`user id is = ${userId}`);
+    const user = await queries.getUserById(userId.splice(',')[0]);
     res.status(201).send(user);
   }
 });
@@ -106,6 +113,21 @@ router.put('/foodPost', async (req, res) => {
       console.log(data);
     }
   });
+});
+
+router.post('/fbUser', async (req, res) => {
+  const userData = req.body;
+  const isEmail = await queries.IsEmailValid(userData.email);
+
+  if (!isEmail) {
+    const userId = await queries.registerFb(userData);
+    const user = await queries.getUserById(userId.splice(',')[0]);
+    res.send(user);
+  } else {
+    let user = await queries.userLogin(userData.email, '');
+    user = user[0][0];
+    res.send(user);
+  }
 });
 
 module.exports = router;
