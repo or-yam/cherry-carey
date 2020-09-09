@@ -9,7 +9,7 @@ export class FormInputs {
   @observable allergies = '';
   @observable mealTime = '';
   @observable mealName = '';
-  @observable date = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+  @observable date = '';
   @observable location = false;
   @observable locationLat = 32.734247;
   @observable locationLng = 35.540642;
@@ -70,7 +70,9 @@ export class FormInputs {
   }
 
   @action onDateInputChange(event) {
-    this.date = new Date(event).toJSON().slice(0, 10).replace(/-/g, '/');
+    let inputDate = new Date(event);
+    inputDate.setDate(inputDate.getDate() + 1);
+    this.date = inputDate.toJSON().slice(0, 10).replace(/-/g, '/');
   }
 
   @action toggleValue(event) {

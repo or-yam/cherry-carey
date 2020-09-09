@@ -149,13 +149,14 @@ const FoodPost = inject(
             <KeyboardDatePicker
               margin="normal"
               name="date"
-              label="Date"
               format="MM/dd/yyyy"
               value={formInputs.date}
               onChange={onDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              error={false}
+              helperText="Pick a date"
             />
           </FormControl>
         </MuiPickersUtilsProvider>
