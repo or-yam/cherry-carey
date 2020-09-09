@@ -65,14 +65,14 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['The Meal', 'Payment', 'Confirm'];
 
-function getStepContent(step, postData) {
+function getStepContent(step, postData, user) {
   switch (step) {
     case 0:
-      return <MealInfo postData={postData} />;
+      return <MealInfo postData={postData} user={user} />;
     case 1:
-      return <PaymentForm postData={postData} />;
+      return <PaymentForm postData={postData} user={user} />;
     case 2:
-      return <Review postData={postData} />;
+      return <Review postData={postData} user={user} />;
     default:
       throw new Error('Unknown step');
   }
@@ -146,7 +146,7 @@ const Checkout = inject(
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  {getStepContent(activeStep, postData)}
+                  {getStepContent(activeStep, postData, user)}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} className={classes.button}>
