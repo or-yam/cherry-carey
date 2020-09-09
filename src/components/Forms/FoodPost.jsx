@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
-import { priceMarks, distributionMarks } from '../Utilities/SlideBarMarks';
+import { priceMarks, distributionMarks } from '../../Utilities/SlideBarMarks';
 import GetLatLng from './GetLatLng';
 
-import Logo from './Logo';
+import Logo from '../Logo';
 
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';

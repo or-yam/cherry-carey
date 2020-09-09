@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
-import FilterDrawer from './FilterDrawer';
+import FilterDrawer from '../Filters/FilterDrawer';
 import Map from './Map';
 
 const FoodMap = inject(
