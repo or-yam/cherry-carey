@@ -1,5 +1,5 @@
 import React from 'react';
-import cherryLogo from '../cherry.svg';
+import cherryLogo from '../asets/images/cherry.svg';
 
 const Logo = () => {
   return (
