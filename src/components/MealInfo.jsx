@@ -19,7 +19,7 @@ export default function MealInfo(props) {
           <Grid style={{ textAlign: 'center' }} item xs={12}>
             <img
               style={{ width: '35vh', borderRadius: '7px' }}
-              src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/9/3/KC1807_Sunnys-Grilled-Sweet-and-Spicy-Chicken-Thighs-and-Rice_s4x3.jpg.rend.hgtvcom.826.620.suffix/1536092264187.jpeg"
+              src={postData.mealImage}
               alt="foodImag"
             />
           </Grid>

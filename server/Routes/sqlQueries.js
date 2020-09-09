@@ -52,6 +52,7 @@ class sqlQueries {
       locationLat,
       locationLng,
       price,
+      mealImage,
     } = postData;
     const query = `INSERT INTO post 
                        VALUES(
@@ -68,7 +69,8 @@ class sqlQueries {
                            0,
                            ${locationLat},
                            ${locationLng},
-                           ${parseInt(price)})`;
+                           ${parseInt(price)},
+                           '${mealImage}')`;
     return sequelize.query(query);
   }
 
