@@ -52,11 +52,8 @@ const FoodPost = inject(
       formInputs.onDateInputChange(event);
     };
 
-    // const [addLocation, setAddLocation] = React.useState(false);
-
     const toggleValue = (event) => {
       formInputs.toggleValue(event);
-      // setAddLocation(event.target.value);
     };
 
     const sliderChange = (event, val) => {
