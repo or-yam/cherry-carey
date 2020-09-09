@@ -5,7 +5,7 @@ USE cherryDb;
 --     name VARCHAR(30),
 --     email VARCHAR(30),
 --     password VARCHAR(30),
---     img VARCHAR(30),
+--     img VARCHAR(400),
 --     PRIMARY KEY(id)
 -- );
 
@@ -46,3 +46,6 @@ USE cherryDb;
 -- );
 
 -- DROP TABLE review;
+
+-- TRUNCATE post;
+-- TRUNCATE user;

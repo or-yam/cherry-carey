@@ -90,4 +90,20 @@ export class User {
       );
     this.getLocation();
   }
+
+  @action facebookRegister(email, name, img) {
+    axios.post(`http://localhost:4000/fbUser`, { email, name, img }).then(
+      (res) => {
+        const { id, name, email, img } = res.data;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.img = img;
+        this.isSignin = true;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 }

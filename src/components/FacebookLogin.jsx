@@ -6,23 +6,14 @@ import { inject, observer } from 'mobx-react';
 const FacebookLogin = inject('user')(
   observer((props) => {
     const { user } = props;
+
     const handleResponse = async (data) => {
       const { name, email, picture } = await data.profile;
-      if (user.checkEmail(email)) {
-        user.email = email;
-        user.password = 'facebook';
-        user.userLogin();
-      } else {
-        user.email = email;
-        user.name = name;
-        user.password = 'facebook';
-        user.img = picture.data.url;
-        user.userRegister();
-      }
+      user.facebookRegister(email, name, picture.data.url);
     };
 
     const handleError = (error) => {
-      this.setState({ error });
+      console.log(error);
     };
 
     return (

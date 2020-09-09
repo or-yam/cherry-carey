@@ -115,4 +115,19 @@ router.put('/foodPost', async (req, res) => {
   });
 });
 
+router.post('/fbUser', async (req, res) => {
+  const userData = req.body;
+  const isEmail = await queries.IsEmailValid(userData.email);
+
+  if (!isEmail) {
+    const userId = await queries.registerFb(userData);
+    const user = await queries.getUserById(userId.splice(',')[0]);
+    res.send(user);
+  } else {
+    let user = await queries.userLogin(userData.email, '');
+    user = user[0][0];
+    res.send(user);
+  }
+});
+
 module.exports = router;
