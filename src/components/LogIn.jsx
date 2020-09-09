@@ -12,6 +12,8 @@ import TextField from '@material-ui/core/TextField';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,16 +44,17 @@ const Login = inject('user')(
       user.onInputChange(event);
     };
 
+    const onCheckChange = () => {
+      user.onRememberChange();
+    };
+
     const onSubmit = () => {
       user.userLogin();
     };
 
-    return localStorage.stayLoggedIn === 'LoggedIn' ? (
-      <div>
-       {user.stayLoggedIn()}
+    return user.isSignin || user.getUserFromLocalStorage() ? (
       <Redirect to="/foodMap" />
-    </div> 
-    ) : ( 
+    ) : (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Logo />
@@ -95,6 +98,16 @@ const Login = inject('user')(
               Login
             </Button>
             <FacebookLogin />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={user.isRememberMe}
+                  onChange={onCheckChange}
+                  inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+              }
+              label=" Remember me"
+            ></FormControlLabel>
           </div>
         </div>
         <Box className="infoBox" mt={4}>

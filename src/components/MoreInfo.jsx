@@ -1,7 +1,7 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -104,7 +104,9 @@ const Checkout = inject(
       setActiveStep(activeStep - 1);
     };
 
-    return (
+    return !user.isSignin && !user.getUserFromLocalStorage() ? (
+      <Redirect to="/login" />
+    ) : (
       <React.Fragment>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
