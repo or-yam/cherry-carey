@@ -23,6 +23,8 @@ const FoodMap = inject(
 
     formInputs.clearInputs();
 
+
+
     const onFilter = (event) => {
       posts.filterByType(event);
     };
