@@ -1,13 +1,13 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
-import { locationRangeMarks } from '../Utilities/SlideBarMarks'; // location filter
 
+// import { locationRangeMarks } from '../Utilities/SlideBarMarks'; // location filter
+// import Typography from '@material-ui/core/Typography'; // location filter
+// import Slider from '@material-ui/core/Slider'; // location filter
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import Typography from '@material-ui/core/Typography'; // location filter
-import Slider from '@material-ui/core/Slider'; // location filter
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
@@ -24,10 +24,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const valueText = (value) => {
-  // location filter
-  return `${value}km`;
-};
+// const valueText = (value) => {
+//   // location filter
+//   return `${value}km`;
+// };
 
 const FilterMap = inject('formInputs')(
   observer((props) => {

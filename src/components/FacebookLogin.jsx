@@ -12,11 +12,10 @@ const FacebookLogin = inject('user')(
       user.facebookRegister(email, name, picture.data.url);
     };
 
-
     const handleError = (error) => {
       console.log(error);
     };
-    
+
     return (
       <FacebookProvider
         appId={process.env.REACT_APP_FB_API_KEY}

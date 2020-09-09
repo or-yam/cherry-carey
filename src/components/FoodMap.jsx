@@ -27,14 +27,11 @@ const FoodMap = inject(
       posts.filterByType(event);
     };
 
-    
-      return localStorage.stayLoggedIn !== 'LoggedIn' ? (
-        <div>
-          <Redirect to="/login" />
-        </div> 
-      ) : (
+    return !user.isSignin && !user.getUserFromLocalStorage() ? (
+      <Redirect to="/login" />
+    ) : (
       <div className="main-page">
-        {user.stayLoggedIn()}
+        {/* {user.stayLoggedIn()} */}
         <div className="top-nav">
           <div style={{ textAlign: 'center' }}>
             <Link to="/foodPost">

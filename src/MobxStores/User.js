@@ -11,6 +11,7 @@ export class User {
   @observable lng = 35.540642;
   @observable mapWindow = false;
 
+  @observable isRememberMe = false;
   @observable emailInput = '';
   @observable passwordInput = '';
   @observable nameInput = '';
@@ -58,18 +59,13 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
-          localStorage.stayLoggedIn = 'LoggedIn';
-          localStorage.id = id;
-          localStorage.name = name;
-          localStorage.email = email;
-          localStorage.img = img;
+          this.isRememberMe && this.rememberMe();
+          this.getLocation();
         },
         (error) => {
           this.errMsg = error.response.data;
         }
       );
-    this.getLocation();
-    window.location.reload();
   }
 
   @action userRegister() {
@@ -87,11 +83,8 @@ export class User {
           this.email = email;
           this.img = img;
           this.isSignin = true;
-          localStorage.stayLoggedIn = 'LoggedIn';
-          localStorage.id = id;
-          localStorage.name = name;
-          localStorage.email = email;
-          localStorage.img = img;
+          this.isRememberMe && this.rememberMe();
+          this.getLocation();
         },
         (error) => {
           error.response.data
@@ -99,16 +92,33 @@ export class User {
             : (this.errMsg = 'something went wrong');
         }
       );
-    this.getLocation();
   }
 
-  @action stayLoggedIn() {
-    this.id = localStorage.id;
-    this.name = localStorage.name;
-    this.email = localStorage.email;
-    this.img = localStorage.img;
-    this.isSignin = true;
-    this.getLocation();
+  @action onRememberChange() {
+    this.isRememberMe = !this.isRememberMe;
+  }
+
+  @action rememberMe() {
+    const cherryUser = {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      img: this.img,
+    };
+    localStorage.setItem('cherryUser', JSON.stringify(cherryUser));
+  }
+
+  @action getUserFromLocalStorage() {
+    let cherryUser = localStorage.getItem('cherryUser');
+    if (cherryUser) {
+      cherryUser = JSON.parse(cherryUser);
+      this.id = cherryUser.id;
+      this.name = cherryUser.name;
+      this.email = cherryUser.email;
+      this.img = cherryUser.img;
+      this.isSignin = true;
+    }
+    return this.isSignin;
   }
 
   @action facebookRegister(email, name, img) {
@@ -120,6 +130,8 @@ export class User {
         this.email = email;
         this.img = img;
         this.isSignin = true;
+        this.isRememberMe && this.rememberMe();
+        this.getLocation();
       },
       (error) => {
         console.log(error);

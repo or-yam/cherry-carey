@@ -12,6 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -41,11 +43,15 @@ const Register = inject('user')(
       user.onInputChange(event);
     };
 
+    const onCheckChange = () => {
+      user.onRememberChange();
+    };
+
     const onSubmit = () => {
       user.userRegister();
     };
 
-    return user.isSignin ? (
+    return user.isSignin || user.getUserFromLocalStorage() ? (
       <Redirect to="/foodMap" />
     ) : (
       <Container component="main" maxWidth="xs">
@@ -107,6 +113,16 @@ const Register = inject('user')(
               Register
             </Button>
           </div>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={user.isRememberMe}
+                onChange={onCheckChange}
+                inputProps={{ 'aria-label': 'primary checkbox' }}
+              />
+            }
+            label=" Remember me"
+          ></FormControlLabel>
         </div>
         <Box className="infoBox" mt={4}>
           <span>Already have an account? </span>{' '}
