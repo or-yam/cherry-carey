@@ -41,6 +41,10 @@ export class User {
     this.lng = postPosition.longitude;
   };
 
+  @action checkEmail(email) {
+    axios.get(`http://localhost:4000/user/${email}`).then((res) => res.data);
+  }
+
   @action userLogin() {
     axios
       .get(
