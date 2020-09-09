@@ -4,13 +4,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 
-const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
-];
-
 const useStyles = makeStyles((theme) => ({
   listItem: {
     padding: theme.spacing(1, 0),
@@ -25,7 +18,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Review(props) {
   const classes = useStyles();
-  const { postData } = props;
+  const { postData, user } = props;
+
+  const payments = [
+    { name: 'Payment method', detail: 'PayPal' },
+    { name: 'Name', detail: `${user.name}` },
+    { name: 'Total Price', detail: `${postData.price}$` },
+    { name: 'Supply Date', detail: postData.date },
+  ];
   return (
     <div style={{ textAlign: 'center' }}>
       <Typography variant="h6" gutterBottom>
@@ -44,7 +44,7 @@ export default function Review(props) {
         <Grid item xs={12}>
           <img
             style={{ width: '35vh', borderRadius: '7px' }}
-            src="https://food.fnr.sndimg.com/content/dam/images/food/fullset/2018/9/3/KC1807_Sunnys-Grilled-Sweet-and-Spicy-Chicken-Thighs-and-Rice_s4x3.jpg.rend.hgtvcom.826.620.suffix/1536092264187.jpeg"
+            src={postData.mealImage}
             alt="meal"
           />
         </Grid>
