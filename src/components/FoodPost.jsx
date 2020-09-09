@@ -52,11 +52,8 @@ const FoodPost = inject(
       formInputs.onDateInputChange(event);
     };
 
-    // const [addLocation, setAddLocation] = React.useState(false);
-
     const toggleValue = (event) => {
       formInputs.toggleValue(event);
-      // setAddLocation(event.target.value);
     };
 
     const sliderChange = (event, val) => {
@@ -149,13 +146,14 @@ const FoodPost = inject(
             <KeyboardDatePicker
               margin="normal"
               name="date"
-              label="Date"
               format="MM/dd/yyyy"
               value={formInputs.date}
               onChange={onDateChange}
               KeyboardButtonProps={{
                 'aria-label': 'change date',
               }}
+              error={false}
+              helperText="Pick a date"
             />
           </FormControl>
         </MuiPickersUtilsProvider>
@@ -266,15 +264,43 @@ const FoodPost = inject(
           size="large"
           aria-label="contained primary button group"
         >
-          <Button id="cook" onClick={onSubmit} color="primary">
-            COOK
+          <Button
+            style={{
+              display: 'grid',
+              backgroundColor: '#118AB2',
+              margin: '5px',
+            }}
+            id="cook"
+            onClick={onSubmit}
+            color="black"
+          >
+            <img
+              style={{ width: '50px' }}
+              src="https://image.flaticon.com/icons/svg/1830/1830839.svg"
+              alt="cookers"
+            />
+            <div>COOK</div>
           </Button>
-          <Button id="eat" onClick={onSubmit} color="secondary">
-            EAT
+          <Button
+            style={{
+              display: 'grid',
+              backgroundColor: '#EF476F',
+              margin: '5px',
+            }}
+            id="eat"
+            onClick={onSubmit}
+            color="black"
+          >
+            <img
+              style={{ width: '50px' }}
+              src="https://image.flaticon.com/icons/svg/2737/2737034.svg"
+              alt="eaters"
+            />
+            <div>EAT</div>
           </Button>
         </ButtonGroup>
         <br></br>
-        <Link to="foodMap" variant="body2">
+        <Link to="foodMap" variant="body2" style={{ color: 'blue' }}>
           {'Back to map'}
         </Link>
       </div>
