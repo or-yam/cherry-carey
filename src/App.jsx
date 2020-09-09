@@ -9,13 +9,14 @@ import FoodMap from './components/FoodMap';
 
 import MoreInfo from './components/MoreInfo';
 import Landing from './components/Landing';
-import UserPage from './components/UserPage'
+import UserPage from './components/UserPage';
 
 import './Styles/App.css';
 
 import { User } from './MobxStores/User';
 import { Posts } from './MobxStores/Posts';
 import { FormInputs } from './MobxStores/FormInputs';
+import ImgUploader from './components/ImgUploader';
 
 const user = new User();
 const posts = new Posts();
@@ -34,7 +35,7 @@ const App = observer(() => {
         <Route path="/foodPost" exact render={() => <FoodPost />} />
         <Route path="/moreInfo/:id" exact render={() => <MoreInfo />} />
         <Route path="/userPage" exact render={() => <UserPage />} />
-        
+        <Route path="/uploader" exact render={() => <ImgUploader />}></Route>
       </Provider>
     </Router>
   );

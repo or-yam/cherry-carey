@@ -256,7 +256,6 @@ const FoodPost = inject(
           />
         </FormControl>
         <br></br>
-
         <ButtonGroup
           style={{
             justifyContent: 'center',

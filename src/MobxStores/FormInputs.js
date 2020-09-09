@@ -17,6 +17,7 @@ export class FormInputs {
   @observable kosher = true;
   @observable distribution = 'Be social - Eat together';
   @observable price = 30;
+  @observable postImg = '';
 
   getLocation = () => {
     if (navigator.geolocation) {
@@ -63,6 +64,7 @@ export class FormInputs {
     this.kosher = true;
     this.distribution = 'Be social - Eat together';
     this.price = 30;
+    this.postImg = '';
   };
 
   @action onInputChange(event) {

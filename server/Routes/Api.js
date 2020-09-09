@@ -74,7 +74,6 @@ router.get('/foodPost', async (req, res) => {
 
 router.put('/foodPost', async (req, res) => {
   const postData = req.body;
-  console.log(postData);
   await queries.upDatePostStatus(postData.id);
   res.send('updated');
 
