@@ -43,34 +43,30 @@ export class User {
   };
 
   @action checkEmail(email) {
-    axios.get(`http://localhost:4000/userEmail/${email}`).then((res) => res.data);
+    axios.get(`/userEmail/${email}`).then((res) => res.data);
   }
 
   @action userLogin() {
-    axios
-      .get(
-        `http://localhost:4000/user/${this.emailInput}/${this.passwordInput}`
-      )
-      .then(
-        (res) => {
-          const { id, name, email, img } = res.data;
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.img = img;
-          this.isSignin = true;
-          this.isRememberMe && this.rememberMe();
-          this.getLocation();
-        },
-        (error) => {
-          this.errMsg = error.response.data;
-        }
-      );
+    axios.get(`/user/${this.emailInput}/${this.passwordInput}`).then(
+      (res) => {
+        const { id, name, email, img } = res.data;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.img = img;
+        this.isSignin = true;
+        this.isRememberMe && this.rememberMe();
+        this.getLocation();
+      },
+      (error) => {
+        this.errMsg = error.response.data;
+      }
+    );
   }
 
   @action userRegister() {
     axios
-      .post(`http://localhost:4000/user`, {
+      .post(`/user`, {
         name: this.nameInput,
         email: this.emailInput,
         password: this.passwordInput,
@@ -122,7 +118,7 @@ export class User {
   }
 
   @action facebookRegister(email, name, img) {
-    axios.post(`http://localhost:4000/fbUser`, { email, name, img }).then(
+    axios.post(`/fbUser`, { email, name, img }).then(
       (res) => {
         const { id, name, email, img } = res.data;
         this.id = id;

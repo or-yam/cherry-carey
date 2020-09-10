@@ -9,7 +9,7 @@ export class Posts {
   @action getFoodPosts() {
     this.foodPosts = [];
     this.loadingState = 'pending';
-    axios.get('http://localhost:4000/foodPost').then(
+    axios.get('/foodPost').then(
       (res) => {
         this.foodPosts = res.data[0].map((post) => new Post(post));
         this.filteredPosts = this.foodPosts;
@@ -41,7 +41,7 @@ export class Posts {
   }
 
   @action addPost(postData) {
-    axios.post('http://localhost:4000/foodPost', postData).then(
+    axios.post('/foodPost', postData).then(
       (res) => {
         this.foodPosts.push(new Post(res.data));
       },

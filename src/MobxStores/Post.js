@@ -35,7 +35,7 @@ export class Post {
   }
 
   @action async getGeneratedBy(generatedBy_id) {
-    await axios.get(`http://localhost:4000/userById/${generatedBy_id}`).then(
+    await axios.get(`/userById/${generatedBy_id}`).then(
       (res) => {
         this.generatedBy = res.data;
       },
@@ -67,7 +67,7 @@ export class Post {
       mealImage: this.mealImage,
       activeUser: user,
     };
-    await axios.put('http://localhost:4000/foodPost', postData).then(
+    await axios.put('/foodPost', postData).then(
       (res) => {
         console.log(res.data);
       },
