@@ -1,12 +1,9 @@
 const express = require('express');
-const path = require('path');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
-
-router.use(express.static(path.join(__dirname, 'build')));
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
@@ -118,10 +115,6 @@ router.post('/fbUser', async (req, res) => {
     user = user[0][0];
     res.send(user);
   }
-});
-
-router.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 module.exports = router;
