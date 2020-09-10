@@ -43,7 +43,7 @@ export class User {
   };
 
   @action checkEmail(email) {
-    axios.get(`http://localhost:4000/user/${email}`).then((res) => res.data);
+    axios.get(`http://localhost:4000/userEmail/${email}`).then((res) => res.data);
   }
 
   @action userLogin() {

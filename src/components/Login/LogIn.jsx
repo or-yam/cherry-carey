@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 
-import Logo from './Logo';
+import Logo from '../Logo';
 import FacebookLogin from './FacebookLogin';
 
 import { makeStyles } from '@material-ui/core/styles';

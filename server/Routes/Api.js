@@ -26,17 +26,21 @@ const transporter = nodemailer.createTransport({
   logger: true,
 });
 
-router.get('/user/:email', async (req, res) => {
+router.get('/userEmail/:email', async (req, res) => {
   const { email } = req.params;
   const isEmail = await queries.IsEmailValid(email);
   res.send(isEmail);
 });
 
+router.get('/userById/:id', async (req, res) => {
+  const { id } = req.params;
+  const user = await queries.getUserById(id);
+  res.send(user[0][0]);
+});
+
 router.get('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
-
   const isEmail = await queries.IsEmailValid(email);
-
   if (isEmail) {
     let user = await queries.userLogin(email, password);
     user = user[0][0];
@@ -59,12 +63,6 @@ router.post('/user', async (req, res) => {
     const user = await queries.getUserById(userId.splice(',')[0]);
     res.status(201).send(user);
   }
-});
-
-router.get('/user/:id', async (req, res) => {
-  const { id } = req.params;
-  const user = await queries.getUserById(id);
-  res.send(user[0][0]);
 });
 
 router.post('/foodPost', async (req, res) => {

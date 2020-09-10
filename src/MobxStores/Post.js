@@ -35,7 +35,7 @@ export class Post {
   }
 
   @action async getGeneratedBy(generatedBy_id) {
-    await axios.get(`http://localhost:4000/user/${generatedBy_id}`).then(
+    await axios.get(`http://localhost:4000/userById/${generatedBy_id}`).then(
       (res) => {
         this.generatedBy = res.data;
       },
