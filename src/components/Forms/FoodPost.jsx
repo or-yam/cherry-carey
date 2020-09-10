@@ -65,8 +65,19 @@ const FoodPost = inject(
       posts.addPost(newPost);
     };
 
-    const uploadImage = (event) => {
-      formInputs.onImageChange(event);
+    const widget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'dnrxmm7a0',
+        uploadPreset: 'i4co6ysf',
+      },
+      (error, result) => {
+        result.info.secure_url &&
+          formInputs.onImageChange(result.info.secure_url);
+      }
+    );
+
+    const showWidget = () => {
+      widget.open();
     };
 
     return formInputs.postType ? (
@@ -260,15 +271,24 @@ const FoodPost = inject(
           />
         </FormControl>
         <br></br>
-        <div>
-          <h1>Upload image</h1>
-          <input type="file" name="image" onChange={uploadImage} />
-          {/* {loading ? (
-            <h1>loading</h1>
-          ) : ( */}
-            <img alt="" src={formInputs.mealImage}  style={{width:'120px'}}/>
-          {/* )} */}
-        </div>
+        <FormControl className={classes.formControl}>
+        
+          <div
+            id="photo-form-container"
+            style={{
+              display: 'grid',
+              gridGap: '10px',
+              justifyContent: 'center',
+              alignItems: 'center',
+              textAlign: 'center',
+            }}
+          >
+            <Button onClick={showWidget} variant="contained" color="primary">
+              Upload photo
+            </Button>
+            <img alt="" src={formInputs.mealImage} style={{ width: '300px' }} />
+          </div>
+        </FormControl>
 
         <ButtonGroup
           style={{
