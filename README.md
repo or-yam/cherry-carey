@@ -10,6 +10,8 @@ All posts displayed on a map and users can make reservations by clicking the ico
 
 ## How to Use
 
+#### [Enter The App](https://cherrycarey.herokuapp.com/)
+
 - Register as new user or Login with your Facebook account.
 - Navigate the map and see if there is a post that suits you.
 - filter the map to view only cookers or eaters by using the to buttons on the bottom.
