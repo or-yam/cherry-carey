@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
+const nodeMailerTemplate = require('./nodeMailer');
 const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
@@ -54,6 +55,21 @@ router.post('/user', async (req, res) => {
   }
 });
 
+router.post('/fbUser', async (req, res) => {
+  const userData = req.body;
+  const isEmail = await queries.IsEmailValid(userData.email);
+
+  if (!isEmail) {
+    const userId = await queries.registerFb(userData);
+    const user = await queries.getUserById(userId.splice(',')[0]);
+    res.send(user);
+  } else {
+    let user = await queries.userLogin(userData.email, '');
+    user = user[0][0];
+    res.send(user);
+  }
+});
+
 router.post('/foodPost', async (req, res) => {
   const postData = req.body;
   const postId = await queries.postFoodPost(postData);
@@ -69,52 +85,9 @@ router.get('/foodPost', async (req, res) => {
 router.put('/foodPost', async (req, res) => {
   const postData = req.body;
   await queries.upDatePostStatus(postData.id);
-  res.send('updated');
-
-  let mailToGeneratedBy = {
-    from: process.env.MAIL_ADDRESS,
-    to: postData.generatedBy.email,
-    subject: 'order confirmation',
-    text: `${postData.activeUser.name} has confirmed you request for ${postData.postType} a ${postData.mealName} at ${postData.date} ${postData.mealTime} please make contact at ${postData.activeUser.email} `,
-  };
-
-  let mailToActiveUser = {
-    from: process.env.MAIL_ADDRESS,
-    to: postData.activeUser.email,
-    subject: 'order confirmation',
-    text: `Thank you ${postData.activeUser.name} for ordering from us. Please contact ${postData.generatedBy.name} at ${postData.generatedBy.email} `,
-  };
-
-  transporter.sendMail(mailToGeneratedBy, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
-  });
-
-  transporter.sendMail(mailToActiveUser, function (err, data) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(data);
-    }
-  });
-});
-
-router.post('/fbUser', async (req, res) => {
-  const userData = req.body;
-  const isEmail = await queries.IsEmailValid(userData.email);
-
-  if (!isEmail) {
-    const userId = await queries.registerFb(userData);
-    const user = await queries.getUserById(userId.splice(',')[0]);
-    res.send(user);
-  } else {
-    let user = await queries.userLogin(userData.email, '');
-    user = user[0][0];
-    res.send(user);
-  }
+  const emailTemplate = new nodeMailerTemplate(postData);
+  emailTemplate.sendAll();
+  res.send('reservation made');
 });
 
 module.exports = router;
