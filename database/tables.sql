@@ -1,6 +1,3 @@
-
-
-
 USE cherryDb;
 
 -- CREATE TABLE user(
