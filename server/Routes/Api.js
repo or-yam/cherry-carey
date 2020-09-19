@@ -1,20 +1,10 @@
 const express = require('express');
 const router = express.Router();
-// const nodemailer = require('nodemailer');
 const nodeMailerTemplate = require('./nodeMailer');
 const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.MAIL_ADDRESS,
-    pass: process.env.MAIL_PASSWORD,
-  },
-  debug: false,
-  logger: true,
-});
 
 router.get('/userEmail/:email', async (req, res) => {
   const { email } = req.params;
