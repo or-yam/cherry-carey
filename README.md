@@ -1,6 +1,6 @@
 # <p align="center"><img src="https://res.cloudinary.com/dnrxmm7a0/image/upload/v1600169600/cherry/cclogo_gwiyj9.jpg" width="300"> </p>
 
-# The Food Social Media
+# A Social Media For Food
 
 This App exist to connect between 👩‍🍳cookers and 🍴hungry people.
 A user can make a Cook/Eat Post and put init all his preferences.
@@ -17,6 +17,14 @@ All posts displayed on a map and users can make reservations by clicking the ico
 - filter the map to view only cookers or eaters by using the to buttons on the bottom.
 - You can filter the posts with more categories by clicking the filter icon.
 - Make a new post by clicking the + button and fill the form.
+
+---
+
+## To Run on localhost
+
+1. uncomment `development` section in `server/Server.js`
+2. run `node server/Server.js`
+3. run `npm run-script develop`
 
 ---
 

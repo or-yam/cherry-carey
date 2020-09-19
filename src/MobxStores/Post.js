@@ -35,14 +35,16 @@ export class Post {
   }
 
   @action async getGeneratedBy(generatedBy_id) {
-    await axios.get(`http://localhost:4000/userById/${generatedBy_id}`).then(
-      (res) => {
-        this.generatedBy = res.data;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    await axios
+      .get(`${process.env.REACT_APP_SERVER_PORT}/userById/${generatedBy_id}`)
+      .then(
+        (res) => {
+          this.generatedBy = res.data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   @action mapWindowToggle() {
@@ -67,13 +69,15 @@ export class Post {
       mealImage: this.mealImage,
       activeUser: user,
     };
-    await axios.put('http://localhost:4000/foodPost', postData).then(
-      (res) => {
-        console.log(res.data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    await axios
+      .put(`${process.env.REACT_APP_SERVER_PORT}/foodPost`, postData)
+      .then(
+        (res) => {
+          console.log(res.data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

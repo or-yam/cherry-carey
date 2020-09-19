@@ -43,13 +43,15 @@ export class User {
   };
 
   @action checkEmail(email) {
-    axios.get(`http://localhost:4000/userEmail/${email}`).then((res) => res.data);
+    axios
+      .get(`${process.env.REACT_APP_SERVER_PORT}/userEmail/${email}`)
+      .then((res) => res.data);
   }
 
   @action userLogin() {
     axios
       .get(
-        `http://localhost:4000/user/${this.emailInput}/${this.passwordInput}`
+        `${process.env.REACT_APP_SERVER_PORT}/user/${this.emailInput}/${this.passwordInput}`
       )
       .then(
         (res) => {
@@ -70,7 +72,7 @@ export class User {
 
   @action userRegister() {
     axios
-      .post(`http://localhost:4000/user`, {
+      .post(`${process.env.REACT_APP_SERVER_PORT}/user`, {
         name: this.nameInput,
         email: this.emailInput,
         password: this.passwordInput,
@@ -122,20 +124,22 @@ export class User {
   }
 
   @action facebookRegister(email, name, img) {
-    axios.post(`http://localhost:4000/fbUser`, { email, name, img }).then(
-      (res) => {
-        const { id, name, email, img } = res.data;
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.img = img;
-        this.isSignin = true;
-        this.isRememberMe && this.rememberMe();
-        this.getLocation();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    axios
+      .post(`${process.env.REACT_APP_SERVER_PORT}/fbUser`, { email, name, img })
+      .then(
+        (res) => {
+          const { id, name, email, img } = res.data;
+          this.id = id;
+          this.name = name;
+          this.email = email;
+          this.img = img;
+          this.isSignin = true;
+          this.isRememberMe && this.rememberMe();
+          this.getLocation();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }
