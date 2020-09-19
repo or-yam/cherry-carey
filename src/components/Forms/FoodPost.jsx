@@ -89,8 +89,8 @@ const FoodPost = inject(
           display: 'grid',
           height: '100%',
           overflow: 'scroll',
-          marginLeft: '32px',
-          marginRight: '32px',
+          paddingLeft: '22px',
+          paddingRight: '22px',
         }}
       >
         <Logo />
@@ -174,56 +174,65 @@ const FoodPost = inject(
         </MuiPickersUtilsProvider>
 
         <br></br>
-        <FormControl className={classes.formControl}>
-          <Typography component="div">
-            <Grid
-              style={{ justifyContent: 'center' }}
-              component="label"
-              container
-              alignItems="center"
-              spacing={1}
-            >
-              <Grid item>YES</Grid>
-              <Grid item>
-                <FormControlLabel
-                  name="kosher"
-                  value={formInputs.kosher}
-                  control={<Switch color="primary" />}
-                  label="KOSHER"
-                  labelPlacement="top"
-                  onChange={toggleValue}
-                />
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            flexWrap: 'wrap',
+          }}
+        >
+          <FormControl className={classes.formControl}>
+            <Typography component="div">
+              <Grid
+                style={{ justifyContent: 'center' }}
+                component="label"
+                container
+                alignItems="center"
+                spacing={1}
+              >
+                <Grid item>YES</Grid>
+                <Grid item>
+                  <FormControlLabel
+                    name="kosher"
+                    value={formInputs.kosher}
+                    control={<Switch color="primary" />}
+                    label="KOSHER"
+                    labelPlacement="top"
+                    onChange={toggleValue}
+                  />
+                </Grid>
+                <Grid item>NO</Grid>
               </Grid>
-              <Grid item>NO</Grid>
-            </Grid>
-          </Typography>
-        </FormControl>
+            </Typography>
+          </FormControl>
 
-        <FormControl className={classes.formControl}>
-          <Typography component="div">
-            <Grid
-              style={{ justifyContent: 'center' }}
-              component="label"
-              container
-              alignItems="center"
-              spacing={1}
-            >
-              <Grid item>USE MINE</Grid>
-              <Grid item>
-                <FormControlLabel
-                  name="location"
-                  value={formInputs.location}
-                  control={<Switch color="primary" />}
-                  label="LOCATION"
-                  labelPlacement="top"
-                  onChange={toggleValue}
-                />
+          <FormControl className={classes.formControl}>
+            <Typography component="div">
+              <Grid
+                style={{ justifyContent: 'center' }}
+                component="label"
+                container
+                alignItems="center"
+                spacing={1}
+              >
+                <Grid item>USE MINE</Grid>
+                <Grid item>
+                  <FormControlLabel
+                    name="location"
+                    value={formInputs.location}
+                    control={<Switch color="primary" />}
+                    label="LOCATION"
+                    labelPlacement="top"
+                    onChange={toggleValue}
+                  />
+                </Grid>
+                <Grid item>ADD NEW</Grid>
               </Grid>
-              <Grid item>ADD NEW</Grid>
-            </Grid>
-          </Typography>
-          {formInputs.location ? <GetLatLng /> : ''}
-        </FormControl>
+            </Typography>
+            {formInputs.location ? <GetLatLng /> : ''}
+          </FormControl>
+        </div>
+
         <br></br>
         <FormControl className={classes.formControl}>
           <Typography id="discrete-slider" gutterBottom>
@@ -272,7 +281,6 @@ const FoodPost = inject(
         </FormControl>
         <br></br>
         <FormControl className={classes.formControl}>
-        
           <div
             id="photo-form-container"
             style={{

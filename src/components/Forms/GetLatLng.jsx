@@ -16,9 +16,9 @@ const GetLatLng = inject('formInputs')(
     };
 
     return (
-      <div style={{ textAlign: 'center' }}>
+      <>
         <TextField
-          style={{ width: '100vh' }}
+          style={{ textAlign: 'center' }}
           onChange={onchange}
           name="adressInput"
           label="INSERT ADDRESS"
@@ -32,7 +32,7 @@ const GetLatLng = inject('formInputs')(
         >
           ADD
         </Button>
-      </div>
+      </>
     );
   })
 );
