@@ -55,6 +55,7 @@ const Register = inject('user')(
       <Redirect to="/foodMap" />
     ) : (
       <Container component="main" maxWidth="xs">
+        {user.clearErrMsg()}
         <CssBaseline />
         <Logo />
         <div className={classes.paper}>

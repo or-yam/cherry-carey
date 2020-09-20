@@ -13,7 +13,7 @@ export class User {
 
   @observable isRememberMe = false;
   @observable emailInput = '';
-  @observable passwordInput = '';
+  @observable passwordInput = '-';
   @observable nameInput = '';
 
   @action onInputChange(event) {
@@ -42,6 +42,10 @@ export class User {
     this.lng = postPosition.longitude;
   };
 
+  @action clearErrMsg() {
+    this.errMsg = '';
+  }
+
   @action checkEmail(email) {
     axios
       .get(`${process.env.REACT_APP_SERVER_PORT}/userEmail/${email}`)
@@ -65,7 +69,11 @@ export class User {
           this.getLocation();
         },
         (error) => {
-          this.errMsg = error.response.data;
+          error.response.status === 404
+            ? (this.errMsg = `Didn't Find This Email Adress`)
+            : error.response.status === 401
+            ? (this.errMsg = `Please Check Your Password`)
+            : (this.errMsg = `Something Went Wrong`);
         }
       );
   }
