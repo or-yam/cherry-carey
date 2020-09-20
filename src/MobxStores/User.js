@@ -42,6 +42,10 @@ export class User {
     this.lng = postPosition.longitude;
   };
 
+  @action clearErrMsg() {
+    this.errMsg = '';
+  }
+
   @action checkEmail(email) {
     axios
       .get(`${process.env.REACT_APP_SERVER_PORT}/userEmail/${email}`)
