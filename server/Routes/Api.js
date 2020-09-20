@@ -5,7 +5,6 @@ const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
 
-
 router.get('/userEmail/:email', async (req, res) => {
   const { email } = req.params;
   const isEmail = await queries.IsEmailValid(email);
