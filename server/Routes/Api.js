@@ -11,7 +11,7 @@ function authenticateToken(req, res, next) {
   if (!token) {
     res.status(401).send('authenticate err');
   }
-  jwt.verify(token, 'secret', (err, user) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
     if (err) {
       res.status(403).send('token is not valid');
     }
@@ -44,7 +44,10 @@ router.post('/user/:email/:password', async (req, res) => {
     let user = await queries.userLogin(email, password);
     user = user[0][0];
     if (user) {
-      const accessToken = jwt.sign(JSON.stringify(user), 'secret');
+      const accessToken = jwt.sign(
+        JSON.stringify(user),
+        process.env.ACCESS_TOKEN_SECRET
+      );
       res.status(202).json(accessToken);
     } else {
       res.status(401).send('check your password');
@@ -63,7 +66,12 @@ router.post('/user', async (req, res) => {
     const userId = await queries.userRegister(name, email, password);
     console.log(`user id is = ${userId}`);
     const user = await queries.getUserById(userId.splice(',')[0]);
-    res.status(201).send(user);
+
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   }
 });
 
