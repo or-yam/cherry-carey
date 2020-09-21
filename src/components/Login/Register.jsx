@@ -55,7 +55,6 @@ const Register = inject('user')(
       <Redirect to="/foodMap" />
     ) : (
       <Container component="main" maxWidth="xs">
-        {user.clearErrMsg()}
         <CssBaseline />
         <Logo />
         <div className={classes.paper}>
@@ -127,7 +126,7 @@ const Register = inject('user')(
         </div>
         <Box className="infoBox" mt={4}>
           <span>Already have an account? </span>{' '}
-          <Link to="/login" variant="body2">
+          <Link to="/login" variant="body2" onClick={() => user.clearErrMsg()}>
             <span className="link">Login</span>
           </Link>
         </Box>

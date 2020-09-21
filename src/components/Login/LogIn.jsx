@@ -112,7 +112,11 @@ const Login = inject('user')(
         </div>
         <Box className="infoBox" mt={4}>
           <span>Don't have an account? </span>
-          <Link to="register" variant="body2">
+          <Link
+            to="register"
+            variant="body2"
+            onClick={() => user.clearErrMsg()}
+          >
             <span className="link">Register</span>
           </Link>
         </Box>
