@@ -1,9 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 const nodeMailerTemplate = require('./nodeMailer');
 const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
+
+function authenticateToken(req, res, next) {
+  const token = req.headers['authorization'];
+  if (!token) {
+    res.status(401).send('authenticate err');
+  }
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      res.status(403).send('token is not valid');
+    }
+    req.user = user;
+    next();
+  });
+}
 
 router.get('/userEmail/:email', async (req, res) => {
   const { email } = req.params;
@@ -17,15 +32,26 @@ router.get('/userById/:id', async (req, res) => {
   res.send(user[0][0]);
 });
 
-router.get('/user/:email/:password', async (req, res) => {
+router.get('/userByToken', authenticateToken, (req, res) => {
+  const user = req.user;
+  res.send(user);
+});
+
+router.post('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
   const isEmail = await queries.IsEmailValid(email);
   if (isEmail) {
     let user = await queries.userLogin(email, password);
     user = user[0][0];
-    user
-      ? res.status(202).send(user)
-      : res.status(401).send('check your password');
+    if (user) {
+      const accessToken = jwt.sign(
+        JSON.stringify(user),
+        process.env.ACCESS_TOKEN_SECRET
+      );
+      res.status(202).json(accessToken);
+    } else {
+      res.status(401).send('check your password');
+    }
   } else {
     res.status(404).send('email not found');
   }
@@ -38,9 +64,12 @@ router.post('/user', async (req, res) => {
     res.status(409).send('email is taken');
   } else {
     const userId = await queries.userRegister(name, email, password);
-    console.log(`user id is = ${userId}`);
     const user = await queries.getUserById(userId.splice(',')[0]);
-    res.status(201).send(user);
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   }
 });
 
@@ -51,11 +80,19 @@ router.post('/fbUser', async (req, res) => {
   if (!isEmail) {
     const userId = await queries.registerFb(userData);
     const user = await queries.getUserById(userId.splice(',')[0]);
-    res.send(user);
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   } else {
     let user = await queries.userLogin(userData.email, '');
     user = user[0][0];
-    res.send(user);
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   }
 });
 

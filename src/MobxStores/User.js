@@ -54,19 +54,33 @@ export class User {
 
   @action userLogin() {
     axios
-      .get(
+      .post(
         `${process.env.REACT_APP_SERVER_PORT}/user/${this.emailInput}/${this.passwordInput}`
       )
       .then(
         (res) => {
-          const { id, name, email, img } = res.data;
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.img = img;
-          this.isSignin = true;
-          this.isRememberMe && this.rememberMe();
-          this.getLocation();
+          const token = res.data;
+          axios
+            .get(`${process.env.REACT_APP_SERVER_PORT}/userByToken`, {
+              headers: {
+                authorization: token,
+              },
+            })
+            .then(
+              (user) => {
+                const { id, name, email, img } = user.data;
+                this.id = id;
+                this.name = name;
+                this.email = email;
+                this.img = img;
+                this.isSignin = true;
+                this.isRememberMe && this.rememberMe(token);
+                this.getLocation();
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         },
         (error) => {
           error.response.status === 404
@@ -79,6 +93,9 @@ export class User {
   }
 
   @action userRegister() {
+    if (!this.emailInput || !this.nameInput || !this.passwordInput) {
+      alert('You must fill all fields');
+    }
     axios
       .post(`${process.env.REACT_APP_SERVER_PORT}/user`, {
         name: this.nameInput,
@@ -87,14 +104,28 @@ export class User {
       })
       .then(
         (res) => {
-          const { id, name, email, img } = res.data[0][0];
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.img = img;
-          this.isSignin = true;
-          this.isRememberMe && this.rememberMe();
-          this.getLocation();
+          const token = res.data;
+          axios
+            .get(`${process.env.REACT_APP_SERVER_PORT}/userByToken`, {
+              headers: {
+                authorization: token,
+              },
+            })
+            .then(
+              (user) => {
+                const { id, name, email, img } = user.data[0][0];
+                this.id = id;
+                this.name = name;
+                this.email = email;
+                this.img = img;
+                this.isSignin = true;
+                this.isRememberMe && this.rememberMe(token);
+                this.getLocation();
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         },
         (error) => {
           error.response.data
@@ -108,12 +139,9 @@ export class User {
     this.isRememberMe = !this.isRememberMe;
   }
 
-  @action rememberMe() {
+  @action rememberMe(token) {
     const cherryUser = {
-      id: this.id,
-      name: this.name,
-      email: this.email,
-      img: this.img,
+      token,
     };
     localStorage.setItem('cherryUser', JSON.stringify(cherryUser));
   }
@@ -122,11 +150,28 @@ export class User {
     let cherryUser = localStorage.getItem('cherryUser');
     if (cherryUser) {
       cherryUser = JSON.parse(cherryUser);
-      this.id = cherryUser.id;
-      this.name = cherryUser.name;
-      this.email = cherryUser.email;
-      this.img = cherryUser.img;
-      this.isSignin = true;
+      const token = cherryUser.token;
+      axios
+        .get(`${process.env.REACT_APP_SERVER_PORT}/userByToken`, {
+          headers: {
+            authorization: token,
+          },
+        })
+        .then(
+          (user) => {
+            const { id, name, email, img } = user.data;
+            this.id = id;
+            this.name = name;
+            this.email = email;
+            this.img = img;
+            this.isSignin = true;
+            this.isRememberMe && this.rememberMe(token);
+            this.getLocation();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
     return this.isSignin;
   }
@@ -136,14 +181,28 @@ export class User {
       .post(`${process.env.REACT_APP_SERVER_PORT}/fbUser`, { email, name, img })
       .then(
         (res) => {
-          const { id, name, email, img } = res.data;
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.img = img;
-          this.isSignin = true;
-          this.isRememberMe && this.rememberMe();
-          this.getLocation();
+          const token = res.data;
+          axios
+            .get(`${process.env.REACT_APP_SERVER_PORT}/userByToken`, {
+              headers: {
+                authorization: token,
+              },
+            })
+            .then(
+              (user) => {
+                const { id, name, email, img } = user.data;
+                this.id = id;
+                this.name = name;
+                this.email = email;
+                this.img = img;
+                this.isSignin = true;
+                this.isRememberMe && this.rememberMe(token);
+                this.getLocation();
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         },
         (error) => {
           console.log(error);
