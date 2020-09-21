@@ -1,9 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
 const nodeMailerTemplate = require('./nodeMailer');
 const sqlQueries = require('./sqlQueries');
 const queries = new sqlQueries();
 require('dotenv').config();
+
+function authenticateToken(req, res, next) {
+  const token = req.headers['authorization'];
+  if (!token) {
+    res.status(401).send('authenticate err');
+  }
+  jwt.verify(token, 'secret', (err, user) => {
+    if (err) {
+      res.status(403).send('token is not valid');
+    }
+    req.user = user;
+    next();
+  });
+}
 
 router.get('/userEmail/:email', async (req, res) => {
   const { email } = req.params;
@@ -17,15 +32,23 @@ router.get('/userById/:id', async (req, res) => {
   res.send(user[0][0]);
 });
 
-router.get('/user/:email/:password', async (req, res) => {
+router.get('/userByToken', authenticateToken, (req, res) => {
+  const user = req.user;
+  res.send(user);
+});
+
+router.post('/user/:email/:password', async (req, res) => {
   const { email, password } = req.params;
   const isEmail = await queries.IsEmailValid(email);
   if (isEmail) {
     let user = await queries.userLogin(email, password);
     user = user[0][0];
-    user
-      ? res.status(202).send(user)
-      : res.status(401).send('check your password');
+    if (user) {
+      const accessToken = jwt.sign(JSON.stringify(user), 'secret');
+      res.status(202).json(accessToken);
+    } else {
+      res.status(401).send('check your password');
+    }
   } else {
     res.status(404).send('email not found');
   }

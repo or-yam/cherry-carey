@@ -54,19 +54,29 @@ export class User {
 
   @action userLogin() {
     axios
-      .get(
+      .post(
         `${process.env.REACT_APP_SERVER_PORT}/user/${this.emailInput}/${this.passwordInput}`
       )
       .then(
         (res) => {
-          const { id, name, email, img } = res.data;
-          this.id = id;
-          this.name = name;
-          this.email = email;
-          this.img = img;
-          this.isSignin = true;
-          this.isRememberMe && this.rememberMe();
-          this.getLocation();
+          const token = res.data;
+          axios
+            .get(`${process.env.REACT_APP_SERVER_PORT}/userByToken`, {
+              headers: {
+                authorization: token,
+              },
+            })
+            .then((user) => {
+              console.log(token);
+              const { id, name, email, img } = user.data;
+              this.id = id;
+              this.name = name;
+              this.email = email;
+              this.img = img;
+              this.isSignin = true;
+              this.isRememberMe && this.rememberMe();
+              this.getLocation();
+            });
         },
         (error) => {
           error.response.status === 404
