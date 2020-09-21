@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx';
-import axios from 'axios';
 import Geocode from 'react-geocode';
 Geocode.setApiKey(process.env.REACT_APP_API_KEY);
 Geocode.setLanguage('en');
@@ -96,17 +95,7 @@ export class FormInputs {
   }
 
   @action async onImageChange(url) {
-        // const file = event.target.files[0];
-        // const data = new FormData();
-        // data.append('file', file);
-        // data.append('upload_preset', 'i4co6ysf');
-    // setLoading(true);
-      // axios
-      //   .post('https://api.cloudinary.com/v1_1/dnrxmm7a0/image/upload', data)
-      //   .then((res) => {
-          this.mealImage = url;
-      //   });
-    // setLoading(false);
+    this.mealImage = url;
   }
 
   @action submitPost(event, userId) {

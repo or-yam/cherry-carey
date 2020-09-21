@@ -64,9 +64,7 @@ router.post('/user', async (req, res) => {
     res.status(409).send('email is taken');
   } else {
     const userId = await queries.userRegister(name, email, password);
-    console.log(`user id is = ${userId}`);
     const user = await queries.getUserById(userId.splice(',')[0]);
-
     const accessToken = jwt.sign(
       JSON.stringify(user),
       process.env.ACCESS_TOKEN_SECRET
@@ -82,11 +80,19 @@ router.post('/fbUser', async (req, res) => {
   if (!isEmail) {
     const userId = await queries.registerFb(userData);
     const user = await queries.getUserById(userId.splice(',')[0]);
-    res.send(user);
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   } else {
     let user = await queries.userLogin(userData.email, '');
     user = user[0][0];
-    res.send(user);
+    const accessToken = jwt.sign(
+      JSON.stringify(user),
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    res.status(202).json(accessToken);
   }
 });
 
