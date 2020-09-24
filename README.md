@@ -6,11 +6,13 @@ This App exist to connect between 👩‍🍳cookers and 🍴hungry people.
 A user can make a Cook/Eat Post and put init all his preferences.
 All posts displayed on a map and users can make reservations by clicking the icons.
 
+## <p align="center"><img src="https://res.cloudinary.com/dnrxmm7a0/image/upload/v1600169417/cherry/cc1_c6lmsc.jpg" width="300"> </p>
+
+## [Try The App](https://cherrycarey.herokuapp.com/)
+
 ---
 
 ## How to Use
-
-#### [Enter The App](https://cherrycarey.herokuapp.com/)
 
 - Register as new user or Login with your Facebook account.
 - Navigate the map and see if there is a post that suits you.
@@ -23,12 +25,19 @@ All posts displayed on a map and users can make reservations by clicking the ico
 ## To Run on localhost
 
 1. uncomment `development` section in `server/Server.js`
-2. run `node server/Server.js`
-3. run `npm run-script develop`
+2. run in separate terminals:
+
+```
+node server/Server.js
+```
+
+```
+npm run-script develop
+```
 
 ---
 
-### ⚛Tools and Libraries
+### Tools and Libraries
 
 - Client Side - React with Mobx, Material UI
 - Server - NodeJs With Express, NodeMailer
@@ -37,22 +46,10 @@ All posts displayed on a map and users can make reservations by clicking the ico
 
 ---
 
-### 🚀To Do
+### 🚀Future Features
 
-- PWA version
-- more filters and mullty choise
-- improve overall styling
+- Adding Reviews
+- Rating Options (both cookers and eaters)
+- Implement Chat
 
 ---
-
-### 🔧To Fix
-
-- Responsivity on large screen
-- security issues with non FB login
-- remove past posts
-- handle no image in post
-- map auto focus on start
-
-### Screenshots
-
-## <p align="center"><img src="https://res.cloudinary.com/dnrxmm7a0/image/upload/v1600169417/cherry/cc1_c6lmsc.jpg" width="300"> </p>
