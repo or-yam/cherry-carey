@@ -45,6 +45,11 @@ npm run-script develop
 - External Services- Google Maps API, Facebook auth, PayPal payment API
 
 ---
+### System design architecture (rough sketch)
+
+## <p align="center"><img src="https://res.cloudinary.com/dnrxmm7a0/image/upload/v1608453180/cherry/system_design_fhin4n.jpg" width="400"> </p>
+
+---
 
 ### 🚀Future Features
 
